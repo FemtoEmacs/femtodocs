@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.15)  24 SEP 2016 15:41
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.4.15)  24 SEP 2016 18:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**femto.tex
+**femto
 (./femto.tex
 LaTeX2e <2011/06/27>
 Babel <3.9f> and hyphenation patterns for 78 languages loaded.
@@ -1533,146 +1533,152 @@ Overfull \hbox (0.87439pt too wide) in paragraph at lines 347--356
 []\T1/cmtt/m/n/12 ~/wrk$ cat readme.txt  # shows the file contents. [] 
  []
 
-[4] [5] [6] [7] [8]
-Chapter 2.
-[9
+[4] [5] [6]
+Overfull \hbox (4.37598pt too wide) in paragraph at lines 534--545
+[]\T1/cmr/m/n/12 A graph-i-cal user in-ter-face al-lows peo-ple to in-ter-act w
+ith com-put-ers through
+ []
 
-] [10] [11] [12] [13] [14] <figs/ha.png, id=99, 80.3pt x 40.15pt>
+[7] [8] [9] [10]
+Chapter 2.
+[11
+
+] [12] [13] [14] [15] [16] <figs/ha.png, id=106, 80.3pt x 40.15pt>
 File: figs/ha.png Graphic file (type png)
 
 <use figs/ha.png>
-Package pdftex.def Info: figs/ha.png used on input line 1104.
+Package pdftex.def Info: figs/ha.png used on input line 1238.
 (pdftex.def)             Requested size: 24.09018pt x 12.04507pt.
- <figs/na.png, id=100, 60.225pt x 40.15pt>
+ <figs/na.png, id=107, 60.225pt x 40.15pt>
 File: figs/na.png Graphic file (type png)
  <use figs/na.png>
-Package pdftex.def Info: figs/na.png used on input line 1105.
+Package pdftex.def Info: figs/na.png used on input line 1239.
 (pdftex.def)             Requested size: 18.06763pt x 12.04507pt.
 
-<figs/ca.png, id=101, 75.28125pt x 50.1875pt>
+<figs/ca.png, id=108, 75.28125pt x 50.1875pt>
 File: figs/ca.png Graphic file (type png)
  <use figs/ca.png>
-Package pdftex.def Info: figs/ca.png used on input line 1106.
+Package pdftex.def Info: figs/ca.png used on input line 1240.
 (pdftex.def)             Requested size: 22.58453pt x 15.05635pt.
 
-<figs/ra.png, id=102, 75.28125pt x 50.1875pt>
+<figs/ra.png, id=109, 75.28125pt x 50.1875pt>
 File: figs/ra.png Graphic file (type png)
  <use figs/ra.png>
-Package pdftex.def Info: figs/ra.png used on input line 1107.
+Package pdftex.def Info: figs/ra.png used on input line 1241.
 (pdftex.def)             Requested size: 22.58453pt x 15.05635pt.
 
-<figs/ka.png, id=103, 100.375pt x 50.1875pt>
+<figs/ka.png, id=110, 100.375pt x 50.1875pt>
 File: figs/ka.png Graphic file (type png)
  <use figs/ka.png>
-Package pdftex.def Info: figs/ka.png used on input line 1108.
+Package pdftex.def Info: figs/ka.png used on input line 1242.
 (pdftex.def)             Requested size: 30.11272pt x 15.05635pt.
 
-<figs/da.png, id=104, 75.28125pt x 50.1875pt>
+<figs/da.png, id=111, 75.28125pt x 50.1875pt>
 File: figs/da.png Graphic file (type png)
  <use figs/da.png>
-Package pdftex.def Info: figs/da.png used on input line 1112.
+Package pdftex.def Info: figs/da.png used on input line 1246.
 (pdftex.def)             Requested size: 22.58453pt x 15.05635pt.
 
-<figs/ta.png, id=105, 100.375pt x 50.1875pt>
+<figs/ta.png, id=112, 100.375pt x 50.1875pt>
 File: figs/ta.png Graphic file (type png)
  <use figs/ta.png>
-Package pdftex.def Info: figs/ta.png used on input line 1113.
+Package pdftex.def Info: figs/ta.png used on input line 1247.
 (pdftex.def)             Requested size: 30.11272pt x 15.05635pt.
 
-<figs/sa.png, id=106, 75.28125pt x 50.1875pt>
+<figs/sa.png, id=113, 75.28125pt x 50.1875pt>
 File: figs/sa.png Graphic file (type png)
  <use figs/sa.png>
-Package pdftex.def Info: figs/sa.png used on input line 1114.
+Package pdftex.def Info: figs/sa.png used on input line 1248.
 (pdftex.def)             Requested size: 22.58453pt x 15.05635pt.
 
-<figs/wa.png, id=107, 75.28125pt x 50.1875pt>
+<figs/wa.png, id=114, 75.28125pt x 50.1875pt>
 File: figs/wa.png Graphic file (type png)
  <use figs/wa.png>
-Package pdftex.def Info: figs/wa.png used on input line 1115.
+Package pdftex.def Info: figs/wa.png used on input line 1249.
 (pdftex.def)             Requested size: 22.58453pt x 15.05635pt.
 
-<figs/la.png, id=108, 100.375pt x 50.1875pt>
+<figs/la.png, id=115, 100.375pt x 50.1875pt>
 File: figs/la.png Graphic file (type png)
  <use figs/la.png>
-Package pdftex.def Info: figs/la.png used on input line 1116.
+Package pdftex.def Info: figs/la.png used on input line 1250.
 (pdftex.def)             Requested size: 30.11272pt x 15.05635pt.
 
-<figs/pa.png, id=109, 75.28125pt x 50.1875pt>
+<figs/pa.png, id=116, 75.28125pt x 50.1875pt>
 File: figs/pa.png Graphic file (type png)
  <use figs/pa.png>
-Package pdftex.def Info: figs/pa.png used on input line 1120.
+Package pdftex.def Info: figs/pa.png used on input line 1254.
 (pdftex.def)             Requested size: 22.58453pt x 15.05635pt.
 
-<figs/dha.png, id=110, 75.28125pt x 50.1875pt>
+<figs/dha.png, id=117, 75.28125pt x 50.1875pt>
 File: figs/dha.png Graphic file (type png)
  <use figs/dha.png>
-Package pdftex.def Info: figs/dha.png used on input line 1121.
+Package pdftex.def Info: figs/dha.png used on input line 1255.
 (pdftex.def)             Requested size: 22.58453pt x 15.05635pt.
 
-<figs/ja.png, id=111, 75.28125pt x 50.1875pt>
+<figs/ja.png, id=118, 75.28125pt x 50.1875pt>
 File: figs/ja.png Graphic file (type png)
  <use figs/ja.png>
-Package pdftex.def Info: figs/ja.png used on input line 1122.
+Package pdftex.def Info: figs/ja.png used on input line 1256.
 (pdftex.def)             Requested size: 22.58453pt x 15.05635pt.
 
-<figs/ya.png, id=112, 100.375pt x 50.1875pt>
+<figs/ya.png, id=119, 100.375pt x 50.1875pt>
 File: figs/ya.png Graphic file (type png)
  <use figs/ya.png>
-Package pdftex.def Info: figs/ya.png used on input line 1123.
+Package pdftex.def Info: figs/ya.png used on input line 1257.
 (pdftex.def)             Requested size: 30.11272pt x 15.05635pt.
 
-<figs/nya.png, id=113, 100.375pt x 50.1875pt>
+<figs/nya.png, id=120, 100.375pt x 50.1875pt>
 File: figs/nya.png Graphic file (type png)
  <use figs/nya.png>
-Package pdftex.def Info: figs/nya.png used on input line 1124.
+Package pdftex.def Info: figs/nya.png used on input line 1258.
 (pdftex.def)             Requested size: 30.11272pt x 15.05635pt.
 
-<figs/ma.png, id=114, 75.28125pt x 50.1875pt>
+<figs/ma.png, id=121, 75.28125pt x 50.1875pt>
 File: figs/ma.png Graphic file (type png)
  <use figs/ma.png>
-Package pdftex.def Info: figs/ma.png used on input line 1128.
+Package pdftex.def Info: figs/ma.png used on input line 1262.
 (pdftex.def)             Requested size: 22.58453pt x 15.05635pt.
 
-<figs/ga.png, id=115, 100.375pt x 50.1875pt>
+<figs/ga.png, id=122, 100.375pt x 50.1875pt>
 File: figs/ga.png Graphic file (type png)
  <use figs/ga.png>
-Package pdftex.def Info: figs/ga.png used on input line 1129.
+Package pdftex.def Info: figs/ga.png used on input line 1263.
 (pdftex.def)             Requested size: 30.11272pt x 15.05635pt.
 
-<figs/ba.png, id=116, 100.375pt x 50.1875pt>
+<figs/ba.png, id=123, 100.375pt x 50.1875pt>
 File: figs/ba.png Graphic file (type png)
  <use figs/ba.png>
-Package pdftex.def Info: figs/ba.png used on input line 1130.
+Package pdftex.def Info: figs/ba.png used on input line 1264.
 (pdftex.def)             Requested size: 30.11272pt x 15.05635pt.
 
-<figs/tha.png, id=117, 75.28125pt x 50.1875pt>
+<figs/tha.png, id=124, 75.28125pt x 50.1875pt>
 File: figs/tha.png Graphic file (type png)
  <use figs/tha.png>
-Package pdftex.def Info: figs/tha.png used on input line 1131.
+Package pdftex.def Info: figs/tha.png used on input line 1265.
 (pdftex.def)             Requested size: 22.58453pt x 15.05635pt.
 
-<figs/nga.png, id=118, 75.28125pt x 50.1875pt>
+<figs/nga.png, id=125, 75.28125pt x 50.1875pt>
 File: figs/nga.png Graphic file (type png)
  <use figs/nga.png>
-Package pdftex.def Info: figs/nga.png used on input line 1132.
+Package pdftex.def Info: figs/nga.png used on input line 1266.
 (pdftex.def)             Requested size: 22.58453pt x 15.05635pt.
- [15 <./figs/ha.png> <./figs/na.png> <./figs/ca.png> <./figs/ra.png> <./figs/ka
+ [17 <./figs/ha.png> <./figs/na.png> <./figs/ca.png> <./figs/ra.png> <./figs/ka
 .png> <./figs/da.png> <./figs/ta.png> <./figs/sa.png> <./figs/wa.png> <./figs/l
 a.png> <./figs/pa.png> <./figs/dha.png> <./figs/ja.png> <./figs/ya.png> <./figs
 /nya.png> <./figs/ma.png> <./figs/ga.png> <./figs/ba.png> <./figs/tha.png> <./f
 igs/nga.png>]
-[16] [17] [18] [19] [20
-
-]
+[18] [19] [20]
 Chapter 3.
 <figs-prefix/download.jpg, id=158, 432.11438pt x 159.59625pt>
 File: figs-prefix/download.jpg Graphic file (type jpg)
 
 <use figs-prefix/download.jpg>
-Package pdftex.def Info: figs-prefix/download.jpg used on input line 1473.
+Package pdftex.def Info: figs-prefix/download.jpg used on input line 1606.
 (pdftex.def)             Requested size: 259.27061pt x 95.75847pt.
- [21 <./figs-prefix/download.jpg>]
-Overfull \hbox (0.47086pt too wide) in paragraph at lines 1509--1515
+ [21
+
+ <./figs-prefix/download.jpg>]
+Overfull \hbox (0.47086pt too wide) in paragraph at lines 1642--1648
  \T1/cmr/bx/n/12 Linux.[] \T1/cmr/m/n/12 Use apt-get to in-stall the lat-est ve
 r-sion of []\T1/cmtt/m/n/12 libncursesw5-dev\T1/cmr/m/n/12 . Since
  []
@@ -1681,7 +1687,7 @@ r-sion of []\T1/cmtt/m/n/12 libncursesw5-dev\T1/cmr/m/n/12 . Since
 File: figs-prefix/readyforaction.jpg Graphic file (type jpg)
 
 <use figs-prefix/readyforaction.jpg>
-Package pdftex.def Info: figs-prefix/readyforaction.jpg used on input line 1543
+Package pdftex.def Info: figs-prefix/readyforaction.jpg used on input line 1676
 .
 (pdftex.def)             Requested size: 134.90367pt x 51.79337pt.
 
@@ -1689,10 +1695,10 @@ Package pdftex.def Info: figs-prefix/readyforaction.jpg used on input line 1543
 File: figs-prefix/firemen.png Graphic file (type png)
 
 <use figs-prefix/firemen.png>
-Package pdftex.def Info: figs-prefix/firemen.png used on input line 1560.
+Package pdftex.def Info: figs-prefix/firemen.png used on input line 1693.
 (pdftex.def)             Requested size: 89.96086pt x 188.20265pt.
 
-Underfull \hbox (badness 3323) in paragraph at lines 1589--1596
+Underfull \hbox (badness 3323) in paragraph at lines 1722--1729
 \T1/cmr/m/n/12 the Cam-bridge pre-fix no-ta-tion, which is
  []
 
@@ -1701,17 +1707,17 @@ Underfull \hbox (badness 3323) in paragraph at lines 1589--1596
 File: figs-prefix/stackshark.jpg Graphic file (type jpg)
 
 <use figs-prefix/stackshark.jpg>
-Package pdftex.def Info: figs-prefix/stackshark.jpg used on input line 1619.
+Package pdftex.def Info: figs-prefix/stackshark.jpg used on input line 1752.
 (pdftex.def)             Requested size: 252.19156pt x 176.91049pt.
 
 <figs-prefix/neatsum.jpg, id=173, 340.27126pt x 129.48375pt>
 File: figs-prefix/neatsum.jpg Graphic file (type jpg)
 
 <use figs-prefix/neatsum.jpg>
-Package pdftex.def Info: figs-prefix/neatsum.jpg used on input line 1627.
+Package pdftex.def Info: figs-prefix/neatsum.jpg used on input line 1760.
 (pdftex.def)             Requested size: 340.27042pt x 129.48341pt.
  [24 <./figs-prefix/stackshark.jpg> <./figs-prefix/neatsum.jpg>]
-Overfull \hbox (20.14568pt too wide) in paragraph at lines 1680--1686
+Overfull \hbox (20.14568pt too wide) in paragraph at lines 1813--1819
 []\T1/cmr/m/n/12 The Texan's book-keeper started fem-toemacs in or-der to visit
  the []\T1/cmtt/m/n/12 finance.scm
  []
@@ -1720,10 +1726,10 @@ Overfull \hbox (20.14568pt too wide) in paragraph at lines 1680--1686
 File: figs-prefix/piggy.jpg Graphic file (type jpg)
 
 <use figs-prefix/piggy.jpg>
-Package pdftex.def Info: figs-prefix/piggy.jpg used on input line 1798.
+Package pdftex.def Info: figs-prefix/piggy.jpg used on input line 1931.
 (pdftex.def)             Requested size: 144.53963pt x 160.9208pt.
 
-Overfull \hbox (16.55351pt too wide) in paragraph at lines 1830--1837
+Overfull \hbox (16.55351pt too wide) in paragraph at lines 1963--1970
  \T1/cmr/bx/n/12 Post-poned pay-ment.[] \T1/cmr/m/n/12 In the case of post-pon-
 ing the pay-ment of a $ 100,000.00
  []
@@ -1733,23 +1739,23 @@ ing the pay-ment of a $ 100,000.00
 File: figs-prefix/deuspan.jpg Graphic file (type jpg)
 
 <use figs-prefix/deuspan.jpg>
-Package pdftex.def Info: figs-prefix/deuspan.jpg used on input line 2049.
+Package pdftex.def Info: figs-prefix/deuspan.jpg used on input line 2182.
 (pdftex.def)             Requested size: 238.97221pt x 269.68689pt.
 
 <figs-prefix/agingshark.jpg, id=199, 376.40625pt x 138.5175pt>
 File: figs-prefix/agingshark.jpg Graphic file (type jpg)
 
 <use figs-prefix/agingshark.jpg>
-Package pdftex.def Info: figs-prefix/agingshark.jpg used on input line 2055.
+Package pdftex.def Info: figs-prefix/agingshark.jpg used on input line 2188.
 (pdftex.def)             Requested size: 376.40532pt x 138.51715pt.
 
-Overfull \hbox (4.03014pt too wide) in paragraph at lines 2055--2056
+Overfull \hbox (4.03014pt too wide) in paragraph at lines 2188--2189
 [][] 
  []
 
 [31 <./figs-prefix/deuspan.jpg> <./figs-prefix/agingshark.jpg>] [32]
-LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 214
-6.
+LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 227
+9.
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/ts1cmtt.fd
 File: ts1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
@@ -1757,7 +1763,7 @@ File: ts1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 [35] [36]
 Chapter 4.
 
-Underfull \hbox (badness 10000) in paragraph at lines 2410--2429
+Underfull \hbox (badness 10000) in paragraph at lines 2543--2562
 
  []
 
@@ -1772,7 +1778,7 @@ Chapter 6.
 [45
 
 ]
-Overfull \hbox (9.24977pt too wide) in paragraph at lines 2978--2981
+Overfull \hbox (9.24977pt too wide) in paragraph at lines 3111--3114
 []\T1/cmr/m/n/12 The ex-pres-sion $\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x < \OT1/c
 mr/m/n/12 2) \OMS/cmsy/m/n/12 _ \OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x > \OT1/cmr/
 m/n/12 5)$ \T1/cmr/m/n/12 means []\T1/cmtt/m/n/12 (or (< x 2) (> x 5))
@@ -1785,85 +1791,85 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: fig-sets/apolob.png Graphic file (type png)
 
 <use fig-sets/apolob.png>
-Package pdftex.def Info: fig-sets/apolob.png used on input line 3081.
+Package pdftex.def Info: fig-sets/apolob.png used on input line 3214.
 (pdftex.def)             Requested size: 96.35974pt x 116.35442pt.
 
 <fig-sets/apoloa.png, id=261, 170.7981pt x 204.5241pt>
 File: fig-sets/apoloa.png Graphic file (type png)
 
 <use fig-sets/apoloa.png>
-Package pdftex.def Info: fig-sets/apoloa.png used on input line 3099.
+Package pdftex.def Info: fig-sets/apoloa.png used on input line 3232.
 (pdftex.def)             Requested size: 85.39883pt x 102.26178pt.
  [48 <./fig-sets/apolob.png (PNG copy)> <./fig-sets/apoloa.png (PNG copy)>] [49
 ]
-Overfull \hbox (3.39688pt too wide) in paragraph at lines 3201--3205
+Overfull \hbox (3.39688pt too wide) in paragraph at lines 3334--3338
 \T1/cmr/m/n/12 sub-string. []\T1/cmtt/m/n/12 (substring "Hello, World" 0 4) \T1
 /cmr/m/n/12 re-turns the []\T1/cmtt/m/n/12 "Hell"
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3219--3228
+Underfull \hbox (badness 10000) in paragraph at lines 3352--3361
 
  []
 
 [50]
-Underfull \hbox (badness 10000) in paragraph at lines 3249--3256
+Underfull \hbox (badness 10000) in paragraph at lines 3382--3389
 
  []
 
 [51]
-Underfull \hbox (badness 10000) in paragraph at lines 3321--3325
+Underfull \hbox (badness 10000) in paragraph at lines 3454--3458
 
  []
 
 
-Overfull \hbox (1.27692pt too wide) in paragraph at lines 3326--3331
+Overfull \hbox (1.27692pt too wide) in paragraph at lines 3459--3464
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3337--3344
+Underfull \hbox (badness 10000) in paragraph at lines 3470--3477
 
  []
 
 [52] [53]
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 3549--3550
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 3682--3683
 [][] 
  []
 
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 3556--3557
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 3689--3690
 [][] 
  []
 
 [54] [55] [56] [57]
-Underfull \hbox (badness 10000) in paragraph at lines 3753--3763
+Underfull \hbox (badness 10000) in paragraph at lines 3886--3896
 
  []
 
 [58] [59] [60] [61] [62]
-Underfull \hbox (badness 10000) in paragraph at lines 4093--4096
+Underfull \hbox (badness 10000) in paragraph at lines 4226--4229
 
  []
 
 [63]
-Underfull \hbox (badness 10000) in paragraph at lines 4098--4104
+Underfull \hbox (badness 10000) in paragraph at lines 4231--4237
 
  []
 
 
-Overfull \hbox (3.6868pt too wide) in paragraph at lines 4111--4124
+Overfull \hbox (3.6868pt too wide) in paragraph at lines 4244--4257
 []\T1/cmtt/m/n/12 (+ i 1)\T1/cmr/m/n/12 , what makes []\T1/cmtt/m/n/12 i \T1/cm
 r/m/n/12 equal to 4. On the same to-ken, []\T1/cmtt/m/n/12 (set! s (cons i s))
  []
 
 [64]
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 4215--4216
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 4348--4349
 [][] 
  []
 
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 4222--4223
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 4355--4356
 [][] 
  []
 
@@ -1872,47 +1878,47 @@ Chapter 7.
 [67
 
 ]
-Overfull \hbox (3.64914pt too wide) in paragraph at lines 4308--4314
+Overfull \hbox (3.64914pt too wide) in paragraph at lines 4441--4447
 []\T1/cmr/m/n/12 Nia eval-u-ated []\T1/cmtt/m/n/12 (App \TS1/cmtt/m/n/12 '\T1/c
 mtt/m/n/12 (1 2 3) \TS1/cmtt/m/n/12 '\T1/cmtt/m/n/12 (4 5))\T1/cmr/m/n/12 . Thi
 s call-ing pat-tern was matched
  []
 
 
-Overfull \hbox (0.93654pt too wide) in paragraph at lines 4321--4328
+Overfull \hbox (0.93654pt too wide) in paragraph at lines 4454--4461
 \T1/cmr/m/n/12 The []\T1/cmtt/m/n/12 (App \TS1/cmtt/m/n/12 '\T1/cmtt/m/n/12 (2 
 3) \TS1/cmtt/m/n/12 '\T1/cmtt/m/n/12 (4 5)) \T1/cmr/m/n/12 sub-pat-tern matches
  once again with []\T1/cmtt/m/n/12 (App xs s)\T1/cmr/m/n/12 ,
  []
 
 [68]
-Underfull \hbox (badness 10000) in paragraph at lines 4386--4387
+Underfull \hbox (badness 10000) in paragraph at lines 4519--4520
 
  []
 
 [69] [70]
-Overfull \hbox (7.50148pt too wide) in paragraph at lines 4510--4520
+Overfull \hbox (7.50148pt too wide) in paragraph at lines 4643--4653
 \T1/cmr/m/n/12 Even be-fore learn-ing re-cur-siv-ity, Nia stud-ied the Fi-bonac
 ci func-tion on page 52[].
  []
 
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 4579--4580
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 4712--4713
 [][] 
  []
 
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 4588--4589
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 4721--4722
 [][] 
  []
 
 [71]
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 4627--4628
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 4760--4761
 [][] 
  []
 
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 4635--4636
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 4768--4769
 [][] 
  []
 
@@ -1920,12 +1926,12 @@ Overfull \hbox (6.79999pt too wide) in paragraph at lines 4635--4636
 Underfull \vbox (badness 3209) has occurred while \output is active []
 
  [72]
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 4763--4764
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 4896--4897
 [][] 
  []
 
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 4772--4773
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 4905--4906
 [][] 
  []
 
@@ -1935,12 +1941,12 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 [73] [74]
 Chapter 8.
 
-Underfull \hbox (badness 10000) in paragraph at lines 4792--4803
+Underfull \hbox (badness 10000) in paragraph at lines 4925--4936
 
  []
 
 
-Overfull \hbox (66.11215pt too wide) in paragraph at lines 4804--4809
+Overfull \hbox (66.11215pt too wide) in paragraph at lines 4937--4942
 [] 
  []
 
@@ -1950,20 +1956,20 @@ Overfull \hbox (66.11215pt too wide) in paragraph at lines 4804--4809
 File: fig-sets/bugcerto.png Graphic file (type png)
 
 <use fig-sets/bugcerto.png>
-Package pdftex.def Info: fig-sets/bugcerto.png used on input line 4908.
+Package pdftex.def Info: fig-sets/bugcerto.png used on input line 5041.
 (pdftex.def)             Requested size: 200.7495pt x 135.00403pt.
 
-Overfull \hbox (1.58022pt too wide) in paragraph at lines 4908--4909
+Overfull \hbox (1.58022pt too wide) in paragraph at lines 5041--5042
 [][] 
  []
 
 [76] [77 <./fig-sets/bugcerto.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 5001--5004
+Underfull \hbox (badness 10000) in paragraph at lines 5134--5137
 
  []
 
 [78]
-Underfull \hbox (badness 10000) in paragraph at lines 5061--5063
+Underfull \hbox (badness 10000) in paragraph at lines 5194--5196
 
  []
 
@@ -1984,11 +1990,11 @@ Package catoptions Warning: Undefined options (family,option,value):
 Here is how much of TeX's memory you used:
  27100 strings out of 493315
  571598 string characters out of 6137904
- 721147 words of memory out of 5000000
+ 720147 words of memory out of 5000000
  29928 multiletter control sequences out of 15000+600000
  29458 words of font info for 76 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 63i,11n,75p,812b,917s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 63i,11n,75p,808b,917s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/cm-super/c
 m-super-t1.enc}{/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/cm-super/cm-
 super-ts1.enc}</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/c
@@ -2019,7 +2025,7 @@ ve/2013/texmf-dist/fonts/type1/public/cm-super/sfss1000.pfb></usr/local/texlive
 013/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb></usr/local/texlive/201
 3/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb></usr/local/texlive/2013/
 texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on femto.pdf (87 pages, 2182177 bytes).
+Output written on femto.pdf (87 pages, 2187768 bytes).
 PDF statistics:
  478 PDF objects out of 1000 (max. 8388607)
  288 compressed objects within 3 object streams

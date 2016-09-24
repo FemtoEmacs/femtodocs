@@ -500,10 +500,9 @@ software installation.
 I will teach you how to use three
 installation tools: apt-get,
 homebrew and git clone. However,
-as a consequence
-of the many problems that I listed
-before, this tutorial will not
-completely cover the tools needed
+ this tutorial will not
+ completely cover the many problems
+ that you must solve 
 to make your machine usable.
 You will really need the help of
 that girl who is majoring in
@@ -511,10 +510,145 @@ Computer Engineering.
 Tell her that, if she teaches you
 how to configure apt-get install,
 you will teach her the ancient
-Javanese script. That said, let us
-see how to install ncurses and
-femtoemacs in your computer.
+Javanese script.
 
+\section{ncurses}
+In the jargon of tech-oriented people,
+a person who uses computers is called
+{\em user}, but some engineers
+prefer the term {\em looser}, because
+they think the last mentioned word conveys
+the idea more precisely. Then,
+user is somebody like you or myself.
+
+Computers need a tool to make communication
+with loosers possible. That tool is
+called User Interface, or UI for short.
+There are two kinds of User Interfaces.
+
+In this chapter, you are learning how to use a
+text terminal. Therefore, you already knows
+what a text based User Interface ou UI.
+The shell is a UI.
+
+A graphical user interface
+allows people to interact with
+computers through graphical icons and
+visual indicators, instead
+typed command labels or text navigation.
+GUIs were introduced when vendors
+perceived that older people have
+difficulty in dealing with modern
+digital machines, that require a formal
+language for accepting commands
+typed on a computer keyboard.
+
+Of course, you could type commands
+on a text box of a Graphical User
+Interface. After all, people frequentely
+converse with each other through
+the Chat Box. However, a text terminal
+offers sharper and crisp characters
+through the use of a specialized
+User Interface called ncurses.
+You will find ncurses at
+the following address:
+\begin{quote}
+\verb|http://ftp.gnu.org/gnu/ncurses/|
+\end{quote}
+The distribution package is called
+archive, since it contains many
+files stored together in a compact way,
+that you will need to uncompress
+and extract.
+\begin{quote}
+\begin{verbatim}
+~$ tar xfvz ncurses-6.0.tar.gz
+\end{verbatim}
+\end{quote}
+The \verb|z| option is used to
+uncompress the
+\verb|ncurses-6.0.tar.gz| archive into
+an \verb|ncurses-6.0.tar| file. The
+\verb|x| option indicates that
+you want to extract the component
+files of the \verb|ncurses-6.0.tar| intermediate
+file and place them into the \verb|ncurses-6.0/|
+directory.
+
+When you perform the download of the
+\verb|ncurses-6.0.tar.gz| archive, the
+Macintosh uncompress the the distribution
+automatically, so that you will end up
+with the tar file in the \verb|~/Downloads|
+folder. Transfer it to your home directory
+and perform the extraction.
+\begin{quote}
+\begin{verbatim}
+~$ cd ~  # makes sure that you are in the home folder
+~$ cp ~/Downloads/ncurses-6.0.tar .
+~$ tar xfv ncurses-6.0.tar
+\end{verbatim}
+\end{quote}
+Notice that it was not necessary to uncompress
+the archive, since the operating system
+did it for you.
+
+The tar tool creates an \verb|ncurses-6.0| folder
+containing all files of the program that implement
+the ncurses text based User Interface.
+
+The \verb|ncurses-6.0| directory contains
+many files in the C  computer language.
+In order to become usable, these files
+must be compiled into a set of libraries
+containing instructions written in a
+language that the computer understand.
+You don't need any knowledge of C to
+perform the translation to machine
+language. All instructions for
+doing compilation job is written
+in  \verb|Makefile|. But this is not
+enough. For the operation to end with
+success, the system must know which
+computer you are using. The \verb|configure|
+contains the program to analyse your
+handware.
+\begin{quote}
+\begin{verbatim}
+~$ cd ncurses-6.0/
+~/ncurses-6.0$ ./configure --enable-widec
+~/ncurses-6.0$ make
+~/ncurses-6.0$ sudo make install
+\end{verbatim}
+\end{quote}
+The second line of the above listing
+configures \verb|ncurses|, i.e.,
+discovers details about your machine.
+The \verb|--enable-widec| customize
+the text terminal for chars with
+diacritics, so you can write words
+like {\em café} and {\em façade}.
+
+The second line of the ncurses installation
+listing compiles the User Interface.
+The third line perform the installation
+itself.
+
+The installation requires that the
+system copy files to the \verb|/usr/local/|
+folder. However you must give a special
+permission for this operation, otherwise
+a virus would be able to make similar copies
+in critical folders.
+
+The \verb|sudo|
+command informs the machine that you
+are a superuser. To avoid beeing tricked
+by a virus or an unauthorized user,
+the machine asks for the passward,
+and if you type it correctly,
+the system installs ncurses.
 
 \section{Linux.} Use apt-get to install the
 latest version of \verb|libncursesw5-dev|.
@@ -1403,8 +1537,7 @@ abscence was due to their mistake
 of assigning me to the Guarani section.
 I accepted the apology, but I still
 was not able to write that treatise
-on Javanese that I promised them
-to send upon publication.
+on Javanese that I promised them.
 
 After the congress, I paid for the publication
 of German and Italian translations of the article
