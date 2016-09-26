@@ -1,0 +1,75 @@
+#! /home/strue028/flisp 
+
+(define (c2f x)
+   (- (/ (* (+ x 40) 9) 5.0) 40))
+
+;; Finite automaton
+(define (end-of-string? s n)
+   (<= (string.count s) n))
+
+(define (digit? c)
+   (and (> c 47) (< c 58)))
+
+(define (invalid? c)
+   (and (not (digit? c)) (not (= c 45)) ))
+
+(define (substring s start end)
+  (string.sub s (string.inc s 0 start) (string.inc s 0 end)))
+
+(define (skp n s)
+   (cond ( (end-of-string? s n) '())
+         ( (invalid? (aref s n))
+           (skp (+ n 1) s))
+         ( (= (aref s n) #\-)
+           (first-digit n (+ n 1) s))
+         ( (digit? (aref s n))
+           (ipart n (+ n 1) s))
+         (else (ipart n (+ n 1) s)) ))
+
+(define (first-digit i j s)
+    (cond ( (end-of-string? s j) '())
+          ( (digit? (aref s j))
+            (ipart i (+ j 1) s))
+          (else (skp j s)) ))
+
+(define (ipart i j s)
+   (cond ( (end-of-string? s j)
+           (list (string->number (substring s i j)) ))
+         ( (= (aref s j) 46)
+           (frac i (+ j 1) s))
+         ( (invalid? (aref s j))
+           (cons (string->number (substring s i j))
+                 (skp (+ j 1) s)))
+        (else (ipart i (+ j 1) s) ) ))
+
+(define (frac i j s)
+   (cond ( (end-of-string? s j)
+           (list (string->number (substring s i j)) ))
+         ( (invalid? (aref s j))
+           (cons (string->number (substring s i j))
+                 (skp (+ j 1) s)))
+         (else (frac i (+ j 1) s) ) ))
+
+
+(princ "Content-type: text/html")
+(newline)
+(newline)
+(newline)
+
+(princ "<html>")(newline)
+(princ "<head>")(newline)
+(princ "<title>femtolisp tutorial</title>")(newline)
+(princ "<meta http-equiv= 'Content-Type' ")(newline)
+(princ "   content= 'text/html; charset=utf-8' />")(newline)
+(princ "</head>")(newline)
+(princ "<body>")(newline)
+(princ "<form name='form' method='get'>") (newline)
+(princ "    <input type='text' name='temp'>")(newline)
+(princ "    <input type='submit' name='btn' value='send'>")(newline)
+(princ "</form>")(newline)
+(princ "  <p>A resposta é ")
+(princ  (c2f(car (skp 0 (os.getenv "QUERY_STRING")) ) ))
+;;(princ (os.getenv "QUERY_STRING"))
+(princ "</p>") (newline)
+(princ "</body>")(newline)
+(princ "</html>") (newline)

@@ -4907,6 +4907,381 @@ must be mastered to perfection.
 \label{wrtFile}
 \end{figure}
 
+\chapter{Cloud computing}
+
+All human or computer languages have dialects.
+One could say that English, German
+and Swedish are dialects of the
+same language. A speaker of Swedish
+can understand easily a person speaking
+Danish or Bokmål. Brazilians visit
+Argentine  and maintain
+heated conversations with local
+people without problem. Portuguese
+and Spanish are in fact dialects of
+Galician.
+
+In general, dialects have common
+grammar,
+the difference rests on part of
+the vocabulary. Compare the sentences
+``Sabes que yo te amo?'' in Spanish and
+``Sabes que eu te amo?'' in Portuguese.
+The only variation is on the word
+``yo'' that means I,
+as in ``I love you.'' The Brazilian
+actor Wagner Moura learned twenty
+or so Spanish words, and there he
+was playing the role of the
+Colombian Pablo Escobar.
+
+If Portuguese and Spanish speakers
+accepted that they speak the same
+language, and decided to spend
+one month or so learning the 50
+words that are different in their basic
+vocabularies, their common idiom
+would have 800,000,000 speakers
+in Europe, Asia, Africa and Americas.
+
+Here is another example of dialectal
+similarity:
+The  Bokmål  sentence ``Vet du at jeg
+elsker deg?'' sounds pretty much
+alike the correspondent
+ Danish ``Ved du, at jeg elsker dig?''
+ Why Norwegian speakers don't accept
+ that their language is, in fact, Danish?
+
+ Did you know that Malay is very
+ close to Indonesian? The
+ two languages are even closer than
+ Portuguese and Spanish. Hindi and
+ Urdu are pretty similar too.
+
+ The language that you have learned
+ in this book is called Scheme.
+ The library \verb|r5rs.scm| provides
+ a bridge between Scheme and the
+ femtolisp compiler. There are other
+ Lisp dialects, such as Common Lisp
+ and Racket.
+
+ In this chapter, you will learn how
+ to write a web application in pure
+ femtolisp. Thus, you will learn both femtolisp
+ and do something useful. But firstly,
+ let us learn what cloud computing is.
+
+ Cloud computing is an Internet based
+ computing that provides shared
+ processing resources on demand to people
+ connected to a computational service.
+ When a  company adheres to a cloud computing
+ service, it avoids infrastructure costs,
+ such as purchasing servers, and keep
+ them in working conditions.
+
+ The cloudorado site shows that the fees
+ of a provider can be pretty steep.
+ However, one can hire a normal
+ hosting service and use it for
+ creating pages that are able to
+ run quite interesting applications.
+
+ When you hire a hosting service,
+ you will receive a user name and
+ must buy a domain name. Let us
+ assume that Nia owns the
+ \verb|medicina.tips| domain,
+ where {\sc medicina} means
+ health care in Latin. The domain
+ may be any sequence of chars,
+ but it is a good idea to choose
+ names that rise the interest of
+ Web users. If one wants to offer
+ medical consultancy, \verb|medicina.tips|
+ is a good name.
+
+ Now that Nia has a user name and a
+ domain, she must install femtolisp
+ in her cloud machine. Here is how
+ she enters in the shell:
+\begin{quote}
+\begin{verbatim}
+~$ ssh -p2222 nia@medicina.tips
+nia@medicina.tips's password: ***
+\end{verbatim}
+\end{quote}
+The 2222 port is used in the protocol
+that connects Nia to the cloud computer.
+She needs a password to complete the connection.
+\begin{verbatim}
+Last login: Sun Sep 25 18:03:00 2016 from 179.155.71.6
+[~]# cd public_html
+[~/public_html]# mkdir lsp
+[~/public_html]# cd lsp
+[~/public_html/lsp]# echo "Addhandler cgi-script .lsp" > .htaccess 
+\end{verbatim}
+The \verb|.htaccess| file must contain the specification
+of the lisp file extension.
+
+The terminal that Nia can use in the cloud is called
+jailshell. The jailshell does not allow Nia
+to access the \verb|/usr/local| folder.
+Then she must send \verb|flisp| and
+\verb|flisp.boot| to her cloud home.
+\begin{verbatim}
+~/Femto-Emacs/femtolisp$ scp -P2222 flisp nia@medicina.tips:~
+nia@medicina.tips's password: ***
+~/Femto-Emacs/femtolisp$ scp -P2222 flisp.boot nia@medicina.tips:~
+nia@medicina.tips's password: ***
+\end{verbatim}
+An important note: The scp command sends files to
+the cloud. In the example, Nia sends the \verb|flisp|
+compiler to her  \verb|nia@medicina.tips| home folder.
+The -P2222 port is indicated with uppercase P.
+As you certainly remember, the \verb|ssh| command
+requires lowercase p.
+
+Again, all that stuff is easier to do than to
+explain. The best policy is to ask for help
+from a computer science major.
+
+\paragraph{Script.} A program that generates
+web pages is called script.
+
+\begin{figure}[!h]
+\begin{verbatim}
+;; File: webscript.scm
+
+(define (lisp? x)
+  (and (> (string.count x) 3)
+       (= (aref x 0) (aref ">" 0)) ))
+
+(define (readLn) (io.readline *input-stream*))
+
+(define (convert)
+  (let loop ( (x (readLn)) )
+     (cond ( (eof-object? x) #t)
+           ( (lisp? x)
+             (princ (string.sub x 1 (string.count x))) 
+             (newline)
+             (loop (readLn))) 
+           (else (newline)
+                 (princ "(princ ")
+                 (write x)
+                 (princ ")") (newline)
+                 (loop (readLn)) )) ))
+
+(define (copyFile inFile outFile)
+  (let ( (in (file inFile :read))
+         (out (file outFile :write :create)) )
+    (with-output-to out
+      (with-input-from in   
+         (princ "#! /home/strue028/flisp")
+         (newline)
+         (princ "(princ \"Content-type: text/html\")")
+         (princ "(newline)")
+         (princ "(newline)")
+         (newline)
+         (convert)
+         (newline)))
+    (io.close in)
+    (io.close out)))
+\end{verbatim}
+\caption{webscript.scm -- Script generator}
+\label{lst:webscript.scm}
+\end{figure}
+
+Usually, an html page formats the text
+and presents it on your browser.
+A dynamic page can use Lisp to add
+calculation to the document.
+
+The function \verb|(copyFile "qstring.script" "qstring.lsp")|
+defined in the \verb|webscript.scm| file reads the
+\verb|qstring.script| line by line. If the line
+starts with the \verb|>| prefix, it is a lisp
+program, and is copied to \verb|qstring.lsp| as is.
+
+If the line is an html directive, \verb|copyFile|
+generates the Lisp operation to print it. For instance,
+if \verb|(rdLine)| reads the line below:
+\begin{quote}
+\begin{verbatim}
+<html>
+\end{verbatim}
+\end{quote}
+it generates the following command in the
+\verb|qstring.lsp| file:
+\begin{quote}
+\begin{verbatim}
+(princ "<html>\n")
+\end{verbatim}
+\end{quote}
+When the femtolisp interpreter executes
+the above line, it prints \verb|<html>|
+as it should. The page of the example
+reads a dialog content from the browser
+User Interface, and passes it to
+the Lisp the lisp \verb|(os.getenv "QUERY_STRING")|
+function. For instance, if  user
+types {\em Nia Vardalos} in the text field
+and presses the \menu{send} button,
+the  \verb|(os.getenv "QUERY_STRING")| command
+assigns \verb|temp=Nia+Vardalos&btn=send| to
+the \verb|str| variable.
+
+\begin{figure}[!b]
+\begin{verbatim}
+<html>
+  <head>
+    <title>femtolisp tutorial</title>
+      <meta http-equiv= 'Content-Type'
+         content= 'text/html; charset=utf-8' />
+   </head>
+ <body>
+   <form name='form' method='get'>
+      <input type='text' name='temp'>
+      <input type='submit' name='btn' value='send'>
+  </form>
+  <p>La réponse est  
+> (let ( (str (os.getenv "QUERY_STRING")))
+>    (if str (princ str) (princ "vide"))
+>       (newline))
+  </p>
+</body>
+</html>
+\end{verbatim}
+\caption{qstring.script}
+\label{lst:qstring.script}
+\end{figure}
+
+Listing~\ref{lst:qstring.lsp} shows
+the structure of the Lisp script.
+The first line calls the femtolisp
+compiler. The prefix \verb|#!|
+is the shebang and indicates
+the full path of the compiler.
+
+The script must print the
+\verb|Content-type: text/html| header
+followed by two newline chars.
+
+If you enter the \verb|~/Femto-Emacs/femtolisp/|
+folder, you will find the \verb|flisp|
+interpreter that can be run idependently
+from the editor. This is the very same
+femtolisp compiler that was sent to
+the cloud service provider. You could
+run the \verb|flisp| compiler directly
+from the shell, but since it does not
+have an editor, it is very unconfortable.
+Therefore, it is advisable to install
+the \verb|rlwrap| line editor.
+
+To install the \verb|rlwrap| editor
+on the Macintosh, you can use the
+homebrew package manager.
+\begin{quote}
+\begin{verbatim}
+~/Femto-Emacs/femtolisp$ brew reinstall rlwrap
+\end{verbatim}
+\end{quote}
+On Linux, you can use the \verb|apt-get|
+manager to install the line editor.
+\begin{quote}
+\begin{verbatim}
+~/Femto-Emacs/femtolisp$ apt-get install rlwrap
+\end{verbatim}
+\end{quote}
+
+
+\begin{figure}[!b]
+\begin{verbatim}
+#! /home/strue028/flisp
+(princ "Content-type: text/html")(newline)(newline)
+(princ "<html>\n")
+(princ "  <head>\n")
+(princ "    <title>femtolisp tutorial</title>\n")
+(princ "      <meta http-equiv= 'Content-Type'\n")
+(princ "         content= 'text/html; charset=utf-8' />\n")
+(princ "   </head>\n")
+(princ " <body>\n")
+(princ "   <form name='form' method='get'>\n")
+(princ "      <input type='text' name='temp'>\n")
+(princ "      <input type='submit' name='btn' value='send'>\n")
+(princ "  </form>\n")
+(princ "  <p>La réponse est  \n")
+ (let ( (str (os.getenv "QUERY_STRING")))
+    (if str (princ str) (princ "vide"))
+       (newline))
+(princ "  </p>\n")
+(princ "</body>\n")
+(princ "</html>\n")
+(princ "\n")
+\end{verbatim}
+\caption{qstring.lsp}
+\label{lst:qstring.lsp}
+\end{figure}
+
+Let us assume that Nia has installed
+the \verb|rlwrap| editor, and typed the
+\verb|webscript.scm| generator of
+listing~\ref{lst:webscript.scm}
+and the \verb|lst:qstring.script| pattern
+in the \verb|~/femtodocs/samples/| folder.
+Then she can start femtolisp thus:
+\begin{verbatim}
+~/femtodocs/samples$ rlwrap ~/Femto-Emacs/femtolisp/flisp
+\end{verbatim}
+
+\paragraph{Lisp REPL.} Traditionally, the lisp
+interaction with user is called Read Eval
+Print Loop or REPL for short. The reason is that
+Lisp reads an expression, evals it, print the
+result, and loops back for the next expression.
+
+\begin{verbatim}
+~/femtodocs/samples$ rlwrap ~/Femto-Emacs/femtolisp/flisp
+;  _
+; |_ _ _ |_ _ |  . _ _
+; | (-||||_(_)|__|_)|_)
+;-------------------|------------------------
+
+> (load ``webscript.scm'')
+
+> (copyFile ``qstring.script'' ``qstring.lsp'')
+    #t
+
+> (exit)
+~/femtodocs/samples$ scp -P2222 qstring.lsp nia@medicina.tips:~/
+\end{verbatim}
+
+Most servers and cloud services run on Linux.
+Therefore, you cannot compile femtolisp in
+your Macintosh or Windows machine and expect it
+to work in the cloud. Therefore, find a local
+Linux machine to build the \verb|flisp| executable.
+After taking care of these compatibility
+problems, Nia entered her cloud machine to
+configure the script.
+\begin{verbatim}
+~/femtodocs/samples$ ssh -p2222 strue028@medicina.tips
+strue028@medicina.tips's password:
+Last login: Sun Sep 25 22:38:25 2016 from 179.155.71.6
+[~]# cd public_html
+[~/public_html]# cd lsp
+[~/public_html/lsp]# cp ~/qstring.lsp .
+[~/public_html/lsp]# chmod a+x qstring.lsp
+\end{verbatim}
+
+\includegraphics[scale=0.5]{figs/form.png}
+
+By the way, the example is in French to show
+that femtolisp deals with chars used in
+weird languages.
 
 \chapter{Bugs}
 
