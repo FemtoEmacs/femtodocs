@@ -4911,7 +4911,7 @@ must be mastered to perfection.
 
 \chapter{Cloud computing}
 A compiler is a program that reads
-source code in a language that
+source code into a language that
 human beings can handle easily
 and translates the aforementioned
 code to an object language that
@@ -4919,20 +4919,21 @@ computers can interpret.
 For instance, Nia writes source code
 in   Scheme.
 The library \verb|r5rs.scm| translates
-it to femtolisp.
+it into femtolisp.
 Then a compiler translates femtolisp
-to instructions that the
-computer can carry out.
+into instructions that the
+computer can carry out efficiently.
 
 \includegraphics[scale=0.8]{figs/source.png}
 
 
 The problem is that the
-compiler installed in
+compiler installed on
 Nia's machine deals with a language
  called femtolisp, while Nia 
- works with  Scheme. This is possible
- because the library \verb|r5rs.scm| provides
+ works with  Scheme. Nia can work in a
+ language different from the compiler
+ only because the library \verb|r5rs.scm| provides
  a bridge between Scheme and the
  femtolisp compiler.
  
@@ -4946,16 +4947,16 @@ Nia's machine deals with a language
 
  Cloud computing is an Internet based
  computer that provides shared
- processing resources on demand to people
+ processing  on demand for those people
  connected to a service provider.
  When a  company adheres to cloud computing,
  it avoids infrastructure costs,
  such as purchasing servers, and keeping
- them in working conditions.
+ them in working order.
 
  The \verb|https://www.cloudorado.com|
- site shows that the fees
- of a provider can be pretty steep.
+ site shows that provider fees
+ can be pretty steep.
  However, one can hire a normal
  hosting service and use it for
  creating pages that are able to
@@ -4963,30 +4964,30 @@ Nia's machine deals with a language
 
  When you hire a hosting service,
  you will receive a user name and
- must buy a domain name. Let us
+ will be requested to
+ buy a domain name. Let us
  assume that Nia owns the
  \verb|medicina.tips| domain,
  where {\sc medicina} means
  health care in Latin. The domain
  may be any sequence of chars,
  but it is a good idea to choose
- names that rise the interest of
+ names that raise interest in
  Web users. Since doctors usually
  know some Latin, if one wants to offer
  expert medical consultancy, \verb|medicina.tips|
  is a good name.
-
  Now that Nia has a user name and a
  domain, she must install femtolisp
  in her cloud machine. Here is how
- she enters in the shell:
+ she enters the shell:
 \begin{quote}
 \begin{verbatim}
 ~$ ssh -p2222 nia@medicina.tips
 nia@medicina.tips's password: ***
 \end{verbatim}
 \end{quote}
-The 2222 port is used in the protocol
+The 2222 port is used in the secure shell protocol
 that connects Nia to the cloud computer.
 She needs a password to complete the connection.
 \begin{Verbatim}[fontsize=\small,
@@ -4998,14 +4999,14 @@ Last login: Sun Sep 25 18:03:00 2016 from 179.155.71.6
 ~/public_html$ cd lsp
 ~/public_html/lsp$ echo "Addhandler cgi-script .lsp" > .htaccess
 \end{Verbatim}
-The \verb|.htaccess| file must contain the specification
-of the lisp file extension.
+The \verb|.htaccess| file specifies 
+an extension for running lisp scripts on the web.
 
 The cloud terminal  is called
 jailshell. The jailshell does not allow Nia
 to access the \verb|/usr/local| folder.
-Then she must send the \verb|flisp| compiler and
-\verb|flisp.boot| to her cloud home.
+Therefore, she needs to send the \verb|flisp| compiler and
+\verb|flisp.boot| to her cloud home directory.
 \begin{Verbatim}[fontsize=\small,
     frame=single,
     framerule=0.5mm]
@@ -5022,16 +5023,16 @@ N.B. The \verb|scp| command takes the -P2222
 port directive with uppercase P,
 but the \verb|ssh| command requires lowercase p.
 
-Again, all the above stuff is easier to do than to
-explain. The best approach is to hire a private
+Again, all the above procedures are easier to perform
+than to explain. The best approach is to hire a private
 tutor who is  majoring in Computer Science.
 Usually, two or three classes are enough to
 learn jailshell, ssh and scp.
-If you don't want to spend money with
+If you do not want to spend money with
 a tutor,  you can ask for
 technical support from your hosting service. 
-If you are a really luck guy, the person
-who will answer your call is sufficiently
+If you are a really lucky, the attendant
+answering your call is sufficiently well
 informed to help you.
 
 \section{HTML page}
@@ -5068,19 +5069,19 @@ opening \verb|<tag>| and a closing \verb|</tag>|.
 \end{figure}
 
 In listing~\ref{lst:qstring.script}, one can see
-that the an html document may have lisp
-snippets to perform calculations. Let us
+that an html document may contain lisp
+snippets for performing calculations. Let us
 indicate the lisp code with the \verb|>| prefix
 as the first char of the line.
 
-As you certainly know, online shops
-present forms that their clients fill
+As you already know, online shops
+present forms that their clients need to fill out
 for placing an order. The form of
 listing~\ref{lst:qstring.script}
 has two input widgets, a text field and
 a button. The \verb|<input type='text' name='temp'>|
 widget is the \verb|temp| text field.
-Its value is whatever the client types in the field.
+Its value is whatever the client types into the field.
 
 The \verb|<input type='submit' name='btn' value='send'>|
 widget is a button with a fixed value equal to \verb|send|.
@@ -5089,10 +5090,10 @@ widget is a button with a fixed value equal to \verb|send|.
 
 \section{Script}
 A program that generates
-web pages is called script.
+web pages is called a script.
 Usually, an html page formats the text
 and presents it on your browser.
-A dynamic page can use Lisp to add
+A dynamic page can use lisp to add
 calculation to the document.
 
 The result of applying 
@@ -5129,10 +5130,10 @@ is the script given on listing~\ref{lst:qstring.lsp}.
 \end{figure}
 
 Listing~\ref{lst:qstring.lsp} shows
-the structure of the Lisp script.
+the structure of the lisp script.
 The first line calls the femtolisp
 compiler. The prefix \verb|#!|
-is the shebang and indicates
+is known as shebang and indicates
 the full path of the compiler.
 
 The script must print the
@@ -5187,9 +5188,11 @@ defined in the \verb|webscript.scm| file reads the
 
  If the line
 starts with the \verb|>| prefix, it is a lisp
-program, and is copied to \verb|qstring.lsp| as is.
+program, and is copied to \verb|qstring.lsp| as is,
+i.e., with all its legal disclaimer.
+
 If the line is an html directive, \verb|copyFile|
-generates the Lisp operation to print it. For instance,
+generates the lisp operation to print it. For instance,
 if \verb|(rdLine)| reads the line below:
 \begin{quote}
 \begin{verbatim}
@@ -5210,18 +5213,21 @@ the above line, it prints \verb|<html>|
 as it should. The page of the example
 reads the form content from the browser,
 and passes it to
-the Lisp the lisp \verb|(os.getenv "QUERY_STRING")|
-function. For instance, if  user
+the lisp \verb|(os.getenv "QUERY_STRING")|
+function. For instance, if the user
 types {\em Nia Vardalos} in the text field
 and presses the \menu{send} button,
 the  \verb|(os.getenv "QUERY_STRING")| command
-assigns \verb|temp=Nia+Vardalos&btn=send| to
-the \verb|str| variable.
+assigns:
+\begin{quote}
+  \verb|temp=Nia+Vardalos&btn=send|
+\end{quote}
+to the \verb|str| variable.
 
 
 If you enter the \verb|~/Femto-Emacs/femtolisp/|
-folder, you will find the \verb|flisp|
-interpreter that can be run idependently
+folder, you will find a \verb|flisp|
+interpreter that can be run independently
 from the editor. This is the very same
 femtolisp compiler that was sent to
 the cloud service provider.
@@ -5229,17 +5235,18 @@ the cloud service provider.
 Let us assume that Nia has placed the
 \verb|webscript.scm| generator of
 listing~\ref{lst:webscript.scm}
-and the \verb|lst:qstring.script| pattern
-in the \verb|~/femtodocs/samples/| folder.
+as well as the pattern of
+listing~\ref{lst:qstring.script}
+into the \verb|~/femtodocs/samples/| folder.
 Then she can start femtolisp thus:
 \begin{verbatim}
 ~/femtodocs/samples$ ~/Femto-Emacs/femtolisp/flisp
 \end{verbatim}
 
 \paragraph{Lisp REPL.} Traditionally, the lisp
-interaction with user is called Read Eval
+interaction with the user is called Read Eval
 Print Loop or REPL for short. The reason is that
-Lisp reads an expression, evals it, print the
+Lisp reads an expression, evals it, prints the
 result, and loops back for the next expression.
 
 \begin{Verbatim}[fontsize=\small,
@@ -5266,7 +5273,7 @@ Therefore, you cannot compile femtolisp in
 your Macintosh or Windows machine and expect it
 to work in the cloud. Therefore, find a local
 Linux machine to build the \verb|flisp| executable.
-After taking care of these compatibility
+After taking care to avoid these compatibility
 problems, Nia entered her cloud machine to
 configure the script.
 \begin{Verbatim}[fontsize=\small,
@@ -5287,21 +5294,21 @@ weird languages.
 
 \section{The GNU Readline Library}
 Using flisp from the command line can be frustrating.
-When you type something, and spot a mistake in the
+When you type something, and spot a mistake at the
 beginning of the line, you cannot use the
 \keys{$\leftarrow$} left arrow key to move
 the cursor to the place where you want to
 insert the correction. 
 
 
-Bottom line in this? You could
+The bottom line is this, you could
 run the \verb|flisp| compiler directly
 from the shell, but since it does not
 have an editor, it is very unconfortable.
 Therefore, it is advisable to install
 a wrap around the GNU Readline Library.
 The most popular of such wraps
-is th \verb|rlwrap| line editor.
+is the \verb|rlwrap| line editor.
 
 To install the \verb|rlwrap| editor
 on the Macintosh, you can use the
@@ -5311,7 +5318,7 @@ homebrew package manager.
 ~/Femto-Emacs/femtolisp$ brew reinstall rlwrap
 \end{verbatim}
 \end{quote}
-On Linux, you can use the \verb|apt-get|
+On Linux, launch the \verb|apt-get|
 manager to install the line editor.
 \begin{quote}
 \begin{verbatim}
