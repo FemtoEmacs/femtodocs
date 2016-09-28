@@ -5310,6 +5310,25 @@ a wrap around the GNU Readline Library.
 The most popular of such wraps
 is the \verb|rlwrap| line editor.
 
+
+\begin{Verbatim}[fontsize=\small,
+    frame=single,
+    framerule=0.5mm]
+;  _
+; |_ _ _ |_ _ |  . _ _
+; | (-||||_(_)|__|_)|_)
+;-------------------|------------------------
+
+> (load ``webscript.scm'')
+
+> (copyFile ``qstring.script'' ``qstring.lsp'')
+    #t
+
+> (exit)
+~/femtodocs/samples$ scp -P2222 qstring.lsp nia@medicina.tips:~/
+\end{Verbatim}
+
+
 To install the \verb|rlwrap| editor
 on the Macintosh, you can use the
 homebrew package manager.
@@ -5774,6 +5793,99 @@ to the $q_2$ state.
          (else (word i (+ j 1) s)) ))
 \end{verbatim}
 \end{fmpage}
+
+\appendix
+
+\chapter{Femtolisp cheat sheet}
+
+\paragraph{Equality predicates.}
+All lisp dialects provide a plethora
+of predicates for testing for equality
+of two objects. Let us perform a few tests
+to discover the difference between them.
+
+\begin{Verbatim}[fontsize=\small,
+    frame=single]
+  ~/Femto-Emacs/femtolisp$ rlwrap ./flisp
+  ;  _
+  ; |_ _ _ |_ _ |  . _ _
+  ; | (-||||_(_)|__|_)|_)
+  ;-------------------|----------------
+
+  > (eq? 4.5 (/ 9.0 2))
+  #f
+  > (eqv? 4.5 (/ 9.0 2))
+  #t
+  > (eq? 'Carmen 'Carmen)
+  #t
+  > (eq? 'Carmen (car '(Carmen Micaela)))
+  #t
+  > (equal? 4.5 (/ 9.0 2))
+  #t
+  > (= 4.5 (/ 9.0 2))
+  #t
+  > (= 'Carmen (car '(Carmen Micaela)))
+  type error: =: expected number, got Carmen
+\end{Verbatim}
+It seems that \verb|(equal? x y)| answers true
+when \verb|x| is visually equal to \verb|y|.
+The predicate \verb|(= x y)| seems to work
+for numbers only. The predicate \verb|(eq? x y)|
+checks whether \verb|x| is the same object as \verb|y|.
+Finally, \verb|(eqv? x y)| returns \verb|#t| when
+\verb|x| is equivalent to \verb|y|, whatever this
+may mean.
+
+\paragraph{Comparing things.}
+Predicates such as \verb|(> x y)|,
+\verb|(>= x y)|, \verb|(< x y)| and \verb|(<= x y)|
+work for objects of any type.
+
+\begin{Verbatim}[fontsize=\small,
+    frame=single]
+  ~/Femto-Emacs/femtolisp$ rlwrap ./flisp
+  > (> 4 3)
+  #t
+  > (> "zebra"  "horse")
+  #t
+  > (>= "abc"  "abc")
+  #t
+  > (<  "abc"  "abc")
+  #f
+  > (<= "abc" "abc")
+  #t
+\end{Verbatim}
+
+\paragraph{Arithmetic operations.} The numerical functions
+shown below can have any number of arguments.
+\begin{itemize}
+\item Multiplication -- $\verb|(* |\;x_1\; x_2\; x_3\ldots x_n\verb|)|$
+\item Addition -- $\verb|(+ |\;x_1\; x_2\; x_3\ldots x_n\verb|)|$
+\item Subtraction -- $\verb|(- |\;x_1\; x_2\; x_3\ldots x_n\verb|)|$
+\item Division -- $\verb|(/ |\;x_1\; x_2\; x_3\ldots x_n\verb|)|$
+\end{itemize}
+Operations such as \verb|(div0 53 5)| and \verb|(mod0 53 5)|
+calculates the quotient and remainder of the integer
+division respectively. All arithmetic operations can
+be nested at will.
+\begin{Verbatim}[fontsize=\small,
+    frame=single]
+> (div0 53 5)
+10
+
+> (mod0 53 5)
+3
+
+> (+ (* 3 4 5) (/ 3.1416 8))
+60.3927
+
+> (define (c2f x) (- (/ (* (+ x 40) 9) 5.0) 40))
+#fn(``7000r1|bXwb9T2c0U2bXx;'' [5.0] c2f)
+
+> (c2f 100)
+212.0
+\end{Verbatim}
+
 
 \begin{thebibliography}{99}
 
