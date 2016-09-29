@@ -4909,7 +4909,7 @@ must be mastered to perfection.
 \label{wrtFile}
 \end{figure}
 
-\chapter{Cloud computing}
+\chapter{Cloud computing}\label{cloud-computing}
 A compiler is a program that reads
 source code into a language that
 human beings can handle easily
@@ -5885,6 +5885,92 @@ be nested at will.
 > (c2f 100)
 212.0
 \end{Verbatim}
+
+\paragraph{File operations.}
+You have already learned the very basic
+file operations on chapter~\ref{cloud-computing},
+page~\pageref{cloud-computing}.\\
+
+
+\begin{fmpage}{0.5\textwidth}
+\begin{verbatim}
+(let ( (s1 (file "f.tx" :read)))
+  (with-input-from s1
+     (prog1 (read)
+        (io.close s1)) ))
+\end{verbatim}
+\end{fmpage}
+\begin{fmpage}{0.4\textwidth}\small
+  ;;Open \verb|"f1.txt"| for reading.\\
+  ;;Input from the \verb|s1| stream.\\
+  ;;(read) an expression.\\
+  ;;(io.close s1) the \verb|s1| stream.
+\end{fmpage}
+
+\verb||\\
+In the above example, all reading
+operations get data from the \verb|s1| stream.
+The {\small \verb|(prog1 (read) (io.close s1)|}
+sequence reads an expression from the \verb|s1|
+stream, and closes the stream. The return
+value of the \verb|prog1| sequence is given by its
+first expression, i.e., \verb|(read)|.
+
+The \verb|copyFile| procedure copies
+the \verb|inF| file into the \verb|outF| file.
+It calls \verb|(rdprt)| that reads
+each \verb|x| line of the \verb|in| stream
+and prints it into the \verb|out| stream
+until the \verb|(eof-object? x)| predicate
+becomes true.
+
+\begin{verbatim}
+(define (readLn) (io.readline *input-stream*))
+
+(define (rdprt)
+  (let loop ( (x (readLn)) )
+     (cond ( (eof-object? x) #t)
+           (else (princ x)
+                 (loop (readLn)) )) ))
+
+(define (copyFile inF outF)
+  (let ( (in (file inF :read))
+         (out (file outF :write :create)) )
+    (with-output-to out
+      (with-input-from in   
+         (rdprt)))
+    (io.close in)
+    (io.close out)))
+\end{verbatim}
+
+The \verb|wrtVector| procedure writes a datum
+into the \verb|nm| file at a
+random position given by the \verb|(* i 20)|
+expression.
+
+\begin{verbatim}
+(define (wrtVector nm datum i)
+  (let ((out (trycatch (file nm :write :append)
+                (lambda(x) (file nm :write :create))) ))
+      (with-output-to out
+         (io.seek out (* i 20))
+         (princ datum))
+      (io.close out)))
+\end{verbatim}
+
+The \verb|rdVector| procedure reads
+an expression from a \verb|(* i 20)|
+random position of the \verb|nm| file.
+
+\begin{verbatim}
+(define (rdVector nm i)
+   (let ( (in  (file nm :read)) )
+      (with-input-from in
+         (io.seek in (* i 20))
+         (print (read)))
+      (io.close in)))
+\end{verbatim}
+
 
 
 \begin{thebibliography}{99}
