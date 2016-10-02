@@ -5710,7 +5710,7 @@ s/he  will get 42.
 
 
 \chapter{Finite Automaton}
-\index{Finite automata}
+\index{Finite automata}\label{chap:finite-automaton}
 A deterministic finite automaton
 is a finite state machine that accepts or rejects
 finite strings of chars and only produces
@@ -5971,6 +5971,91 @@ random position of the \verb|nm| file.
       (io.close in)))
 \end{verbatim}
 
+In listing~\ref{wordsFromFile},
+the \verb|rdword| procedure reads the
+contents of a file as a list of words. 
+It is implemented as an
+automaton. To learn what an automaton is,
+reread chapter~\ref{chap:finite-automaton},
+page~\pageref{chap:finite-automaton}.
+
+To test listing~\ref{wordsFromFile}, let
+us create a file with the first and
+second line of one of the most
+popular of Byron's poems:
+\begin{quote}
+She walks in beauty, like the night\\ 
+Of cloudless climes and starry skies.
+\end{quote}
+Now, let us start up femtolisp, load
+the program, and read the words and
+punctuation marks from the poem.
+As soon a word is read, it is consed
+into a list, and the automaton proceeds
+to read the rest of the text.
+\begin{verbatim}
+~/femtodocs/samples $rlwrap ~/femtolisp/flisp
+;  _
+; |_ _ _ |_ _ |  . _ _
+; | (-||||_(_)|__|_)|_)
+;-------------------|-----------------
+
+> (load "wordsFromFile.scm")
+#<function>
+> (rdList "words.txt")
+("She" "walks" "in" "beauty" "," "like" 
+"the" "night" "Of" "cloudless" "climes"
+ "and" "starry" "skies" ".")
+\end{verbatim}
+
+
+The automaton of listing~\ref{wordsFromFile} 
+is based on two procedures, \verb|(io.getc s)| and
+\verb|(io.peekc s)|. The \verb|(io.getc s)|
+reads a char from the \verb|s| stream,
+and advance the file descriptor to the
+next char. The \verb|(io.peekc s)| procedure
+peek at a char, but do not advance the
+file descriptor. I hope that this much
+information will be enough for you to 
+figure out how the automaton works.
+
+\begin{figure}[!b]
+\begin{verbatim}
+(define (punctuation-mark? c)
+  (not (not (string.find ".;:,?!()" c)) ))
+
+(define (ignore-blank c s)
+   (cond ( (eof-object? c) '())
+         ( (or (eqv? c #\space) (eqv? c #\newline)) 
+           (ignore-blank (io.getc s) s))
+         ( (punctuation-mark? c)
+           (cons (string c) 
+                 (ignore-blank (io.getc s) s)))
+         (else (word c s '()) ) )) 
+
+(define (word c s xs)
+   (cond ( (eof-object? c)
+           (list (apply string (reverse xs))))
+         ( (eqv? c #\space)
+           (cons (apply string (reverse xs))
+                 (ignore-blank (io.getc s) s)))
+         ( (eof-object? (io.peekc s))
+           (apply string (reverse (cons c xs)) ))
+         ( (punctuation-mark? (io.peekc s))
+           (cons (apply string (reverse (cons c xs)))
+                 (ignore-blank (io.getc s) s)))
+         ( (io.eof? s)
+           (list (apply string (reverse xs))))
+         (else (word (io.getc s) s (cons c xs)) ) ))
+
+(define (rdList fname)
+   (let ( (in (file fname :read)))
+         (ignore-blank (io.getc in) in)))
+\end{verbatim}
+\caption{Reading words from a file}
+\label{wordsFromFile}
+\end{figure}
 
 
 \begin{thebibliography}{99}
