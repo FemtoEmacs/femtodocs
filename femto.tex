@@ -5911,21 +5911,38 @@ You have already learned the very basic
 file operations on chapter~\ref{cloud-computing},
 page~\pageref{cloud-computing}.\\
 
-
-\begin{fmpage}{0.5\textwidth}
+\begin{figure}[!h]
+\begin{fmpage}{0.95\textwidth}
 \begin{verbatim}
-(let ( (s1 (file "f.tx" :read)))
-  (with-input-from s1
-     (prog1 (read)
-        (io.close s1)) ))
+~/femtodocs/samples$ rlwrap ~/Femto-Emacs/femtolisp/flisp
+;  _
+; |_ _ _ |_ _ |  . _ _
+; | (-||||_(_)|__|_)|_)
+;-------------------|---------------
+> (let ( (s (file "f.txt" :write :create)))
+     (with-output-to s
+        (princ '(She walks in beauty))
+        (io.close s)))
+#t
+> (let ( (s (file "f.txt" :read)))
+     (with-input-from s
+        (prog1 (read)
+          (io.close s)) ))
+(She walks in beauty)
+> (let ( (s (file "f.txt" :read)))
+     (with-input-from s
+         (read)
+         (io.close s)))
+#t
+> (let* ( (s (file "f.txt" :read))
+          (expression (read s)) )
+      (io.close s) expression)
+(She walks in beauty)
 \end{verbatim}
 \end{fmpage}
-\begin{fmpage}{0.4\textwidth}\small
-  ;;Open \verb|"f1.txt"| for reading.\\
-  ;;Input from the \verb|s1| stream.\\
-  ;;(read) an expression.\\
-  ;;(io.close s1) the \verb|s1| stream.
-\end{fmpage}
+\caption{Basic io}
+\label{basicio}
+\end{figure}
 
 \verb||\\
 In the above example, all reading
@@ -5936,6 +5953,17 @@ stream, and closes the stream. The return
 value of the \verb|prog1| sequence is given by its
 first expression, i.e., \verb|(read)|.
 
+In order to better understand the
+necessity of the prog1 sequencer,
+the last expression of listing~\ref{basicio}
+shows what happens if one simply reads
+an expression and closes the stream:
+The result would be \verb|#t|, which
+would report that the stream was closed 
+successfully, but is not what you want.
+Of course, \verb|let*| can produce
+the same effect as the \verb|prog1| sequencer.
+
 The \verb|copyFile| procedure copies
 the \verb|inF| file into the \verb|outF| file.
 It calls \verb|(rdprt)| that reads
@@ -5945,22 +5973,59 @@ until the \verb|(eof-object? x)| predicate
 becomes true.
 
 \begin{verbatim}
+(define (opn fname)
+  (trycatch (file fname :write :append)
+      (lambda(x) (file fname :write :create)) ))
+
+(define (into fname expr (s (opn fname)))
+   (with-output-to s
+     (write expr) (newline) (io.close s)))
+
 (define (readLn) (io.readline *input-stream*))
 
 (define (rdprt)
-  (let loop ( (x (readLn)) )
-     (cond ( (eof-object? x) #t)
-           (else (princ x)
-                 (loop (readLn)) )) ))
+   (let loop ( (x (readLn)))
+      (cond ( (eof-object? x) #t)
+            (else (princ x)
+                  (loop (readLn)) )) ))
 
 (define (copyFile inF outF)
-  (let ( (in (file inF :read))
-         (out (file outF :write :create)) )
-    (with-output-to out
-      (with-input-from in   
-         (rdprt)))
-    (io.close in)
-    (io.close out)))
+   (let ( (in (file inF :read))
+          (out (file outF :write :create)) )
+     (with-output-to out
+        (with-input-from in
+           (rdprt)))
+     (io.close in)
+     (io.close out)))
+
+(define (prtFile fname)
+   (let ( (in (file fname :read)))
+     (with-input-from in
+        (let loop ( (x (readLn)))
+           (while (not (eof-object? x))
+              (princ x)
+              (loop (readLn))) ) )))
+\end{verbatim}
+
+\begin{verbatim}
+> (into "byron.txt" '(She walks in pretty))
+#t
+
+> (into "byron.txt" '(like the night))
+#t
+
+> (prtFile "byron.txt")
+(She walks in pretty)
+(like the night)
+#f
+
+> (copyFile "byron.txt" "byron2.txt")
+#t
+
+> (prtFile "byron2.txt")
+(She walks in pretty)
+(like the night)
+#f
 \end{verbatim}
 
 The \verb|wrtVector| procedure writes a datum
