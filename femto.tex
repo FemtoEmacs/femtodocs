@@ -102,8 +102,19 @@ Lisp offers a Read, Eval, Print Loop (REPL).
 \begin{enumerate}
 \item Femtolisp is open source.
 \item Femtolisp is small and written in C.
-\item In the majority of situations Femtolisp is compatible
-  with the standard Scheme dialect.
+\item After loading the \verb|r5rs.scm| library
+  provided in the femtoemacs distribution,
+  the user can bridge the syntactic gap
+  between femtolisp and Scheme.
+  In the majority of situations, the \verb|r5rs.scm|
+  library is compatible
+  with the standard Scheme dialect. This means that
+  one can use classical Scheme tutorials to learn
+  how to configure and customize femtoemacs.
+  The Structure and Interpretation of Computer Programs
+  is the most popular of these tutorials.
+  Of course, you can use the content of the
+  present text to the same effect.
 \item Femtolisp is fast.
 \end{enumerate}    
 
@@ -495,7 +506,7 @@ software. Each operating system has its own
 package manager. Even if you stick to a single
 operating system, you will have to
 deal with many package managers
-and different philosophies about
+and different philosophies concerning
 software installation.
 
 
@@ -503,9 +514,8 @@ I will teach you how to use three
 installation tools: apt-get,
 homebrew and git clone. However,
  this tutorial will not
- completely cover the many problems
- that you must solve 
-to make your machine usable.
+ completely cover the many subtleties
+ involved while you make your machine usable.
 You will really need the help of
 that girl who is majoring in
 Computer Engineering.
@@ -517,39 +527,42 @@ Javanese script.
 \section{ncurses}
 In the jargon of tech-oriented people,
 a person who uses computers is called
-{\em user}, but some engineers
-prefer the term {\em looser}, because
-they think the last mentioned word conveys
-the idea more precisely. Then,
-user is somebody like you or myself.
+{\em user}, but engineers
+prefer the term {\em looser}, as
+the latter is an affectionate way
+of calling those individuals who need to work
+with a computer, but in fact have no skills. By the way,
+looser is a loser who can't spell ``loser''.
+
+
 
 Computers need a tool to make communication
-with loosers possible. That tool is
+with users possible. That tool is
 called User Interface, or UI for short.
-There are two kinds of User Interfaces.
+There are two kinds of User Interface.
 
 In this chapter, you are learning how to use a
-text terminal. Therefore, you already knows
-what a text based User Interface ou UI.
-The shell is a UI.
+text terminal. Therefore, you already know,
+what a text based User Interface or UI is.
+After all, you are operating the shell,
+and the shell is a User Interface.
 
 A graphical user interface
 allows people to interact with
 computers through graphical icons and
-visual indicators, instead
-typed command labels or text navigation.
+visual indicators, instead of 
+typed commands or keyboard shortcuts.
 GUIs were introduced when vendors
-perceived that older people have
+perceived that non tech-savvy customers have
 difficulty in dealing with modern
 digital machines, that require a formal
-language for accepting commands
-typed on a computer keyboard.
+language for accepting commands.
 
-Of course, you could type commands
-on a text box of a Graphical User
-Interface. After all, people frequentely
+Considering that people frequentely
 converse with each other through
-the Chat Box. However, a text terminal
+the Chat Box, you could type commands
+in a text box of a Graphical User
+Interface. However, a text terminal
 offers sharper and crisp characters
 through the use of a specialized
 User Interface called ncurses.
@@ -561,15 +574,20 @@ the following address:
 The distribution package is called
 archive, since it contains many
 files stored together in a compact way,
-that you will need to uncompress
+that you will need to decompress
 and extract.
+
+A popular tool for decompressing an archive
+is gunzip that accepts files with the \verb|*.gz|
+extension. Extraction is performed by the \verb|tar|
+application. 
 \begin{quote}
 \begin{verbatim}
 ~$ tar xfvz ncurses-6.0.tar.gz
 \end{verbatim}
 \end{quote}
-The \verb|z| option is used to
-uncompress the
+The \verb|z| option calls gunzip to
+decompress the
 \verb|ncurses-6.0.tar.gz| archive into
 an \verb|ncurses-6.0.tar| file. The
 \verb|x| option indicates that
@@ -578,13 +596,15 @@ files of the \verb|ncurses-6.0.tar| intermediate
 file and place them into the \verb|ncurses-6.0/|
 directory.
 
-When you perform the download of the
+The Macintosh differs from Linux machines
+in that, when you perform the download of the
 \verb|ncurses-6.0.tar.gz| archive, the
-Macintosh uncompress the the distribution
+Apple operating system decompresses the distribution
 automatically, so that you will end up
 with the tar file in the \verb|~/Downloads|
-folder. Transfer it to your home directory
-and perform the extraction.
+folder. Then you can transfer it to your home directory
+and perform the extraction without the need for the
+\verb|z| option.
 \begin{quote}
 \begin{verbatim}
 ~$ cd ~  # makes sure that you are in the home folder
@@ -592,9 +612,6 @@ and perform the extraction.
 ~$ tar xfv ncurses-6.0.tar
 \end{verbatim}
 \end{quote}
-Notice that it was not necessary to uncompress
-the archive, since the operating system
-did it for you.
 
 The tar tool creates an \verb|ncurses-6.0| folder
 containing all files of the program that implement
@@ -605,16 +622,17 @@ many files in the C  computer language.
 In order to become usable, these files
 must be compiled into a set of libraries
 containing instructions written in a
-language that the computer understand.
-You don't need any knowledge of C to
+language that the computer understands.
+You do not need any knowledge of C to
 perform the translation to machine
-language. All instructions for
-doing compilation job is written
-in  \verb|Makefile|. But this is not
-enough. For the operation to end with
-success, the system must know which
+language. All instructions in the
+batch job for performing the compilation
+are written in  \verb|Makefile|. However,
+\verb|Makefile| on its on is not
+sufficient. For the operation to be
+successful, the system needs also to know which
 computer you are using. The \verb|configure|
-contains the program to analyse your
+contains the program that analyzes your
 handware.
 \begin{quote}
 \begin{verbatim}
@@ -627,28 +645,27 @@ handware.
 The second line of the above listing
 configures \verb|ncurses|, i.e.,
 discovers details about your machine.
-The \verb|--enable-widec| customize
+The \verb|--enable-widec| option customizes
 the text terminal for chars with
 diacritics, so you can write words
 like {\em café} and {\em façade}.
 
 The second line of the ncurses installation
 listing compiles the User Interface.
-The third line perform the installation
-itself.
+The third line performs the very installation.
 
 The installation requires that the
 system copy files to the \verb|/usr/local/|
-folder. However you must give a special
-permission for this operation, otherwise
-a virus would be able to make similar copies
+folder. However, you must give special
+permission for this operation to be performed,
+otherwise the possibility remains open for
+a virus to make similar copies
 in critical folders.
-
 The \verb|sudo|
 command informs the machine that you
-are a superuser. To avoid beeing tricked
+are a superuser. To avoid being tricked
 by a virus or an unauthorized user,
-the machine asks for the passward,
+the machine asks for the password,
 and if you type it correctly,
 the system installs ncurses.
 
@@ -656,7 +673,7 @@ the system installs ncurses.
 latest version of \verb|libncursesw5-dev|.
 Since repositories are usually old,
  download a recent distribution of ncurses,
-build it:
+and build it:
 \begin{verbatim}
 ~$ sudo apt-get install libncursesw5-dev
 ~$ wget http://ftp.gnu.org/gnu/ncurses/ncurses-6.0.tar.gz
@@ -666,9 +683,9 @@ build it:
 ~/ncurses-6.0$ make
 ~/ncurses-6.0$ sudo make install
 \end{verbatim}
-After installing ncursesw, you you need to
-clone the sources of the editor. Here is how
-to do the job:
+After installing ncursesw,  you need to
+clone the sources for the editor. Here is how
+to perform this job:
 \begin{quote}
 \begin{verbatim}
 ~$ git clone https://github.com/FemtoEmacs/Femto-Emacs
@@ -693,15 +710,18 @@ the customization files to your home directory.
 ~/Femto-Emacs/femto$ cp aliases.scm $HOME/
 \end{verbatim}
 
+I have to say this again: An installation
+task has so many details that, unless you
+are an engineer yourself, 
+ask for help from a computer expert.
 
-  
 \section{MAC OS-X.}
-In order to install programs that depends
+In order to install programs that depend
 on resources present in a text terminal,
 you need to install the
 \verb|libncursesw.a| library. You can
 use your browser to download it.
-Immediately after download, it will be
+Immediately after the download is complete, it will be
 placed in the \verb|~/Downloads/| folder.
 
 It is advisable to transfer it to your
@@ -715,14 +735,14 @@ installation folder.
 \end{verbatim}
 \end{quote}
 Remember that the dot indicates the current
-directory. For instance, the \verb|./greeting|
-means: execute the \verb|greeting| command
+directory. For instance, the \verb|./femto|
+command means: execute the \verb|femto| file
 present in the current directory.
 The fact is that Unix and Unix like systems
 are unable to find a command, except when
 it is installed in a pre-defined search
 path or when the file path is completely
-especified.
+specified.
 
  Unpack and make the distribution archive as shown below:
 \begin{quote}
