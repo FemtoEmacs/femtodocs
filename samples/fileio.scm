@@ -23,12 +23,11 @@
      (io.close in)
      (io.close out)))
 
-(define (prtFile fname)
-   (let ( (in (file fname :read)))
-     (with-input-from in
-        (let loop ( (x (readLn)))
+(define (prtFile fname (in (file fname :read)))
+        (let loop ( (x (io.getc in)))
            (when (not (eof-object? x))
-              (princ x)
-              (loop (readLn))) ) )))
+                (io.putc *output-stream* x)
+                (loop (io.getc in)) ))
+       (io.close in))
 
 

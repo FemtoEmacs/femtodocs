@@ -5970,16 +5970,21 @@ It calls \verb|(rdprt)| that reads
 each \verb|x| line of the \verb|in| stream
 and prints it into the \verb|out| stream
 until the \verb|(eof-object? x)| predicate
-becomes true.
+becomes true. When the file descriptor
+reaches the end of a file, any read
+operation returns an end of file object,
+which makes the \verb|(eof-object? x)| predicate
+return \verb|#t| -- true. 
 
+\begin{figure}[!h]
+\begin{fmpage}{0.95\textwidth}
 \begin{verbatim}
 (define (opn fname)
   (trycatch (file fname :write :append)
       (lambda(x) (file fname :write :create)) ))
 
 (define (into fname expr (s (opn fname)))
-   (with-output-to s
-     (write expr) (newline) (io.close s)))
+   (with-output-to s  (write expr) (newline) (io.close s)))
 
 (define (readLn) (io.readline *input-stream*))
 
@@ -5993,21 +5998,55 @@ becomes true.
    (let ( (in (file inF :read))
           (out (file outF :write :create)) )
      (with-output-to out
-        (with-input-from in
-           (rdprt)))
+        (with-input-from in  (rdprt)))
      (io.close in)
      (io.close out)))
 
-(define (prtFile fname)
-   (let ( (in (file fname :read)))
-     (with-input-from in
-        (let loop ( (x (readLn)))
-           (while (not (eof-object? x))
-              (princ x)
-              (loop (readLn))) ) )))
+(define (prtFile nm (in (file nm :read)))
+        (let loop ( (x (io.getc in)))
+           (when (not (eof-object? x))
+                (io.putc *output-stream* x)
+                (loop (io.getc in)) ))
+       (io.close in))
 \end{verbatim}
+\end{fmpage}
+\caption{fileio.scm -- File Input/Output}
+\label{cpyFile}
+\end{figure}
+
+
+Let us test  listing \ref{cpyFile},
+which is stored at the \verb|fileio.scm| file.
+The \verb|(opn fname)| operation tries to
+open a file for appending text. If the file
+does not exist, \verb|(opn fname)| creates it.
+
+The \verb|(rdprt)| procedure reads 
+lines from a file and prints them into another file.
+File descriptors are generated from file
+names by the 
+\begin{quote}
+\verb|(copyFile inF outF)|
+\end{quote}
+procedure. When a file is read beyond
+the last char, the result is an
+end-of-file object, that is detected
+by the \verb|(eof-object? x)| and
+stops the read-print-loop in the
+\verb|(rdprt)| procedure.
+The \verb|(into fname expr)| procedure
+inserts the \verb|expr| lisp expression
+into the \verb|fname| file as 
+one text line.
 
 \begin{verbatim}
+~/femtodocs/samples$ rlwrap ~/Femto-Emacs/femtolisp/flisp
+;  _
+; |_ _ _ |_ _ |  . _ _
+; | (-||||_(_)|__|_)|_)
+;-------------------|---------------------
+
+> (load "fileio.scm")
 > (into "byron.txt" '(She walks in pretty))
 #t
 
@@ -6027,35 +6066,135 @@ becomes true.
 (like the night)
 #f
 \end{verbatim}
+The \verb|(prtFile nm)| procedure prints
+a file char by char. In the named-let,
+every time that the \verb|(io.getc in)|
+procedure is called, the loop reads 
+one char from the \verb|in|
+stream. The \verb|(io.putc *output-stream* x)|
+prints the \verb|x| char on the screen.
+The  $\verb|(when | c\; x_1\;x_2\ldots x_n\verb|)|$ form
+executes the $x_1$, $x_2$\ldots $x_n$ 
+expressions, when the $c$ condition holds.
+In the case of the \verb|(prtFile fname)|
+procedure, the \verb|when|-form puts
+the \verb|x| char into the \verb|*output-stream*|
+and loops back to read and print the next char.
 
+\paragraph{Random access.}
 The \verb|wrtVector| procedure writes a datum
 into the \verb|nm| file at a
-random position given by the \verb|(* i 20)|
+random position given by the \verb|(* i sz)|
 expression.
 
+The \verb|rdVector| procedure reads
+an expression from a \verb|(* i sz)|
+random position of the \verb|nm| file.
+The \verb|(clear nm i sz)| operation
+fills a node at \verb|(* i sz)| with
+blank chars.
+
+\begin{figure}[!h]
+\begin{fmpage}{0.95\textwidth}
 \begin{verbatim}
-(define (wrtVector nm datum i)
-  (let ((out (trycatch (file nm :write :append)
-                (lambda(x) (file nm :write :create))) ))
+(define (opn fname)
+  (trycatch (file fname :write :append)
+      (lambda(err) (file fname :write :create)) ))
+
+(define (clear nm i sz (out (opn nm)))
+   (io.seek out (* i sz))
+   (let loop ((j sz))
+      (when (> j 0)
+         (io.putc out #\space)
+         (loop (- j 1)) ))
+      (io.close out))
+
+(define (wrtVector nm datum i (sz 100))
+   (clear nm i sz)
+   (let ((out (trycatch (file nm :write :append)
+                 (lambda(err) (file nm :write :create)) ) ))
       (with-output-to out
-         (io.seek out (* i 20))
+         (io.seek out (* i sz))
          (princ datum))
       (io.close out)))
-\end{verbatim}
 
-The \verb|rdVector| procedure reads
-an expression from a \verb|(* i 20)|
-random position of the \verb|nm| file.
+(define (rdVector nm i (sz 100))
+  (let ( (in (file nm :read)))
+    (with-input-from in
+       (io.seek in (* i sz))
+       (print (read)))
+    (io.close in)))
+\end{verbatim}
+\end{fmpage}
+\caption{randomAccess.scm}
+\label{randomAccess}
+\end{figure}
+
+The file is organized as a sequence
+of nodes, where each node has a fixed
+number of chars. In the examples,
+there are 100 chars in a given node.
+Node \verb|i| starts at the 
+\verb|(* i sz)| position. For instance,
+node 2 starts at the \verb|(* 2 100)|
+ position and ends at the \verb|(* 3 100)|
+ position.
+
+To clean a node, the \verb|(io.seek out (* i sz))|
+places the file descriptor at the first char
+of the node, and loops through the node size.
+
+
+
+Below, you will find a test for  
+listing~\ref{randomAccess}.
+
+
 
 \begin{verbatim}
-(define (rdVector nm i)
-   (let ( (in  (file nm :read)) )
-      (with-input-from in
-         (io.seek in (* i 20))
-         (print (read)))
-      (io.close in)))
+~/femtodocs/samples$ rlwrap ~/Femto-Emacs/femtolisp/flisp
+;  _
+; |_ _ _ |_ _ |  . _ _
+; | (-||||_(_)|__|_)|_)
+;-------------------|-----------------------------
+> (load "randomAccess.scm")
+#<function>
+> (wrtVector "gordon.txt" '(She walks) 0)
+#t
+
+> (wrtVector "gordon.txt" '(in beauty) 1)
+#t
+
+> (wrtVector "gordon.txt" '(like the night) 2)
+#t
+
+> (wrtVector "gordon.txt" '(of cloudless climes) 3)
+#t
+
+> (wrtVector "gordon.txt" '(and starry skies) 4)
+#t
+
+> (rdVector "gordon.txt" 0)
+(She walks)#t
+
+> (rdVector "gordon.txt" 1)
+(in beauty)#t
+
+> (rdVector "gordon.txt" 2)
+(like the night)#t
+
+> (rdVector "gordon.txt" 3)
+(of cloudless climes)#t
+
+> (rdVector "gordon.txt" 4)
+(and starry skies)#t
+
+> (rdVector "gordon.txt" 2)
+(like the night)#t
 \end{verbatim}
 
+
+\paragraph{A file automaton.}
 In listing~\ref{wordsFromFile},
 the \verb|rdword| procedure reads the
 contents of a file as a list of words. 
@@ -6101,7 +6240,54 @@ reads a char from the \verb|s| stream,
 and advance the file descriptor to the
 next char. The \verb|(io.peekc s)| procedure
 peek at a char, but do not advance the
-file descriptor. I hope that this much
+file descriptor.
+
+Consider the third clause that appears
+in the cond-form that appears in the
+definition of the \verb|(word c s xs)|
+procedure. The clause peeks the next
+char in the stream, but does not 
+advance the file descriptor. If the
+char is the end-of-file object,
+the automaton has finished with the
+file. Therefore, the clause reverses
+the \verb|xs| accumulator and 
+casts it into a string.
+Why one cannot use \verb|io.getc|
+to check the next character for
+the end of file? 
+
+The short answer
+is that in the case of clause 
+failure, the char would not be 
+available for last clause.
+
+The long answer is that one
+could use the \verb|io.getc|
+procedure. However, 
+the last clause should 
+call the \verb|(begin (io.ungetc s) (io.getc s))|
+sequence,
+instead of the \verb|(io.getc s)| procedure.
+This is necessary, in order
+to restore the file descriptor 
+that the \verb|(io.getc s)|
+procedure advanced in the third clause.
+
+The implementation of automata through
+\verb|io.getc| and \verb|io.peekc| is
+particularly useful in compiler construction.
+I believe that the designers of femtolisp
+has provided such a complete set of
+char reading functions, because they
+intended to use femtolisp in the
+implementation of the Julia language.
+%% By the way, if your job is numerical
+%% calculations, I suggest serious 
+%% consideration of the Julia language
+%% relative merits over other solutions.
+
+I hope that this much
 information will be enough for you to 
 figure out how the automaton works.
 
@@ -6126,7 +6312,7 @@ figure out how the automaton works.
            (cons (apply string (reverse xs))
                  (ignore-blank (io.getc s) s)))
          ( (eof-object? (io.peekc s))
-           (apply string (reverse (cons c xs)) ))
+           (list (apply string (reverse (cons c xs)) ) ))
          ( (punctuation-mark? (io.peekc s))
            (cons (apply string (reverse (cons c xs)))
                  (ignore-blank (io.getc s) s)))
@@ -6141,6 +6327,49 @@ figure out how the automaton works.
 \caption{Reading words from a file}
 \label{wordsFromFile}
 \end{figure}
+
+
+\paragraph{List processing.} As all
+lisp dialects, femtolisp has a
+plethora of list processing
+functions. Below, the interested
+reader will find a demonstration
+of this kind of function.
+
+\begin{verbatim}
+~/femtodocs/samples$ rlwrap ~/Femto-Emacs/femtolisp/flisp
+;  _
+; |_ _ _ |_ _ |  . _ _
+; | (-||||_(_)|__|_)|_)
+;-------------------|--------------------------
+
+> (member 4 '(3 5 4 8))
+(4 8)
+> (assoc "ed" '( ("paul" 42) ("ed" 12) ("ann" 5)))
+("ed" 12)
+> (list-tail '(a b c d e f) 2)
+(c d e f)
+> (list-head '(a b c d e f) 2)
+(a b)
+> (list-ref '(a b c d e f) 2)
+c
+> (length= '(a b c d e f) 6)
+#t
+> (length> '(a b c d e f) 3)
+(d e f)
+> (last-pair '(a b c d e f))
+(f)
+> (lastcdr '(a b c d e f))
+()
+> (map! (lambda(x) (* x x)) '(3 4 5))
+(9 16 25)
+> (filter (lambda(x) (> x 2)) '(3 4 5 6 2 1))
+(3 4 5 6
+> (separate (lambda(x) (> x 2)) '(3 4 5 6 2 1))
+((*values*) (3 4 5 6) (2 1))
+> (count (lambda(x) (> x 2)) '(3 4 5 6 2 1))
+4
+\end{verbatim}
 
 
 \begin{thebibliography}{99}
