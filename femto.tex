@@ -5851,9 +5851,10 @@ as long as the reader keeps feeding letters.
 
 \paragraph{Equality predicates.}
 All lisp dialects provide a plethora
-of predicates for testing for equality
-of two objects. Let us perform a few tests
-to discover the difference between them.
+of predicates for testing the  equality
+between two objects. Let us perform a few tests
+to discover the difference between these
+many predicates.
 
 \begin{Verbatim}[fontsize=\small,
 frame=single]
@@ -5878,9 +5879,10 @@ frame=single]
 > (= 'Carmen (car '(Carmen Micaela)))
 type error: =: expected number, got Carmen
 \end{Verbatim}
-It seems that \verb|(equal? x y)| answers true
-when \verb|x| is visually equal to \verb|y|.
-The predicate \verb|(= x y)| seems to work
+As a general rule, the \verb|(equal? x y)| 
+is true when both \verb|x| and \verb|y|
+objects have the same printed
+representation. The predicate \verb|(= x y)| seems to work
 for numbers only. The predicate \verb|(eq? x y)|
 checks whether \verb|x| is the same object as \verb|y|.
 Finally, \verb|(eqv? x y)| returns \verb|#t| when
@@ -5916,30 +5918,31 @@ shown below can have any number of arguments.
 \item Division -- $\verb|(/ |\;x_1\; x_2\; x_3\ldots x_n\verb|)|$
 \end{itemize}
 Operations such as \verb|(div0 53 5)| and \verb|(mod0 53 5)|
-calculates the quotient and remainder of the integer
-division respectively. All arithmetic operations can
-be nested at will.
+calculate the quotient and remainder of the integer
+division respectively. 
+
+Arithmetic operations can
+be nested as necessary, i.e., one
+ can be placed inside the other.
+In order to get a better understanding
+of this idea, study the examples below.
 \begin{Verbatim}[fontsize=\small,
 frame=single]
 > (div0 53 5)
 10
-
 > (mod0 53 5)
 3
-
 > (+ (* 3 4 5) (/ 3.1416 8))
 60.3927
-
 > (define (c2f x) (- (/ (* (+ x 40) 9) 5.0) 40))
 #fn(``7000r1|bXwb9T2c0U2bXx;'' [5.0] c2f)
-
 > (c2f 100)
 212.0
 \end{Verbatim}
 
 \paragraph{File operations.}
 You have already learned the very basic
-file operations on chapter~\ref{cloud-computing},
+file operations in chapter~\ref{cloud-computing},
 page~\pageref{cloud-computing}.\\
 
 \begin{figure}[!h]
@@ -5971,13 +5974,13 @@ page~\pageref{cloud-computing}.\\
 (She walks in beauty)
 \end{verbatim}
 \end{fmpage}
-\caption{Basic io}
+\caption{Basic IO}
 \label{basicio}
 \end{figure}
 
 \verb||\\
 In the above example, all reading
-operations get data from the \verb|s1| stream.
+operations retrieve data from the \verb|s1| stream.
 The {\small \verb|(prog1 (read) (io.close s1)|}
 sequence reads an expression from the \verb|s1|
 stream, and closes the stream. The return
@@ -5998,14 +6001,14 @@ the same effect as the \verb|prog1| sequencer.
 The \verb|copyFile| procedure copies
 the \verb|inF| file into the \verb|outF| file.
 It calls \verb|(rdprt)| that reads
-each \verb|x| line of the \verb|in| stream
+each \verb|x| line from the \verb|in| stream
 and prints it into the \verb|out| stream
 until the \verb|(eof-object? x)| predicate
 becomes true. When the file descriptor
-reaches the end of a file, any read
-operation returns an end of file object,
+reaches the end of a file, any reading
+operation returns an end-of-file object,
 which makes the \verb|(eof-object? x)| predicate
-return \verb|#t| -- true. 
+return true. 
 
 \begin{figure}[!h]
 \begin{fmpage}{0.95\textwidth}
@@ -6047,7 +6050,7 @@ return \verb|#t| -- true.
 
 
 Let us test  listing \ref{cpyFile},
-which is stored at the \verb|fileio.scm| file.
+which is stored in the \verb|fileio.scm| file.
 The \verb|(opn fname)| operation tries to
 open a file for appending text. If the file
 does not exist, \verb|(opn fname)| creates it.
@@ -6068,7 +6071,7 @@ stops the read-print-loop in the
 The \verb|(into fname expr)| procedure
 inserts the \verb|expr| lisp expression
 into the \verb|fname| file as 
-one text line.
+one line of text.
 
 \begin{verbatim}
 ~/femtodocs/samples$ rlwrap ~/Femto-Emacs/femtolisp/flisp
@@ -6106,7 +6109,7 @@ stream. The \verb|(io.putc *output-stream* x)|
 prints the \verb|x| char on the screen.
 The  $\verb|(when | c\; x_1\;x_2\ldots x_n\verb|)|$ form
 executes the $x_1$, $x_2$\ldots $x_n$ 
-expressions, when the $c$ condition holds.
+expressions, when and only when the $c$ condition holds.
 In the case of the \verb|(prtFile fname)|
 procedure, the \verb|when|-form puts
 the \verb|x| char into the \verb|*output-stream*|
@@ -6122,7 +6125,8 @@ The \verb|rdVector| procedure reads
 an expression from a \verb|(* i sz)|
 random position of the \verb|nm| file.
 The \verb|(clear nm i sz)| operation
-fills a node at \verb|(* i sz)| with
+completely fills the span of 
+a node at \verb|(* i sz)| with
 blank chars.
 
 \begin{figure}[!h]
@@ -6134,10 +6138,10 @@ blank chars.
 
 (define (clear nm i sz (out (opn nm)))
 (io.seek out (* i sz))
-(let loop ((j sz))
+(let sweep ((j sz))
   (when (> j 0)
      (io.putc out #\space)
-     (loop (- j 1)) ))
+     (sweep (- j 1)) ))
   (io.close out))
 
 (define (wrtVector nm datum i (sz 100))
@@ -6173,7 +6177,7 @@ position.
 
 To clean a node, the \verb|(io.seek out (* i sz))|
 places the file descriptor at the first char
-of the node, and loops through the node size.
+of the node, and sweeps across the node size.
 
 
 
@@ -6181,8 +6185,8 @@ Below, Nia tests
 listing~\ref{randomAccess}. 
 Firstly, she loads the 
 program. Then she inserts
-snippets from a well known
-poem into nodes 0, 1, 2, 3 and 4.
+snippets from one of Byron's
+poems into nodes 0, 1, 2, 3 and 4.
 Finally, she uses the \verb|rdVector|
 procedure to retrieve the contents
 of the nodes.
@@ -6245,11 +6249,11 @@ popular of Byron's poems:
 She walks in beauty, like the night\\ 
 Of cloudless climes and starry skies.
 \end{quote}
-Now, let us start up femtolisp, load
+Now, let us start-up femtolisp, load
 the program, and read the words and
 punctuation marks from the poem.
 As soon a word is read, it is consed
-into a list, and the automaton proceeds
+onto the front of a list, and the automaton proceeds
 to read the rest of the text.
 \begin{verbatim}
 ~/femtodocs/samples $rlwrap ~/femtolisp/flisp
@@ -6271,19 +6275,19 @@ The automaton of listing~\ref{wordsFromFile}
 is based on two procedures, \verb|(io.getc s)| and
 \verb|(io.peekc s)|. The \verb|(io.getc s)|
 reads a char from the \verb|s| stream,
-and advance the file descriptor to the
+and advances the file descriptor to the
 next char. The \verb|(io.peekc s)| procedure
-peek at a char, but do not advance the
+peeks at a char, but does not advance the
 file descriptor.
 
-Consider the third clause that appears
-in the cond-form that appears in the
-definition of the \verb|(word c s xs)|
-procedure. The clause peeks the next
+Consider the third clause of
+cond-form that appears in
+the \verb|(word c s xs)| definition.
+The clause peeks at the next
 char in the stream, but does not 
 advance the file descriptor. If the
 char is the end-of-file object,
-the automaton has finished with the
+the automaton has finished working on the
 file. Therefore, the clause reverses
 the \verb|xs| accumulator and 
 casts it into a string.
@@ -6294,7 +6298,7 @@ the end of file?
 The short answer
 is that in the case of clause 
 failure, the char would not be 
-available for last clause.
+available for next clause.
 
 The long answer is that one
 could use the \verb|io.getc|
@@ -6395,7 +6399,7 @@ c
 (f)
 > (lastcdr '(a b c d e f))
 ()
-> (map! (lambda(x) (* x x)) '(3 4 5))
+> (map  (lambda(x) (* x x)) '(3 4 5))
 (9 16 25)
 > (filter (lambda(x) (> x 2)) '(3 4 5 6 2 1))
 (3 4 5 6
@@ -6513,6 +6517,43 @@ available.
 #\b
 > (aref (string #\a) 0)
 97
+\end{verbatim}
+
+\paragraph{Higher order functions.}
+A higher-order function, also known as
+functional form, is an operation that
+exhibits one of the following features:
+\begin{itemize}
+  \item can take a function as argument or
+  \item returns a function as the result.
+\end{itemize}
+
+The \verb|foldl| functional form applies
+a two arguments function between the
+elements of a list. For instance,
+\verb|(foldl * 1 '(2 3 4 5))| performs
+the calculation \verb|2*3*4*5*1|.
+The name \verb|foldl| comes from the
+fact that this functional form applies
+the folding function from left to right.
+There is also a \verb|foldr| functional
+form, that accumulates results from
+ right to left.
+\begin{verbatim}
+~/Femto-Emacs/femtolisp$ rlwrap ./flisp
+;  _
+; |_ _ _ |_ _ |  . _ _
+; | (-||||_(_)|__|_)|_)
+;-------------------|--------------------
+
+> (map (lambda(x) (* x x)) '(2 3 4 5))
+(4 9 16 25)
+
+> (foldl * 1 '(2 3 4 5))
+120
+
+> (foldr * 1 '(2 3 4 5))
+120
 \end{verbatim}
 
 
