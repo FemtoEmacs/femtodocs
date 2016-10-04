@@ -5763,73 +5763,87 @@ stream of words and punctuation from an English text.
 \begin{tikzpicture}[>=stealth',shorten >=1pt,on grid,
                    auto,node distance=3cm]
 \node[initial,state,accepting] (S)      {$S$};
-\node[state]         (q1) [right of=S]  {$q_1$};
-\node[state]         (q3) [right of=q1] {$q_3$};
-\node[state]         (r0) [below of= S] {\verb|'()|};
-\node[state]         (q2) [below of=q1] {$q_2$};
+\node[state]         (q0) [right of=S]  {$skp$};
+\node[state]         (q1) [right of=q0]  {$q_1$};
+\node[state]         (q3) [right of=q1] {$q_2$};
+\node[state]         (r0) [below of= S] {$\rightarrow n$};
+\node[state]         (q2) [below of=q1] {$\rightarrow n$};
 
-\path[->] (S)  edge  (q1)
+\path[->] (S)  edge  (q0)
+(q0) edge [->] node {\small else} (q1)
 (q1) edge [bend right] node {.,:?!} (q2)
-(q1) edge [loop above] node {blank} (q1)
-(q3) edge [bend left=60] node {blank} (q1)
-(q1) edge [->,bend left] node {a-z} (q3)
-(q1) edge [bend right] node {""} (r0);
+(q0) edge [loop above] node {blank} (q0)
+(q3) edge [bend left=60] node {\small else} (q2)
+(q1) edge [->,bend left] node {else} (q3)
+(q1) edge [] node {""} (r0);
 \path[->]
-(q3) edge [loop right] node {a-z} (q3)
-(q3) edge [bend left=10] node {,.?} (q1);
+(q3) edge [loop right] node {a-z} (q3);
 \end{tikzpicture}
 \caption{Finite automaton that recognizes English words}
 \label{fig:automaton}
 \end{figure}
 
 In the automaton of figure~\ref{fig:automaton}, there
-are three states: $q_1$, $q_2$ and $q_3$.
-The automaton remains in the state $q_1$ as long as
+are three states: $skp$, $q_1$ and $q_2$.
+The automaton remains in the state $skp$ as long as
 the stream produces blank chars, i. e., \verb|#\space|,
 \verb|#\newline| or \verb|#\tab|. If the computation
-reaches the end of the string, the automaton returns
-\verb|'()| and stops. If a punctuation mark appears
-in the stream, the automaton accepts it, and goes
-to the $q_2$ state. 
+reaches the end of the string, the automaton  stops.
+If a punctuation mark appears
+in the stream, the automaton accepts it, and 
+returns $\rightarrow n$. If the  $q_1$ state
+receives an alphabetical letter, the automaton
+goes to state $q_2$ and remains there 
+as long as the reader keeps feeding letters.
 
 \begin{figure}[!h]
 \begin{fmpage}{0.9\linewidth}
 \begin{verbatim}
-;; Finite automaton
+(define (end? s n) (<= (string-length s) n))
 
-(define (end-of-string? s n)
-(<= (string-length s) n))
+(define (pct? s n) (string.find ".,?" (string-ref s n)))
 
-(define (punctuation-mark? c)
-(not (not (string.find ".;:,?!()" c)) ))
+(define (blk? s n) (string.find " \n" (string-ref s n)))
 
-(define (tokenize s)
-(ignore-blank 0 s))
+(define (letter? s n)
+  (and (not (pct? s n)) (not (blk? s n)) ))
 
-(define (ignore-blank n s)
-(cond ( (end-of-string? s n) '())
-     ( (char-whitespace? (string-ref s n)) 
-       (ignore-blank (+ n 1) s))
-     ( (punctuation-mark? (string-ref s n))
-         (cons (substring s n (+ n 1))
-               (ignore-blank (+ n 1) s)))
-     (else (word n (+ n 1) s)) )) 
+(define (skp n s)
+   (if (or (end? s n) (not (blk? s n))) n
+      (skp (+ n 1) s)))
 
-(define (word i j s)
-(cond ( (end-of-string? s j)
-       (list (substring s i j)))
-     ( (char-whitespace? (string-ref s j))
-         (cons (substring s i j)
-               (ignore-blank j s)))
-     ( (punctuation-mark? (string-ref s j))
-       (cons (substring s i j)
-             (ignore-blank j  s)))
-     (else (word i (+ j 1) s)) ))
+(define (q1 n s)
+   (cond ( (end? s n) n)
+         ( (pct? s n) (+ n 1) )
+         (else (q3 n s)) ))
+
+(define (q3 n s )
+   (cond ( (end? s n) n)
+         ( (letter?  s n) (q3 (+ n 1) s))
+         (else  n)))
+
+(define (tkz s (n 0) (i (skp n s)) (j (q1 i s)))
+  (cond ( (end? s i) '())
+          ( (end? s j) (list (substring s i j)))
+          (else (cons (substring s i j) (tkz s j)) ) ))
 \end{verbatim}
 \end{fmpage}
 \caption{Finite Automaton in Scheme}
 \label{FA-in-Scheme}
 \end{figure}
+
+\begin{verbatim}
+~/Femto-Emacs/femtolisp$ rlwrap ./flisp
+;  _
+; |_ _ _ |_ _ |  . _ _
+; | (-||||_(_)|__|_)|_)
+;-------------------|--------------------------
+
+> (begin (load "aliases.scm") (load "auto-one.scm")
+     (tkz "She walks in beauty, like the night."))
+("She" "walks" "in" "beauty" "," "like" "the" "night" ".")
+\end{verbatim}
+
 
 \appendix
 
