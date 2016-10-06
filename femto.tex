@@ -2377,6 +2377,7 @@ two functions, \verb|(car xs)|
 and \verb|(cdr xs)| that
 selects the head and the tail
 respectively.
+\index{List!selectors: car, cdr}
 
 As one can see below,
 it is possible to reach any
@@ -2465,6 +2466,7 @@ how the cond-form works.
 \label{going-through-a-list}
 \end{figure}
 
+\index{Conditional execution!cond}
 The cond-form consists of a sequence
 of clauses. In a function definition,
 a clause has two components: A condition
@@ -2803,12 +2805,14 @@ are easier to do than to explain. Therefore,
 the reader is advised to learn femtoemacs
 by experimenting with the commands.
 
-\section{let-binding}
-The let-form introduces local variables through
-a list of \verb|(id value)| pairs.
+\section{let-binding}\index{let-binding}
+The let-form introduces\index{Local variables} 
+local variables\index{Local variables!let-binding}
+through a list of \verb|(id value)| 
+pairs.\index{let-binding!basic let-binding}
 In the basic let-binding, a variable cannot 
 depend on previous values that appear
-in the local list. In the 
+in the local list. In the\index{let-binding!let-star binding}
 \verb|let*| (let star) binding,
 one can use previous bindings to calculate
 the value of a variable, as one can see in
@@ -2971,7 +2975,7 @@ a number between 0 and 6, corresponding to
 Sunday, Monday, Tuesday, Wednesday,
 Thursday, Friday and Saturday.
 
-\section{True or False}
+\section{True or False}\index{Conditional execution!True and False}
 So far, the only tool that Nia has used
 for programming is combination of functions.
 However, this is not enough to write
@@ -2986,7 +2990,7 @@ order:
 \begin{verbatim}
 (if (< m 3) (+ m 10) (- m 2))
 \end{verbatim}
-\end{quote}
+\end{quote}\index{Conditional execution!if-else}
 The if-else expression says: if the
 Julian numbering \verb|m| is greater
 than 2, then subtract 2 from \verb|m|,
@@ -3726,6 +3730,8 @@ that produces the corresponding name.
 \label{fig:day-of-the-week}
 \end{figure}
 
+\index{Conditional execution!cond}
+\index{cond!clauses}
 The cond-form controls conditional
 execution, based on a set of clauses.
 Each clause has a condition followed by
@@ -4185,7 +4191,7 @@ which contains the year, month and day of interest.
 (keyword "while")
 \end{verbatim}
 
-\section{The list constructor}
+\section{The list constructor}\index{List!cons}
 Since the \verb|car| and \verb|cdr| operations
 select the two parts of a pair, they are called
 {\em selectors}.
@@ -4219,7 +4225,8 @@ to the dotted Cartesian \verb|'(3 . (4 . ()))| pair.
 
 A backquote, not to be confused with quote, also prevents
 evaluation, but the backquote transforms the list 
-into a template. When there appears a comma in the 
+into a template.\index{List!backquote}
+When there appears a comma in the 
 template, Lisp evaluates the expression following
 the comma and replaces it with the result. 
 If a comma is combined with \verb|@| to produce
@@ -4686,7 +4693,7 @@ these dummy arguments, otherwise
 she will get an error message,
 instead of a result. 
 
-The named-let
+The named-let\index{Named-let}\index{Loop!named-let}
 permit the creation of functions
 with initialized arguments, avoiding
 the definition of anomalous functions
@@ -4722,17 +4729,21 @@ that one can find in languages like C
 or Python. However, the named-let
 binding has an important advantage
 over other loop facilities: One can
-give a meaningful name to scheme loops.
+give a meaningful 
+name\index{Named-let!meaningful name for loop}
+to scheme loops.
 For instance, since the loop of
 figure~\ref{oneargfib} is used 
 to calculate the \verb|fn+1| iteration,
 Nia put the \verb|fn+1| tag on it.
 
 There is another way to get rid of
-auxiliary parameters:
+auxiliary 
+parameters:\index{Local variables!auxiliary parameters}
 One can initialize the parameters
 of a definition with
-default values, as shown
+default values,\index{Local variables!default values}
+as shown
 in figure~\ref{accumulators}.
 
 
@@ -4880,7 +4891,8 @@ page~\pageref{page:call-with-input-file}.
 
 The procedure\index{call-with-output-file}
 \verb|call-with-output-file|\index{Output to file}
-can be applied to a file name and a function
+can be\index{Output to file!call-with-output-file}
+applied to a file name and a function
 with an output port as argument. One could
 define the output port function, but
 usually people use a lambda abstraction
@@ -5174,6 +5186,8 @@ The script must print the
 followed by two newline chars.
 
 \section{Script generator}
+\index{Output to file!with-output-to}
+\index{Output to file!(file outFile :write :create)}
 
 The function \verb|(copyFile "qstring.script" "qstring.lsp")|
 defined in the \verb|webscript.scm| file reads the
@@ -6008,14 +6022,16 @@ becomes true. When the file descriptor
 reaches the end of a file, any reading
 operation returns an end-of-file object,
 which makes the \verb|(eof-object? x)| predicate
-return true. 
-
+return true.\index{Output to file!(file fname :write :append)} 
+\index{Input from file!(file inF :read)}
+\index{Input from file!with-input-from}
+\index{Output to file!(io.putc *output-stream* x)}
 \begin{figure}[!h]
 \begin{fmpage}{0.95\textwidth}
 \begin{verbatim}
 (define (opn fname)
 (trycatch (file fname :write :append)
-  (lambda(x) (file fname :write :create)) ))
+  (lambda(x) (file fname :write create)) ))
 
 (define (into fname expr (s (opn fname)))
 (with-output-to s  (write expr) (newline) (io.close s)))
@@ -6058,11 +6074,11 @@ does not exist, \verb|(opn fname)| creates it.
 The \verb|(rdprt)| procedure reads 
 lines from a file and prints them into another file.
 File descriptors are generated from file
-names by the 
+names by the procedure: 
 \begin{quote}
 \verb|(copyFile inF outF)|
 \end{quote}
-procedure. When a file is read beyond
+When a file is read beyond
 the last char, the result is an
 end-of-file object, that is detected
 by the \verb|(eof-object? x)| and
@@ -6109,7 +6125,8 @@ stream. The \verb|(io.putc *output-stream* x)|
 prints the \verb|x| char on the screen.
 The  $\verb|(when | c\; x_1\;x_2\ldots x_n\verb|)|$ form
 executes the $x_1$, $x_2$\ldots $x_n$ 
-expressions, when and only when the $c$ condition holds.
+expressions,\index{Conditional execution!when}
+when and only when the $c$ condition holds.
 In the case of the \verb|(prtFile fname)|
 procedure, the \verb|when|-form puts
 the \verb|x| char into the \verb|*output-stream*|
@@ -6177,7 +6194,7 @@ position.
 
 To clean a node, the \verb|(io.seek out (* i sz))|
 places the file descriptor at the first char
-of the node, and sweeps across the node size.
+of the node, and sweeps across the node span.
 
 
 
@@ -6202,35 +6219,38 @@ of the nodes.
 #<function>
 > (wrtVector "gordon.txt" '(She walks) 0)
 #t
-
 > (wrtVector "gordon.txt" '(in beauty) 1)
 #t
-
 > (wrtVector "gordon.txt" '(like the night) 2)
 #t
-
 > (wrtVector "gordon.txt" '(of cloudless climes) 3)
 #t
-
-> (wrtVector "gordon.txt" '(and starry skies) 4)
-#t
-
 > (rdVector "gordon.txt" 0)
 (She walks)#t
-
 > (rdVector "gordon.txt" 1)
 (in beauty)#t
-
 > (rdVector "gordon.txt" 2)
 (like the night)#t
-
 > (rdVector "gordon.txt" 3)
 (of cloudless climes)#t
+\end{verbatim}
 
+\paragraph{Examples of execution.}
+From this point on, the examples of
+program execution will no longer
+show how to start-up femtolisp, nor
+the femtolisp header. The reader 
+will know that s/he is dealing
+with an example through the presence
+of the \verb|>| prompt for the Read Eval Print Loop.
+\begin{verbatim}
+> (load "randomAccess.scm")
+#fn(...)
+> (wrtVector "gordon.txt" '(and starry skies) 4)
+#t
 > (rdVector "gordon.txt" 4)
 (and starry skies)#t
 \end{verbatim}
-
 
 \paragraph{A file automaton.}
 In listing~\ref{wordsFromFile},
@@ -6270,7 +6290,8 @@ to read the rest of the text.
 "and" "starry" "skies" ".")
 \end{verbatim}
 
-
+\index{Input from file!io.peekc}
+\index{Input from file!io.getc}
 The automaton of listing~\ref{wordsFromFile} 
 is based on two procedures, \verb|(io.getc s)| and
 \verb|(io.peekc s)|. The \verb|(io.getc s)|
@@ -6291,15 +6312,14 @@ the automaton has finished working on the
 file. Therefore, the clause reverses
 the \verb|xs| accumulator and 
 casts it into a string.
-Why one cannot use \verb|io.getc|
-to check the next character for
-the end of file? 
 
+Why is it not possible to use \verb|io.getc|
+to check the next character for
+the end of file in the third clause? 
 The short answer
 is that in the case of clause 
 failure, the char would not be 
 available for next clause.
-
 The long answer is that one
 could use the \verb|io.getc|
 procedure. However, 
@@ -6315,9 +6335,9 @@ procedure advanced in the third clause.
 The implementation of automata through
 \verb|io.getc| and \verb|io.peekc| is
 particularly useful in compiler construction.
-I believe that the designers of femtolisp
+I believe that the designer of femtolisp
 has provided such a complete set of
-char reading functions, because they
+char reading functions, because he
 intended to use femtolisp in the
 implementation of the Julia language.
 %% By the way, if your job is numerical
@@ -6325,8 +6345,8 @@ implementation of the Julia language.
 %% consideration of the Julia language
 %% relative merits over other solutions.
 
-I hope that this much
-information will be enough for you to 
+I hope that the above given
+information will be sufficient for you to 
 figure out how the automaton works.
 
 \begin{figure}[!b]
@@ -6457,9 +6477,9 @@ work with  femtolisp.
 \label{DFA}
 \end{figure}
 
-There are many advantages of working
-in femtolisp, instead of Scheme.
-Since femtolisp was designed recently,
+There are many advantages to working
+with femtolisp, instead of Scheme.
+Since femtolisp is of recent design,
 it does not need to maintain backward
 compatibility, and is slightly more
 expressive. Besides this, the
@@ -6528,35 +6548,102 @@ exhibits one of the following features:
   \item returns a function as the result.
 \end{itemize}
 
+\index{List!foldl, foldr}
 The \verb|foldl| functional form applies
-a two arguments function between the
+a two argument operation between the
 elements of a list. For instance,
 \verb|(foldl * 1 '(2 3 4 5))| performs
 the calculation \verb|2*3*4*5*1|.
-The name \verb|foldl| comes from the
+The name \verb|foldl| is short for
+{\em fold left}, and comes from the
 fact that this functional form applies
 the folding function from left to right.
 There is also a \verb|foldr| functional
 form, that accumulates results from
- right to left.
+ right to left.\\
+ 
+\begin{fmpage}{0.9\textwidth}
 \begin{verbatim}
-~/Femto-Emacs/femtolisp$ rlwrap ./flisp
-;  _
-; |_ _ _ |_ _ |  . _ _
-; | (-||||_(_)|__|_)|_)
-;-------------------|--------------------
+;; average.lsp
 
-> (map (lambda(x) (* x x)) '(2 3 4 5))
-(4 9 16 25)
-
+(define (avg xs)
+  (/  (foldl + 0.0 xs)
+      (foldl (lambda(x y) (+ 1 x)) 0.0 xs)))
+\end{verbatim}
+\end{fmpage}
+\begin{verbatim}
+> (load "average.lsp")
+#fn(...)
 > (foldl * 1 '(2 3 4 5))
 120
-
 > (foldr * 1 '(2 3 4 5))
 120
 \end{verbatim}
 
+\paragraph{Hash table.}
+A hash table is a data structure that can map keys to values. 
+It uses a hash function to compute an index 
+into an array of buckets, from which the desired
+value can be found.
+\begin{verbatim}
 
+> (define tbl (table))
+#table()
+> (put! tbl 'nero 'germanicus@rome.gov)
+#table(nero germanicus@rome.gov)
+> (put! tbl 'napoleon 'emperor@france.gov)
+#table(nero germanicus@rome.gov  napoleon emperor@france.gov)
+> (get tbl 'nero)
+germanicus@rome.gov
+\end{verbatim}
+
+\paragraph{List map functions.} A map operation can
+apply a function to the elements of one or more lists.
+The examples below show how it works.
+\index{List!map}
+
+
+\begin{verbatim}
+> (map (lambda(x y) (* x y)) '(2 3 4) '(5 6 7))
+(10 18 28)
+> (map (lambda(x) (* x x)) '(2 3 4))
+(4 9 16)
+\end{verbatim}
+
+\paragraph{Memory streams.} The easiest way to build a
+string from scratch is to apply print functions 
+to a buffer, then cast this buffer to the desired
+string.
+
+\begin{verbatim}
+(define (prefix? p s i (cnt (string.count p)))
+  (if (< (string.count s) (+ cnt i)) #f 
+     (let loop ( (k 0) )
+       (cond ( (>= k cnt) #t)
+             ( (= (aref p k) (aref s (+ i k)) )
+               (loop (+ k 1)))
+             (else #f)) ) ))
+            
+(define (fixdiacritics s (n (string.count s)))
+  (let loop ((b (buffer)) (i 0))
+    (cond ( (>= i n) (io.tostring! b))
+          ( (prefix? "%C3%BA" s i)
+             (io.putc b #\ú) (loop b (+ i 6)))
+          ( (prefix? "%C3%A9" s i)
+            (io.putc b #\é) (loop b (+ i 6)))
+          (else (io.putc b (string.char s i))
+                (loop b (+ i 1))  ))  ))
+\end{verbatim}
+Web protocol substitutes code snippets for
+diacritical letters. The above program
+restores the diacritics.
+
+\begin{verbatim}
+> (load "diac.lsp")
+#<function>
+> (fixdiacritics "J%C3%BAlia")
+"Júlia"
+\end{verbatim}
 \begin{thebibliography}{99}
 
 
@@ -6566,17 +6653,21 @@ Computer Programs. The MIT Press, Second Edition, 1996.
 
 \bibitem{Felleisen} Matthias Felleisen,
 Robert Bruce Findler, Matthew Flatt, Shriram Krishnamurthi.
-Available in \verb|http://www.htdp.org|.
+How to Design Programs.
+Available from \verb|http://www.htdp.org|
 
 \bibitem{Sitaram} Dorai Sitaram. Teach yourself Scheme
 in Fixnum Days. Available
-in \verb|http://ds26gte.github.io/tyscheme/|.
+from \verb|http://ds26gte.github.io/tyscheme/|
 
 \bibitem{Hoyte} Doug Hoyte. Let Over Lambda. Hoytech, 2008. ISBN: 978-1-4357-1275-1
 
 \bibitem{Church1932} A. Church, A set of postulates for the foundation of logic, Annals of Mathematics, Series 2, 33:346–366 (1932).
 
 \bibitem{Church} Alonzo Church. The Calculi of Lambda Conversion. Princepton University Press, 1986.
+
+\bibitem{Dybvig} R. Kent Dybvig. The Scheme Programming Language.
+Available from \verb|http://www.scheme.com/tspl4/|
 
 \end{thebibliography}
 
