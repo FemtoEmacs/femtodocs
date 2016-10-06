@@ -589,7 +589,7 @@ and extract.
 A popular tool for decompressing an archive
 is gunzip that accepts files with the \verb|*.gz|
 extension. Extraction is performed by the \verb|tar|
-application. 
+application.\index{Shell!tar xfvz}
 \begin{quote}
 \begin{verbatim}
 ~$ tar xfvz ncurses-6.0.tar.gz
@@ -2377,7 +2377,9 @@ two functions, \verb|(car xs)|
 and \verb|(cdr xs)| that
 selects the head and the tail
 respectively.
-\index{List!selectors: car, cdr}
+\index{List!selector: car}
+\index{List!selector: cdr}
+
 
 As one can see below,
 it is possible to reach any
@@ -2443,7 +2445,7 @@ However, for the sake of the impatient reader,
 let us give a preview on
 how the cond-form works.
 
-
+\index{Predicates!null?}
 \begin{figure}[!h]
 \begin{fmpage}{0.9\textwidth}
 \begin{verbatim}
@@ -3313,9 +3315,11 @@ number belongs to the {\bf number} type,
 which is a subset of $\mathbb{R}$.
 
 
-If $x\in{\bf Int}$, Lisp programmers\index{Type} say that $x$ has type
-\label{type:definition} \index{Type!Int} {\bf integer}. They also
-say that $r$ has type {\bf number} if $r\in {\bf Real}$.
+If $x\in{\bf Int}$, Lisp programmers\index{Type} say 
+that $x$ has 
+type\label{type:definition} \index{Type!Int} {\bf integer}. 
+They also say that $r$ has 
+type {\bf number} if $r\in {\bf Real}$.
 
 In femtolisp, rational and irrational numbers
 are inexact data types. Here are a few functions
@@ -3335,7 +3339,7 @@ $\verb|(atan | x \verb|)|$ -- $\arctan(x)$\\
 $\verb|(log | x \verb|)|$ -- natural logarithm\\
 $\verb|(log2 | x \verb|)|$ -- logarithm in base 2\\
 $\verb|(log10 | x \verb|)|$ -- logarithm in base 10
-\end{quote}
+\end{quote}\index{Predicates!integer?}
 Integers are distinguished from inexact numbers
 by the \verb|(integer? x)| predicate. Two important
 integer functions are \verb|(quotient x y)| and
@@ -3352,20 +3356,21 @@ There are other types
 besides {\bf integer}, and {\bf number}. 
 Here is a  list of primitive types:
 \begin{description}
-\item[integer ---] Integer numbers between $-2147483648$ and $2147483647$.
+\item[integer ---] Integer numbers between $-2147483648$ and $2147483647$. \index{Predicates!exact?}
 The \verb|(exact? x)| function returns \verb|#t| if \verb|x|
 is an integer, and \verb|#f| otherwise.
 \item[inexact ---] the inexact type represents both
 rational and irrational numbers, albeit approximately.
 The \verb|(inexact? x)| function returns \verb|#t| for
-inexact numbers.
+inexact numbers.\index{Predicates!inexact?}
 \item[number ---] A number can be either exact or inexact.
 The \verb|(number? x)| function returns \verb|#t| for numbers,
-and \verb|#f| for any other type of object.
+and \verb|#f| for any other type of object.\index{Predicates!number?}
 \item[String ---] A quoted\index{String} string \index{Type!String}
 of characters: \verb|"3.12"|, \verb|"Hippasus"|, \verb|"pen"|, etc.
 The \verb|(string? x)| function answers \verb|#t| 
-if \verb|x| is a string, and \verb|#f| otherwise.
+if \verb|x| is a string, 
+and \verb|#f| otherwise.\index{Predicates!string?}
 A few important functions that operate on strings are:
 \begin{itemize}
 \item \verb|(string-length s)| returns the number
@@ -3375,12 +3380,14 @@ returns the \verb| "llo"| substring.
 \verb|(substring "Hello, World" 0 4)| returns the
 \verb|"Hell"| substring. And so on.
 \end{itemize}
-\item[Char ---] Chars have the \verb|#\| prefix: 
+\item[Char ---] Chars have the \verb|#\|
+  prefix: \index{Type!Char}
 \verb|#\A|,
 \verb|#\b|, \verb|#\3|, \verb|#\space|,
 \verb|#\newline|, etc.
 The \verb|(char? x)| function returns \verb|#t|
-when \verb|x| is a char. Let \verb|s| be
+when \verb|x| is a char.\index{Predicates!char?}
+Let \verb|s| be
 a string such as \verb|"Hello"|. Then,
 \verb|(string-ref "Hello" 0)|
 returns the first char of \verb|s|,
@@ -3401,7 +3408,8 @@ equal to \verb|#\g| or comes before it.\\
 \item[Pair ---] One can use a pair data type
 both to represent Cartesian pairs and lists.
 The \verb|(pair? x)| returns \verb|#t| if
-\verb|x| is a pair, otherwise it returns \verb|#f|.
+\verb|x| is a pair,\index{Predicates!pair?}
+otherwise it returns \verb|#f|.
 The \verb|'()| empty list is a very important
 object that one can use as the second element
 of a pair. The \verb|(null? x)| returns \verb|#t|
@@ -4228,9 +4236,10 @@ evaluation, but the backquote transforms the list
 into a template.\index{List!backquote}
 When there appears a comma in the 
 template, Lisp evaluates the expression following
-the comma and replaces it with the result. 
+the comma\index{List!comma}
+and replaces it with the result. 
 If a comma is combined with \verb|@| to produce
-the \verb|,@| at-sign,
+the \verb|,@| at-sign,\index{List!at-sign}
 then the expression following the at-sign 
 is evaluated to create a list. This list is
 spliced into place in the template. 
@@ -5088,6 +5097,8 @@ Html uses hundreds of different directives to define
 a layout for web pages. Each directive requires an
 opening \verb|<tag>| and a closing \verb|</tag>|.
 
+\index{princ}
+
 \begin{figure}[!h]
 \begin{verbatim}
 <html>
@@ -5192,6 +5203,9 @@ followed by two newline chars.
 The function \verb|(copyFile "qstring.script" "qstring.lsp")|
 defined in the \verb|webscript.scm| file reads the
 \verb|qstring.script| line by line.
+
+\index{String!string.count}
+\index{String!string.sub}
 
 \begin{figure}[!h]
 \begin{verbatim}
@@ -5322,7 +5336,7 @@ to work in the cloud. Therefore, find a local
 Linux machine to build the \verb|flisp| executable.
 After taking care to avoid these compatibility
 problems, Nia entered her cloud machine to
-configure the script.
+configure the script.\index{Shell!chmod a+x}
 \begin{Verbatim}[fontsize=\small,
 frame=single,
 framerule=0.5mm]
@@ -5525,12 +5539,14 @@ means that there is an error in the program.
 \begin{wrapfigure}[10]{i}{7cm}
 \includegraphics[scale=0.5]{fig-sets/bugcerto.png}
 \end{wrapfigure}
-The first computer was constructed
-by Konrad Zuse,\index{Zuse}
+The first computer was\index{Konrad Zuse!Ursula Walk} 
+constructed\index{Konrad Zuse!first computer}
+by Konrad Zuse,\index{Zuse}\index{Konrad Zuse}
 a German civil engineer, and his assistant,
 Ms. Ursula Walk,\index{Ursula Hebekeuser} née Hebekeuser.
 The first computers, like those of Zuse and Walk,
-were based on relays. These are
+were based on relays.\index{Konrad Zuse!relays}
+These are
 bulky electrical devices, typically incorporating
 an electromagnet, which is activated by a current
 in one circuit to turn on or off another circuit.
@@ -5809,6 +5825,11 @@ returns $\rightarrow n$. If the  $q_1$ state
 receives an alphabetical letter, the automaton
 goes to state $q_2$ and remains there 
 as long as the reader keeps feeding letters.
+\index{String!string.find}
+\index{String!strings-ref}
+\index{String!string-length}
+\index{String!string}
+
 
 \begin{figure}[!h]
 \begin{fmpage}{0.9\linewidth}
@@ -5868,7 +5889,7 @@ All lisp dialects provide a plethora
 of predicates for testing the  equality
 between two objects. Let us perform a few tests
 to discover the difference between these
-many predicates.
+many predicates.\index{Predicates!eqv?}
 
 \begin{Verbatim}[fontsize=\small,
 frame=single]
@@ -5959,6 +5980,8 @@ You have already learned the very basic
 file operations in chapter~\ref{cloud-computing},
 page~\pageref{cloud-computing}.\\
 
+\index{princ}
+
 \begin{figure}[!h]
 \begin{fmpage}{0.95\textwidth}
 \begin{verbatim}
@@ -6026,6 +6049,8 @@ return true.\index{Output to file!(file fname :write :append)}
 \index{Input from file!(file inF :read)}
 \index{Input from file!with-input-from}
 \index{Output to file!(io.putc *output-stream* x)}
+\index{princ}
+\index{Predicates!eof-object?}
 \begin{figure}[!h]
 \begin{fmpage}{0.95\textwidth}
 \begin{verbatim}
@@ -6144,7 +6169,8 @@ random position of the \verb|nm| file.
 The \verb|(clear nm i sz)| operation
 completely fills the span of 
 a node at \verb|(* i sz)| with
-blank chars.
+blank chars.\index{print}\index{read}
+\index{Output to file!newline}
 
 \begin{figure}[!h]
 \begin{fmpage}{0.95\textwidth}
@@ -6439,6 +6465,11 @@ of listing~\ref{FA-in-Scheme}, which
 is written in the Scheme programming
 language. However, this time let us
 work with  femtolisp.
+\index{String!string.char}
+\index{String!string.sub}
+\index{String!string.find}
+\index{String!string.count}
+
 
 \begin{figure}[!h]
 \begin{fmpage}{0.9\textwidth}
@@ -6500,6 +6531,12 @@ The Scheme Programming Language,  etc.
 As for femtolisp, this tutorial that you
 are reading is about the only documentation
 available.
+
+\index{String!string.reverse}
+\index{String!string.number}
+\index{String!string to number}
+\index{Char!char.upcase}
+\index{Char!char.downcase}
 
 
 \begin{verbatim}
@@ -6613,7 +6650,9 @@ The examples below show how it works.
 \paragraph{Memory streams.} The easiest way to build a
 string from scratch is to apply print functions 
 to a buffer, then cast this buffer to the desired
-string.
+string.\index{Output to buffer}
+\index{Output to buffer!(buffer)}
+\index{Output to buffer!io.tostring!}
 
 \begin{verbatim}
 (define (prefix? p s i (cnt (string.count p)))
