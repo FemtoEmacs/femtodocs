@@ -121,6 +121,1197 @@ present text to the same effect.
 \mainmatter
 
 
+\chapter{Femtoemacs commands}
+In the next chapter, you will learn how to install
+femtoemacs. To give you a head start, this chapter
+lists the basic commands you need to edit a file.
+
+In the following cheat sheet, \verb|Spc| denotes
+the space bar, \verb|C-| is the \keys{Ctrl} prefix, \verb|M-| represents 
+the  \keys{Alt} prefix and  $\kappa$ can be any key. 
+
+\paragraph{Basic commands.} \verb|C-|$\kappa$ -- Press and release \keys{Ctrl}
+and \keys{$\kappa$} simultaneously
+\begin{quote}
+ \verb|C-s| then type some text, and press \verb|C-s| again 
+  -- search a text.\\
+ \verb|C-r| then type some text, and press \verb|C-r| again 
+  -- reverse search.\\
+ \verb|C-k| -- kill a line.\\
+ \verb|C-h| -- backspace.\\
+ \verb|C-d| -- delete char forward.\\ 
+ \verb|C-Spc| then move the cursor -- select a region.\\
+ \verb|M-w| -- save selected region into the kill ring. \\
+ \verb|C-w| -- kill region.\\
+ \verb|C-y| -- insert killed or saved region.\\
+ \verb|C-g| -- cancel minibuffer reading.\\
+ \verb|C-a| -- go to beginning of line.\\
+ \verb|C-e| -- go to end of line.\\
+ \verb|C-b| -- move backward one character.\\
+ \verb|C-f| -- move forward one character.\\
+ \verb|C-n| -- move cursor to the next line.\\
+ \verb|C-p| -- move cursor to the previous line.\\
+ \verb|C-l| -- refresh screen.\\
+ \verb|C-u| -- undo. \\
+ \verb|C-v| -- forward page.\\
+ \keys{INS} -- toggle overwrite mode.\\
+ \keys{$\leftarrow$} \keys{$\rightarrow$} \keys{$\uparrow$} \keys{$\downarrow$} -- arrows move cursor.\\
+\end{quote}
+\paragraph{Control-x commands.} \verb|C-x C-|$\kappa$ -- Keep \keys{Ctrl}
+down and press \keys{x} and  \keys{$\kappa$}
+\begin{quote}
+  \verb|C-x C-f| -- open a file into a new buffer.\\
+  \verb|C-x C-w| -- write file with new name.\\
+\verb|C-x C-s| -- save file.\\
+\verb|C-x C-c| -- exit femto.\\
+\verb|C-x i| -- insert file at the cursor.\\
+\verb|C-x ?| -- describes a key stroke.\\
+\verb|C-x @| --  shell command. After \verb|C-x @|,
+if one types \verb|ls| at the prompt, the computer
+will list the current folder.
+It is possible to use any other shell command
+just like the \verb|ls| example.
+\end{quote}
+
+
+
+\paragraph{Window commands.} One can have more
+than one window on the screen. Below, you will
+find commands that cope with this situation.
+\begin{itemize}
+\item \verb|C-x |$\kappa$ -- Press and release \keys{Ctrl}
+and \keys{x} together, then press \keys{$\kappa$} 
+\begin{quote}
+\verb|C-x n| -- next buffer.\\
+\verb|C-x C-n| -- next buffer. Same as above.\\  
+\verb|C-x C-b| -- list buffers.\\
+\verb|C-x k| -- kill current buffer.\\
+\verb|C-x =| -- cursor position.\\
+\verb|C-x 2| -- split window into cursor window and other window.\\
+\verb|C-x o| -- jump to the other window.\\
+\verb|C-x 1| -- close the other window.\\
+\verb|C-x 0| -- close the cursor window.
+\end{quote}
+\item \verb|Esc| $\kappa$ -- Press and release the \keys{Esc} key,
+then press the \keys{$\kappa$} key.
+\begin{quote}
+\verb|Esc >| -- go to the end of buffer.\\
+\verb|Esc <| -- go to the beginning of buffer.\\ 
+\verb|Esc f| -- word forward.\\
+\verb|Esc b| -- word backward.\\
+\end{quote}
+\item \verb|M|-$\kappa$ -- Keep the \keys{Alt} key
+down and press the \keys{$\kappa$} key.
+\begin{quote}
+\verb|M-b| -- move backward one word.\\
+\verb|M-f| -- move forward one word.\\
+\verb|M-g| -- go to the line given in the minibuffer.\\
+\verb|M-n| -- activate the next buffer.\\
+\verb|M-r| -- query replace.
+\end{quote}
+\end{itemize}
+
+\paragraph{Query replace.} If you press \keys{Esc}\keys{r},
+the computer enters in the query replace mode.
+First, femtoemacs prompts for the text snippet S
+that you want to replace. Then it prompts for
+the replacement R. When you type the R text and
+press the \keys{Enter} key, the cursor jumps to
+the first occurence of S, and femtolisp
+asks whether you want to
+replace it. If the answer is
+\verb|y|, femtolisp will replace S
+with \verb|R| and jump to the next occurence.
+If the answer is \verb|n|, femtolisp will
+jump to the next occurrence of S without
+performing the replacement.
+
+\paragraph{Go to line.} When you try to compile
+code containing errors, the compiler
+usually reports the line number where the error occurred.
+If you press \keys{Esc}\keys{g}, femtoemacs
+prompts for a line number. As soon as you
+type the number and press the \keys{Enter}
+key, the cursor jumps to the line where the
+error occurred.
+
+In order to know the position of the cursor,
+press the \verb|C-x =| command,
+and femtoemacs gives information concerning
+the character under the
+cursor, the corresponding code, the line,
+and the character position in the text.
+
+\paragraph{List bindings.} If you press
+the \keys{Esc}\keys{$l$} command, the computer
+lists all femtoemacs commands. Then you
+can check whether I forgot a keybinding or
+another in this tutorial. By the way,
+the \keys{$l$} corresponds to the lowercase L
+letter. This means that you must press
+and release the \keys{Esc} key, then
+strike the lowercase L key.
+
+\paragraph{Nia Vardalos.}
+In order to get acquainted with editing and scripting,
+let us accompany the Canadian programmer Nia
+Vardalos, while she explores femtoemacs.
+
+When text is needed for carrying out a command,
+it is read from the minibuffer, a one line
+window at the bottom of the screen. For instance, 
+if Nia presses \verb|C-s| for finding a text, 
+the text is read from the minibuffer. After
+typing the text that she wants to localize,
+Nia presses \verb|C-s| again to start the search.
+For abandoning an ongoing command, she may press \verb|C-g|.
+
+To transport a region from one place to another,
+Nia presses \verb|C-Spc| to start
+ the selection process 
+ and move the cursor to select the region. 
+ Then she presses \verb|C-w| to
+kill her selection. Finally, she moves
+the cursor to the insertion place,
+and presses the \verb|C-y| shortcut.
+
+To copy a region, Nia presses \verb|C-Spc| and moves the cursor to select the region.
+Then she presses \verb|M-w| to save the selection into the kill ring. Finally,
+she takes the cursor to the destination where the copy is to be inserted and
+issues the \verb|C-y| command.
+
+Nia noticed that there are two equivalent ways to
+issue an \verb|M-|$\kappa$ command. She can
+press and release the \keys{Esc} key, then
+strike the  $\kappa$ key. Alternatively, she
+can keep the \keys{Alt} key down and press
+the \keys{$\kappa$} key.
+
+\paragraph{Calculations with Lisp.} Femtoemacs
+offers a Lisp dialect to perform calculations
+and text processing. Let us assume that you
+want to find how many students graduate
+from medical schools in California. You
+press \keys{Esc}\keys{;} and femtoemacs
+will prompt you for a Lisp expression.
+\begin{quote}
+\verb|> (+ 190 180 170 160 120 100 100 90)|\keys{Enter}
+\end{quote}
+In the above expression, the first thing after
+the open parenthesis is the \verb|+| sum
+operation identifier. After the name of
+the operation, there is a list of
+the arguments to be added together.
+As soon as Nia presses the \keys{Enter} key,
+femtoemacs shows the result of the addition:
+\begin{quote}
+\verb|1110|
+\end{quote}
+The rule that worked for 
+the $\verb|(+ | x_1\;x_2\ldots\verb|)|$
+sum operation also works for the 
+other arithmetic function too.
+\begin{itemize}
+  \item{Multiplication} is performed
+by the \verb|*| operation.
+\begin{quote}
+\keys{Esc}\keys{;}\\
+\verb|> (* 1 2 3 4 5)|\keys{Enter}\\
+120
+\end{quote}
+\item{Division} is obtained through the \verb|/| operation.
+\begin{quote}
+\keys{Esc}\keys{;}\\
+\verb|> (* 1 2 4)|\keys{Enter}\\
+0.125
+\end{quote}
+The above operation performed the chain
+division \verb|1/2/3|.
+\item{Subtraction} has the syntax shown below.
+\begin{quote}
+\keys{Esc}\keys{;}\\
+\verb|> (- 1 2 4)|\keys{Enter}\\
+-5
+\end{quote}
+\item Mixed operations. One can nest subexpressions
+  within an outer expression. For instance,
+  to get the average student number graduating
+  from medical school in California, one can
+  calculate the expression:
+\begin{quote}
+\keys{Esc}\keys{;}\\
+\verb|> (/ (+ 190 180 170 160 120 100 100 90) 8)|\keys{Enter}
+\end{quote}
+
+\end{itemize}
+
+
+\chapter{Installation}  
+A text editor, like Emacs or femto, has three components:
+\begin{enumerate}
+\item A frontend that inserts characters into a buffer.
+A buffer is a memory region with an image of a
+text file. One can see the buffer as a representation
+of a scratch pad. As such, the frontend provides tools to
+insert keystrokes at the  point indicated by 
+a movable cursor.
+\item Editing operations that save buffers
+as files, delete and insert text, move the
+cursor around, copy items from one place to another, etc.
+\item A scripting language for customizing the editor.
+\end{enumerate}
+
+There is a large choice of frontends. Some frontends 
+work with a raster graphics image, which  is a dot matrix 
+data structure that represents a grid of pixels. 
+There are also frontends that are specialized in
+showing letters and other characters via an appropriate
+display media. The latter sort of frontend is called
+text-based user interfaces, while the former is called
+graphical user interface, or GUI for short.
+
+Text-based user interfaces are more
+confortable on the eyes, since they  provide
+sharper and crisp alphabetical letters.
+On the other hand, GUI allows for font 
+customization. At present,
+femtoemacs offers only ncurses, which
+is a text-based user interface.
+Therefore, download the most recent version 
+from the distribution site:
+\verb|https://www.gnu.org/software/ncurses/|
+
+\includegraphics[scale=0.6]{figs-prefix/download.jpg}
+
+
+\paragraph{MAC OS-X.}
+Unpack and make the distribution archive as shown below:
+\begin{quote}
+\begin{verbatim}
+~$ tar xfvz ncurses-6.0.tar.gz
+~$ cd ncurses-6.0/
+~/ncurses-6.0$ ./configure --enable-widec
+~/ncurses-6.0$ make
+~/ncurses-6.0$ sudo make install
+\end{verbatim}
+\end{quote}
+Femto assumes that  \verb|libncursesw.a|
+resides in the following folder:
+\begin{quote}
+\begin{verbatim}
+/usr/local/lib/libncursesw.a 
+\end{verbatim}
+\end{quote}
+Therefore, copy the \verb|libncursesw.a| file
+to \verb|/usr/local/lib/| as shown below:
+\begin{verbatim}
+~/$ cd ncurses-6.0 
+~/ncurses-6.0$ cd lib 
+~/ncurses-6.0/lib$ sudo cp libncursesw.a /usr/local/lib/
+\end{verbatim}
+
+After installing libncursesw, enter the folder \verb|Femto-Emacs/|
+and build the editor for Macistosh:
+\begin{verbatim}
+~/$ cd ~/Femto-Emacs/ 
+~/Femto-Emacs$ make -f Makefile.macosx
+~/Femto-Emacs$ sudo make -f Makefile.macosx install
+\end{verbatim}
+The sudo application will ask for the password that
+permits storing \verb|femto| and \verb|femto.boot|
+into the \verb|/usr/local/bin/| folder.
+
+\paragraph{Linux.} Use apt-get to install the
+latest version of \verb|libncursesw5-dev|.
+Since Linux repositories are usually old,
+download a recent source distribution of ncurses,
+build it, and install it on top of the
+apt-get version, thus:
+\begin{verbatim}
+~$ sudo apt-get install libncursesw5-dev
+~$ wget http://ftp.gnu.org/gnu/ncurses/ncurses-6.0.tar.gz
+~$ tar xfvz ncurses-6.0.tar.gz
+~$ cd ncurses-6.0/
+~/ncurses-6.0$ ./configure --enable-widec
+~/ncurses-6.0$ make
+~/ncurses-6.0$ sudo make install
+\end{verbatim}
+After installing ncursesw, you can make the editor:
+\begin{verbatim}
+~/$ cd ~/Femto-Emacs/ 
+~/Femto-Emacs$ make
+~/Femto-Emacs$ sudo make install 
+\end{verbatim}
+
+
+\section{Ready}
+You are now ready for action!
+
+\includegraphics{figs-prefix/readyforaction.jpg}
+
+It seems that people prefer money to sex.
+After all, almost everybody says no to
+sex on one occasion or another.
+But I have never seen a single
+person refusing money. Therefore, let us
+start this tutorial talking about money.
+
+If one wants to calculate a running
+total of bank deposits, she will make
+a column of numbers and perform the
+addition.
+
+\index{Arithmetic!Elemetary School}  
+\begin{wrapfigure}[10]{i}{5cm}
+\renewcommand\figurename{Fig.}
+\includegraphics[scale=0.5]{figs-prefix/firemen.png}
+\caption{Running total}
+\end{wrapfigure}
+What I mean to say is that, if you
+need to perform the addition
+$8 + 26 + 85 + 3$ with pencil and paper,
+you will probably stack the numbers the
+same way you did before taking pre-algebra
+classes in highschool:
+\begin{quote}
+\begin{tabular}{p{0.5cm}p{1cm}}
++ &\verb|  8|\\
+&\verb| 26|\\
+&\verb| 85|\\
+&\verb|  3|\\
+\hline
+&\verb|122|
+\end{tabular}
+\end{quote}
+Subtraction is not treated differently:
+\begin{quote}
+\begin{tabular}{p{0.5cm}p{1.5cm}}
+\Large\bf -&   358\\
+&   216\\
+\hline
+& 142
+\end{tabular}
+\end{quote}
+
+This chapter contains an introduction to
+the Cambridge prefix notation, 
+which is slightly different from the one you
+learned in elementary school: The operation
+and its arguments are put between parentheses.
+In doing so, one does not need to draw a line
+under the bottom number, as you can see below:
+\begin{quote}
+\begin{tabular}{p{0.5cm}p{1cm}}
+(+ &\verb|  8|\\
+&\verb| 26|\\
+&\verb| 85|\\
+&\verb|  3|)\\
+&\verb|122|
+\end{tabular}
+\end{quote}
+The Cambridge prefix notation can be applied
+to any operation, not only to the four arithmetic
+functions. 
+
+\section{Cambridge prefix notation}
+\index{Prefix notation}
+\index{Prefix notation!Cambridge}
+Let us summarize what we have learned
+until now. In pre-algebra, students
+learn to place arithmetic operators (+, -, × and ÷)
+between their operands; e.g. 347+45.
+However, when doing additions and subtractions
+on paper, they stack the operands.
+
+\includegraphics{figs-prefix/stackshark.jpg}
+
+
+Lisp programmers put operation and operands
+between parentheses. The right parenthesis
+separate the operands from the result,
+instead of drawing a line under the last operand.
+
+\includegraphics{figs-prefix/neatsum.jpg}
+
+\section{Pictures}
+Here is the story of a Texan who went on
+vacation to a beach in Mexico. While he was
+freely dallying with the local beauties,
+unbeknowest to him a blackmailer took some
+rather incriminating photos.
+After a week long gallivanting, the Texan
+returns to his ranch in a small town near Austin.
+Arriving at his door shortly after is the blackmailer
+full of bad intentions.
+
+Unaware of any malice, the Texan allows the so
+called photographer to enter and sit in front
+of his desk. Without delay, the blackmailer spread
+out a number of photos on the desk, along with his
+demands: “For the photo in front of the hotel,
+that will cost you \$~25320.00. Well, the one
+on the beach that's got to be \$~56750.00.
+Finally, this definitively I can't let
+go for less than \$~136000.00.”
+
+Once finished with his presentation,
+the blackmailer snaps up the photos,
+and looks to the Texan with a sinister
+grin, awaiting his reply.
+
+Delighted with the selection of pics,
+the Texan in an ellated voice says:
+“I thought I would have no recollection
+of my wonderful time. I want 3 copies
+of the hotel shot, half a dozen of the beach.
+And the last one, I need two copies for myself,
+and please, send one to my ex-wife.
+Make sure you leave me your contact
+details; I might need some more.
+
+\paragraph{Mixed calculations.}
+In order to calculate how much the
+Texan needs to pay his supposed blackmailer,
+his bookkeeper needs to perform the
+following operations:
+$$3\times 25320+6\times 56750 + 2\times 136000+136000$$
+It should be remembered that multiplications
+within an expression take priority over additions
+and subtractions. The bookkeeper must therefore
+calculate the first two products $3\times 25320$
+and $6\times 56750$, before performing the first
+addition. In the Cambridge prefix notation,
+the internal parentheses pass priority over
+to the multiplications.
+
+The Texan's bookkeeper started femtoemacs
+in order to visit the \verb|finance.scm|
+file. The text editor creates a memory
+buffer that mirrors the file contents.
+By convention, the file and the buffer
+have the same name.
+
+Initially, the \verb|finance.scm| buffer
+is empty, but the bookkeeper will fill it
+with expressions and the corresponding
+calculations. Here is how to start the
+text editor:
+\begin{quote}
+\begin{verbatim}
+~/Femto-Emacs$ femto finance.scm
+\end{verbatim}
+\end{quote}
+Listing~\ref{texan:photos} shows what
+an interaction with a femto buffer looks like.
+
+\begin{figure}[!h]
+\begin{fmpage}{0.8\textwidth}
+
+\verb|(+  (* 3 25320)|\\
+\verb|    (* 6 56750)|\\
+\verb|    (* 2 136000)|\\
+\verb|    136000 )|\keys{Esc}\keys{~]~}\\ 
+824460
+\end{fmpage}
+
+\begin{fmpage}{0.8\textwidth}
+\verb| |
+\end{fmpage}
+\caption{The finance.scm buffer}
+\label{texan:photos}
+\end{figure}
+
+After typing an expression obeying the
+Cambridge prefix notation syntax,
+the bookkeeper moves the cursor to the front
+of the most external right parenthesis.
+To perform the calculation,
+he presses and releases the
+\keys{Esc} key, then presses and releases
+the \keys{~]~} key. The femtolisp
+interpreter inserts the result
+into the buffer.
+To save the buffer, the bookkeeper
+keeps the \keys{Ctrl} key down,
+and presses the \keys{~x~} and
+\keys{~s~} keys in sequence.
+To exit the
+editor, he maintains the \keys{~x~}
+pressed and hits the \keys{~x~}
+and \keys{~c~} keys one after the other.
+If there are
+unsaved files, the editor warns
+that modified buffers exist,
+and requires confirmation before
+quitting.
+
+\section{Time value of money}
+Suppose that you wanted to buy a \$ 100,000 red Ferrari,
+and the forecourt salesperson in his eagerness to
+close a deal gives you the following two payment options:  
+\begin{itemize}
+\item Pay \$ 100,000 now {\bf or}
+\item pay the full \$ 100,000 after a three year grace period.
+\end{itemize}
+
+I am sure that you would choose to pay the \$ 100,000 after
+three years of grace has finished, although you have the
+money in a savings account waiting for a business
+opportunity. But why is this? After all, you will need
+to pay the debt one way or the other. However, if you
+keep the money in your power during the grace period,
+you can earn a few months of fuel from the interest.
+
+You may not know for sure how much interest you
+will earn in three years, but since the salesperson
+is not charging you for deferring the payment,
+whatever you gain is yours to keep.
+
+Unfortunately for you, the above scenario would
+more than probably not happen in real life.
+The right to delay payment until some future
+date is a merchandise with a price tag,
+which {\em is called interest by those who
+think it lawful, and usury by those who
+do not} (William Blackstone's Commentaries
+on the Laws of England). Therefore, unless
+the salesperson is your favorite aunt,
+the actual offer is like jumping into a tank
+full of sharks as in the classic James Bond films.
+It requires a little forethought and understanding
+of how interest works, before making a decision.
+Here is a more realistic real estate sales offer:
+
+\begin{itemize}
+\item \$ 100,000 now {\bf or}
+\item \$ 115,000 at the end of three years.
+\end{itemize}
+
+What to do when facing an increase in price
+to cover postponement of payment? The best
+policy is to ask your banker how much interest
+she is willing to pay you over your
+granted grace period.
+
+Since the economy performance is far
+from spectacular, your banker offers you
+an interest rate of 2.5\%, compound annually.
+She explains that compound interest arises
+when interest is paid on both the principal
+and also on any interest from past years.
+
+\section{Future value}\index{Future Value}
+
+\includegraphics{figs-prefix/piggy.jpg}
+
+The value of money changes with time. Therefore,
+the longer you keep control of your money,
+the higher its value becomes, as it can earn
+interest. Time Value of Money, or TVM for short,
+is a concept that conveys the idea that money
+available now is worth more than the same
+amount in the future.
+
+If you have \$ 100,000.00 in a savings account
+now, that amount is called {\em present value},
+since it is what your investment would give you,
+if you were to spend it today.
+
+Future value of an investment is the amount
+you have today plus the interest that your
+investment will bring at the end of a
+specified period.
+
+The relationship between the present value
+and the future value is given by the
+following expression:
+\begin{equation}
+FV= PV\times (1+i)^n
+\label{eq:future-value}
+\end{equation}
+where $FV$ is the future value, $PV$ is the present
+value, $i$ is the interest rate divided by 100,
+and $n$ is the number of periods.
+
+\paragraph{Postponed payment.}
+In the case of postponing the payment of a \$ 100,000.00 car
+for 3 years, at an interest rate of 0.025, the future
+value of the money would be 107,689.06; therefore,
+I stongly recomend against postponing the payment.
+You have learned how to calculate an expression
+by pressing the \keys{Esc}\keys{~]~} command.
+However, there is another way of evaluating an expression.
+
+When you open the femtoemacs editor, there is
+a one line buffer at the bottom of the screen.
+If you keep the \keys{Ctrl} key pressed,
+and strike the  \keys{~o~} key, the editor
+will read and evaluate a Cambridge prefix
+expression from the minibuffer.
+
+\begin{figure}[!h]
+\begin{fmpage}{0.8\textwidth}
+
+\verb|(+  (* 3 25320)|\\
+\verb|    (* 6 56750)|\\
+\verb|    (* 2 136000)|\\
+\verb|    136000 )|\keys{Esc}\keys{~]~}\\ 
+824460
+\end{fmpage}
+
+\begin{fmpage}{0.8\textwidth}
+\verb|> (* 100000.00 (expt (+ 1.0 0.025) 3))|\keys{Enter}\\
+\verb|107689.06|
+\end{fmpage}
+\caption{Command from the minibuffer}
+\label{future-value}
+\end{figure}
+
+\section{Compound interest}
+
+Our Texan decides he needs a break. Thus he walks into
+a New York City bank and asks for the loan officer.
+He tells a story of how through his doctor's recomendation
+he was taking it easy at his property in the south of
+France for two whole years and for such a medical
+emergency he needs a \$ 10,000.00 loan.
+
+The loan officer said that the interest was a compound 8\%
+a year, but the bank would need some collateral for the loan.
+
+“Well, I have a 60 year old car that I like very much.
+Of course, I cannot take it with me to France.
+Would you accept it as collateral?”
+
+Unsure whether or not the old car was worth the
+amount of the loan, the officer summons the bank manager.
+The manager inspects the vehicle that was parked on the
+street in front of the bank. After a close examination,
+he gives a nod of approval: “It’s a Tucker Torpedo.
+Give him the loan.”
+
+The Texan quite willingly signed his heirloom over.
+An employee then drove the old car into the bank’s
+underground garage and parked it. From time to time,
+the employee would go, and turn over the engine, to keep
+the car in good running condition, and gave it an
+occasional waxing just to maintain it in pristine condition.
+Two years later the Texan returned, and asked how
+much he owed the bank. The loan officer started femtoemacs,
+and calculated the total debt as \$ 11,664.00.
+
+\paragraph{Interest Calculation.}
+\index{Interest!Compound}
+Let us follow the calculation of the value accumulated
+in the first year of compound interest at a 8\% rate
+over \$ 10,000.00. Press \keys{Ctrl}\keys{~o~} and
+enter formula~\ref{eq:future-value} in the minibuffer:
+\begin{quote}
+\begin{verbatim}
+> (* (expt (+ 1.0 0.08) 2) 10000)
+11644.00
+\end{verbatim}
+\end{quote}
+Observe that it was necessary to divide the
+interest rate by 100, which produces 0.08.
+
+It is possible to define an operation that
+calculates formula~\ref{eq:future-value}
+given the arguments \verb|fv|, \verb|i|
+and \verb|n|. The definition is given
+in listing~\ref{Texan:parking}.
+Start the editor from a text terminal:
+\begin{quote}
+\begin{verbatim}
+~$ mkdir financing
+~$ cd financing
+~/financing$ femto fvalue.scm
+\end{verbatim}
+\end{quote}
+After typing the definition shown
+in listing~\ref{Texan:parking},
+you must issue the \keys{Ctrl}\keys{~x~}
+\keys{Ctrl}\keys{~s~}
+command to save the buffer.
+In order to do this, keep the
+\keys{Ctrl} key pressed down and
+hit the \keys{~x~} and
+\keys{~s~} keys in sequence.
+
+In order to load the program into
+femtolisp, press \keys{Ctrl}\keys{~o~}
+and type \verb|(load "fvalue.scm")|
+in the minibuffer, as shown in
+listing~\ref{Texan:parking}.
+After the loading operation,
+you can press the
+\keys{Ctrl}\keys{~o~} command again,
+and type
+\begin{quote}
+\verb|(future-value 10000 8 2)|
+\end{quote}
+in the minibuffer.
+
+\begin{figure}[!h]\index{define}
+\begin{fmpage}{0.8\textwidth}
+\begin{verbatim}
+;; File: fvalue.scm
+
+(define  (future-value pv i n)
+(* (expt (+ (/ i 100.0) 1) n) 
+   pv)
+);;end define
+\end{verbatim}
+\end{fmpage}
+
+\begin{fmpage}{0.8\textwidth}
+\verb|(load "fvalue.scm")|\keys{Enter}\\
+\verb|#<function>|\\
+\verb|(future-value 10000 8 2)|\keys{Enter}\\
+11644.00
+\end{fmpage}
+\caption{Future Value Program}
+\label{Texan:parking}
+\end{figure}
+
+In listing~\ref{Texan:parking}, text
+between a semicolon and the end of
+a line is considered a comment.
+Therefore, \verb|;; File: fvalue.scm|
+is a comment. Likewise, \verb|;;end define|
+is a comment. Comments are ignored by
+femtolisp, and have the simple function of
+helping people.
+
+\section{Mortgage}
+A man with horns, legs and tail of a goat,
+thick beard, snub nose and pointed ears entered
+a real estate agency, and expressed his intention
+of closing a deal. People fled in all directions,
+thinking that Satan himself was paying them a visit.
+Deardry seemed to be the only person who remained
+calm. “What a ignorant, narrow minded, prejudiced
+lot! I know you are not the devil. You are the
+Great God Pan! What can I do for you?”
+
+“I would like to buy a house in London.
+I know that the city is made up of 32 Boroughs
+and where I buy will make an enormous difference
+to price, quality of life, and chances of increase
+in capital value of the property.”
+
+“Well, Sir, with our experience you can rest
+assured that you will secure your ideal property.
+Firstly we must decide on what type of property
+fits your needs and where you want to be. You
+may consider somewhere like Fulham, Chelsea,
+Knightsbridge, Kensington or Mayfair.
+I have properties in all these places. ”
+
+“Chelsea! I like the name.”
+
+“Chelsea is arguably one of the best residential
+areas in London. It has benefited from it’s close
+proximity to the west end of the city and is highly
+sought after by overseas buyers looking to be located
+in one of the most popular areas in central London.
+At the moment, I can offer you a fantastic living
+space in a four bedroomed flat situated behind
+King's Road. The price is £10,500,000.”
+
+“I don't have this kind of cash with me right now,
+but can get it in a few months of working in a
+circus. Meanwhile, can you arrange a mortgage for me? ”
+
+“Yes, Yes I can help arrange mortgages in all 32 Boroughs
+of London. Non-residents can have mortgages up to 70\% of
+the purchase price. Do you have £3,150,000 pounds for the
+down payment? In mortgage agreements, down payment is
+the difference between the purchase price of a property
+and the mortgage loan amount.”
+
+“I know what down payment is. And yes, I can dispose
+of £3,150,000 pounds.”
+
+“A mortgage insurance is required for borrowers with
+a down payment of less than 20\% of the home's purchase
+price. That is not your case. Therefore, the balance of
+the purchase price after the down payment is deducted
+is the amount of your mortgage. Let us write a program
+in femtolisp to find out your estimated monthly payment.
+The loan amount is £7,350,000 pounds. The interest rate
+is 10\% a year. The length of the mortgage is 20 years.
+That is the best I can do for you, I am afraid.
+You are going to pay £97131.00 pounds a month for
+ten years. After that, the balance of your debt
+will be zero. But your visit is a surprise!”
+The broker exclaimed. “ I never thought I would
+ever see a true living god wanting to do property
+deals in London.”
+
+With that, Pan replied: “If property prices
+were not so high, and interest rate so steep,
+we would definitely be up for business more often.”
+
+\includegraphics[scale=0.5]{figs-prefix/deuspan.jpg}
+
+\paragraph{Loan Amortization.}
+Amortization refers to the gradual reduction
+of the loan principal through periodic payments.
+
+\includegraphics{figs-prefix/agingshark.jpg}
+
+Suppose you obtained a 20-year mortgage
+for a \$ 100,000.00 principal at the interest
+rate of 6\% a year. Calculate the monthly payments.
+
+\paragraph{Amortization Formula.} Let $p$ be the
+present value, $n$ the number of periods,
+and $r$ be the
+interest rate, i.e., the interest divided by 100.
+In this case, the monthly payment for full
+amortization is given by~\ref{eq:amortization}.
+This formula is implemented in
+listing~\ref{Pan:mortgage}.
+\begin{equation}
+\frac{r\times p\times(1+r)^n}{(1+r)^n - 1}
+\label{eq:amortization}
+\end{equation}
+
+\begin{figure}[!h]\index{define}
+\begin{fmpage}{0.9\textwidth}
+\begin{verbatim}
+;; File: pmt.scm
+
+(define (pmt 
+         p ;; present value
+         i ;; interest 
+         n ;; number of periods
+         ;; optional parameters
+              (r (/ i 100.0)) 
+              (rn (expt (+ 1.0 r) n)) 
+    );;end of parameter list
+(/ (* r p rn)
+ (- rn 1))
+);;end of define
+
+\end{verbatim}
+\end{fmpage}
+
+\begin{fmpage}{0.9\textwidth}
+\verb|(load "pmt.scm")|\keys{Enter}\\
+\verb|#<function>|\\
+\verb|(pmt (* 10500000.00 0.7) (/ 10.0 12) (* 20 12))|\keys{Enter}\\
+70929.00
+\end{fmpage}
+\caption{Mortgage for a God}
+\label{Pan:mortgage}
+\end{figure}
+
+You certainly noticed that the
+\verb|pmt| function, defined
+in listing~\ref{Pan:mortgage},
+has two parameters \verb|r| and \verb|rn|,
+which the user does not need
+to express. Femtolisp itself
+assigns \verb|(/ i 100.0)| to \verb|r|
+and \verb|(expt (+ 1.0 r) n)| to \verb|rn|.
+
+\section{Lists}
+Every human and computer language
+has syntax, i.e., rules for combining
+components of sentences.
+In general, a computer language
+syntax is complex, and the programmer
+must study it for years before
+becomming proficient.
+
+Lisp has the simplest syntax
+of any language. All
+Lisp constructions are expressed
+in Cambridge prefix notation:
+$\verb|(operation|\;x_1\;x_2\;x_3\ldots x_n\verb|)|$.
+This means that Lisp commands,
+macros, procedures and functions
+can be written  as a pair of parentheses
+enclosing an operation followed
+by its arguments. Remember, there is no
+exception to this rule.
+
+A linked list is a representation for
+a \verb|xs| sequence  in such a way
+that it is easy and efficient to
+push a new object to the top of \verb|xs|.
+\begin{quote}
+\begin{verbatim}
+> (define aList '(S P Q R))
+(S P Q R)
+> (cons 'Rome aList)
+(Rome S P Q R)
+> aList
+(S P Q R)
+\end{verbatim}
+\end{quote}
+The \verb|'(S P Q R)| list of letters
+is prefixed by a quotation mark because
+in Lisp lists and programs have the
+same syntax: The Cambridge prefix notation.
+The single quotation mark
+tags the list so the computer will
+take it at face-value, and so not to be evaluated.
+
+Through the repeated application of the
+\verb|cons| function, one can
+build lists of any length
+by adding new elements to
+a core.
+\begin{quote}
+\begin{verbatim}
+> (define xs '(S P Q R))
+(S P Q R)
+> (cons 5 (cons 4 (cons 3 (cons 2 (cons 1 xs)) ) ))
+(5 4 3 2 1 S P Q R)
+> xs
+(S P Q R)
+\end{verbatim}
+\end{quote}
+In the above example, you have noted
+that repeated application of nested functions
+cause right parentheses accumulate
+at the tail of the expression.
+It is good practice in programming
+to group these bunches of right parentheses
+in easily distinguishable patterns.
+
+\begin{verbatim}
+> (cons 'S (cons 'P (cons 'Q '(R)) ))  ;4 right parentheses
+(1 2 3)
+> (+ 51 (* 9 (+ 2 (- 3 (+ 1 2 3)) ) )) ;5 right parentheses
+42 
+> (+ 6 (* 9 (+ 2 (- 3 (+ 4 (- 3))) ))) ;6 right parentheses
+42
+\end{verbatim}
+
+Another way to create easily recognizable
+patterns  is to
+reorganize the expression in order
+to interrupt the sequence
+of right parentheses:
+\begin{quote}
+\begin{verbatim}
+> (+ 51 (* (+ 2 (- 3 (+ 1 2 3))) 9))
+42
+\end{verbatim}
+\end{quote}
+
+The head of a list is its first
+element. For instance, the head
+of \verb|'(S P Q R)| is the
+\verb|'S| element. The tail
+is the sublist that comes after
+the head. In the case of
+\verb|'(S P Q R)|, the tail
+is \verb|'(P Q R)|. Lisp has
+two functions, \verb|(car xs)|
+and \verb|(cdr xs)| that
+selects the head and the tail
+respectively.
+\index{List!selector: car}
+\index{List!selector: cdr}
+
+
+As one can see below,
+it is possible to reach any
+element of a list with
+a sequence of \verb|car|
+and \verb|cdr|.
+\begin{verbatim}
+> (define xs '(2 3 4 5 6.0))
+(2 3 4 5 6.0)
+> xs
+(2 3 4 5 6.0)
+> (car xs)
+2
+> (cdr xs)
+(3 4 5 6.0)
+> (car (cdr xs))
+3
+> (cdr (cdr xs))
+(4 5 6.0)
+> (car (cdr (cdr xs)))
+4
+> (car (cdr (cdr (cdr xs)) ))
+5
+> (car (cdr (cdr (cdr (cdr xs)) ) ))
+6.0
+\end{verbatim}
+
+\section{Going through a list}\label{sec:average}
+In listing~\ref{going-through-a-list},
+the \verb|avg| function can be used to
+calculate the average of a list of numbers.
+It reaches all elements of the list
+through successive applications
+of  \verb|(cdr s)|.
+The list elements are accumulated in
+\verb|acc|,
+while the \verb|n| parameter counts
+the number of \verb|(cdr s)| applications.
+When  \verb|s| becomes empty, the \verb|acc|
+accumulator contains the sum of \verb|s|, and \verb|n|
+contains the number of elements. The average
+is given by \verb|(/ acc n)|. 
+
+In order to fully understand the workings
+of the \verb|avg| function, we should have
+waited for the introduction to the \verb|cond-form|
+given on page~\pageref{page:cond-form}.
+The only reason for presenting
+a complex definition like \verb|avg|
+so early in this tutorial is
+to show a grouping pattern of five
+right parentheses. As was discussed
+previously, when the number of close
+parentheses is greater than 3, good
+programmers distribute these into small
+groups, so that an individual who is
+trying to understand the program
+can see that the expression is
+proprely closed at a glance.
+
+\paragraph{For the impatient learner.}
+However, for the sake of the impatient reader,
+let us give a preview on
+how the cond-form works.
+
+\index{Predicates!null?}
+\begin{figure}[!h]
+\begin{fmpage}{0.9\textwidth}
+\begin{verbatim}
+(define (avg s (acc 0) (n 0))
+(cond ( (and (null? s) (= n 0)) 0)
+     ( (null? s) (/ acc n) )
+     (else (avg (cdr s) 
+                (+ (car s) acc) 
+                (+ n 1.0)) ) ))
+\end{verbatim}
+\end{fmpage}
+
+\begin{fmpage}{0.9\textwidth}
+\verb|(load "average.scm")|\keys{Enter}\\
+\verb|#<function>|\\
+\verb|(avg '(3 4 5 6))|\keys{Enter}\\
+4.5
+\end{fmpage}
+\caption{Going through a list}
+\label{going-through-a-list}
+\end{figure}
+
+\index{Conditional execution!cond}
+The cond-form consists of a sequence
+of clauses. In a function definition,
+a clause has two components: A condition
+and an expression. The value of the
+cond-form will be given in the first
+clause that has a true condition.
+A concrete example will make this
+statement clear. In the case of
+listing~\ref{going-through-a-list},
+the clauses are:
+\begin{enumerate}
+\item \verb| ( (and (null? s) (= n 0)) 0)| --
+The condition \verb|(null? s)| will be true
+when \verb|s| is the empty \verb|'()| list.
+If the user types \verb|(avg '())|,
+the \verb|(null? s)| expression is true, and \verb|n| is
+equal to 0. The condition
+\verb|(and (null? s) (= n 0))| is true, and the cond-form
+returns 0.
+\item \verb|( (null? s) (/ acc n) )| -- This clause
+will be activated when the \verb|s| list is
+\verb|'()| empty, but \verb|n| is greater than
+0. If \verb|n| were 0, the first clause
+would prevent the evaluator from
+reaching the second clause. The only
+way to reach the second clause is to go through
+the list by repeatedly evaluating the third clause.
+The value of the second clause is \verb|(/ acc n)|,
+which is the average of the list.
+\item \verb|(else (avg (cdr s) (+ (car s) acc) (+ n 1.0)) )| --
+This clause will be evaluated
+when none of the previous conditions are true.
+If the user executes the \verb|(avg '(3 4 5 6))|
+expression, the evaluator will visit this
+clause with \verb|s= (3 4 5 6)|, \verb|s= (4 5 6)|,
+\verb|s= (5 6)| and \verb|s= (6)|.
+Every time the evaluator falls into the third
+clause, \verb|(cdr s)| is executed, and \verb|s|
+looses an element.
+\end{enumerate}
+
+\paragraph{The third clause.}
+Let us follow the evaluation of \verb|(avg '(3 4 5 6))|
+as it repeatedly  descends through the cond-form conditions
+until it reaches the third clause.
+
+\begin{itemize}
+\item\verb|(avg '(3 4 5 6))|
+goes to the else-clause, that will call:
+\begin{quote}
+\verb|(avg (cdr s) (+ (car s) acc) (+ n 1))|
+\end{quote}
+with
+\verb|s= (3 4 5 6)|, \verb|acc= 0|
+and \verb|n= 0|. Since:
+\begin{quote}
+\verb|(cdr s)= (4 5 6)|,
+\verb|(+ (car s) acc)= 3| and
+\verb|(+ n 1)= 1|,
+\end{quote}
+the else-clause expression reduces to
+\verb|(avg '(4 5 6) 3 1)|.
+\item\verb|(avg '(4 5 6) 3 1)| goes to the
+else-clause again, that calls:
+\begin{quote}
+\verb|(avg (cdr s) (+ (car s) acc) (+ n 1))|
+\end{quote}
+with \verb|s= (4 5 6)|, \verb|acc= 3| and \verb|n= 1|.
+Since:
+\begin{quote}
+\verb|(cdr s)= (5 6)|,
+\verb|(+ (car s) acc)= 7| and
+\verb|(+ n 1)= 2|,
+\end{quote}
+the else-clause expression reduces to
+\verb|(avg '(5 6) 7 2)|.
+\item \verb|(avg '(5 6) 7 2)| visits 
+the else-clause once more:
+\begin{quote}
+\verb|(avg (cdr s) (+ (car s) acc) (+ n 1))|
+\end{quote}
+with \verb|s= (5 6)|, \verb|acc= 7| and \verb|n= 2|.
+Since:
+\begin{quote}
+\verb|(cdr s)= (6)|,
+\verb|(+ (car s) acc)= 12| and
+\verb|(+ n 1)= 3|,
+\end{quote}
+the else-clause expression reduces to
+\verb|(avg '(6) 12 3)|.
+\item\verb|(avg '(6) 12 3)| evaluates the
+expression
+\begin{quote}
+\verb|(avg (cdr s) (+ (car s) n) (+ n 1))|
+\end{quote} 
+for the fourth time, which calls \verb|(avg '() 18 4)|.
+\item \verb|(avg '() 18 4)|  maches
+the \verb|(null? s)| clause, that calculates the
+averaging \verb|(/ acc n)| expression
+with \verb|acc= 18| and \verb|n= 4|.
+\end{itemize}
+
+
+
 \chapter{Shell}
 \index{Shell}
 Nia, a Greek young woman, has an
@@ -1603,1069 +2794,6 @@ go for it?''
 ``I am in.''
 
 
-\chapter{Intallation}  
-A text editor, like Emacs or femto, has three components:
-\begin{enumerate}
-\item A frontend that inserts characters into a buffer.
-A buffer is a memory region with an image of a
-text file. One can see the buffer as a representation
-of a scratch pad. As such, the frontend provides tools to
-insert keystrokes at the  point indicated by 
-a movable cursor.
-\item Editing operations that save buffers
-as files, delete and insert text, move the
-cursor around, copy items from one place to another, etc.
-\item A scripting language for customizing the editor.
-\end{enumerate}
-
-There is a large choice of frontends. Some frontends 
-work with a raster graphics image, which  is a dot matrix 
-data structure that represents a grid of pixels. 
-There are also frontends that are specialized in
-showing letters and other characters via an appropriate
-display media. The latter sort of frontend is called
-text-based user interfaces, while the former is called
-graphical user interface, or GUI for short.
-
-Text-based user interfaces are more
-confortable on the eyes, since they  provide
-sharper and crisp alphabetical letters.
-On the other hand, GUI allows for font 
-customization. At present,
-femtoemacs offers only ncurses, which
-is a text-based user interface.
-Therefore, download the most recent version 
-from the distribution site:
-\verb|https://www.gnu.org/software/ncurses/|
-
-\includegraphics[scale=0.6]{figs-prefix/download.jpg}
-
-
-\paragraph{MAC OS-X.}
-Unpack and make the distribution archive as shown below:
-\begin{quote}
-\begin{verbatim}
-~$ tar xfvz ncurses-6.0.tar.gz
-~$ cd ncurses-6.0/
-~/ncurses-6.0$ ./configure --enable-widec
-~/ncurses-6.0$ make
-~/ncurses-6.0$ sudo make install
-\end{verbatim}
-\end{quote}
-Femto assumes that  \verb|libncursesw.a|
-resides in the following folder:
-\begin{quote}
-\begin{verbatim}
-/usr/local/lib/libncursesw.a 
-\end{verbatim}
-\end{quote}
-Therefore, copy the \verb|libncursesw.a| file
-to \verb|/usr/local/lib/| as shown below:
-\begin{verbatim}
-~/$ cd ncurses-6.0 
-~/ncurses-6.0$ cd lib 
-~/ncurses-6.0/lib$ sudo cp libncursesw.a /usr/local/lib/
-\end{verbatim}
-
-After installing libncursesw, enter the folder \verb|Femto-Emacs/|
-and build the editor for Macistosh:
-\begin{verbatim}
-~/$ cd ~/Femto-Emacs/ 
-~/Femto-Emacs$ make -f Makefile.macosx
-\end{verbatim}
-
-\paragraph{Linux.} Use apt-get to install the
-latest version of \verb|libncursesw5-dev|.
-Since Linux repositories are usually old,
-download a recent source distribution of ncurses,
-build it, and install it on top of the
-apt-get version, thus:
-\begin{verbatim}
-~$ sudo apt-get install libncursesw5-dev
-~$ wget http://ftp.gnu.org/gnu/ncurses/ncurses-6.0.tar.gz
-~$ tar xfvz ncurses-6.0.tar.gz
-~$ cd ncurses-6.0/
-~/ncurses-6.0$ ./configure --enable-widec
-~/ncurses-6.0$ make
-~/ncurses-6.0$ sudo make install
-\end{verbatim}
-After installing ncursesw, you can make the editor:
-\begin{verbatim}
-~/$ cd ~/Femto-Emacs/ 
-~/Femto-Emacs$ make
-\end{verbatim}
-
-Installation is achieved by copying the
-compiled files to \verb|/usr/local/bin/| and
-the customization files to your home directory.
-\begin{verbatim}
-~/Femto-Emacs/femto$ sudo cp femto /usr/local/bin/ 
-~/Femto-Emacs/femto$ sudo cp femto.boot /usr/local/bin/ 
-~/Femto-Emacs/femto$ cp init.lsp $HOME/ 
-~/Femto-Emacs/femto$ cp aliases.scm $HOME/
-\end{verbatim}
-
-\section{Ready}
-You are now ready for action!
-
-\includegraphics{figs-prefix/readyforaction.jpg}
-
-It seems that people prefer money to sex.
-After all, almost everybody says no to
-sex on one occasion or another.
-But I have never seen a single
-person refusing money. Therefore, let us
-start this tutorial talking about money.
-
-If one wants to calculate a running
-total of bank deposits, she will make
-a column of numbers and perform the
-addition.
-
-\index{Arithmetic!Elemetary School}  
-\begin{wrapfigure}[10]{i}{5cm}
-\renewcommand\figurename{Fig.}
-\includegraphics[scale=0.5]{figs-prefix/firemen.png}
-\caption{Running total}
-\end{wrapfigure}
-What I mean to say is that, if you
-need to perform the addition
-$8 + 26 + 85 + 3$ with pencil and paper,
-you will probably stack the numbers the
-same way you did before taking pre-algebra
-classes in highschool:
-\begin{quote}
-\begin{tabular}{p{0.5cm}p{1cm}}
-+ &\verb|  8|\\
-&\verb| 26|\\
-&\verb| 85|\\
-&\verb|  3|\\
-\hline
-&\verb|122|
-\end{tabular}
-\end{quote}
-Subtraction is not treated differently:
-\begin{quote}
-\begin{tabular}{p{0.5cm}p{1.5cm}}
-\Large\bf -&   358\\
-&   216\\
-\hline
-& 142
-\end{tabular}
-\end{quote}
-
-This chapter contains an introduction to
-the Cambridge prefix notation, 
-which is slightly different from the one you
-learned in elementary school: The operation
-and its arguments are put between parentheses.
-In doing so, one does not need to draw a line
-under the bottom number, as you can see below:
-\begin{quote}
-\begin{tabular}{p{0.5cm}p{1cm}}
-(+ &\verb|  8|\\
-&\verb| 26|\\
-&\verb| 85|\\
-&\verb|  3|)\\
-&\verb|122|
-\end{tabular}
-\end{quote}
-The Cambridge prefix notation can be applied
-to any operation, not only to the four arithmetic
-functions. 
-
-\section{Cambridge prefix notation}
-\index{Prefix notation}
-\index{Prefix notation!Cambridge}
-Let us summarize what we have learned
-until now. In pre-algebra, students
-learn to place arithmetic operators (+, -, × and ÷)
-between their operands; e.g. 347+45.
-However, when doing additions and subtractions
-on paper, they stack the operands.
-
-\includegraphics{figs-prefix/stackshark.jpg}
-
-
-Lisp programmers put operation and operands
-between parentheses. The right parenthesis
-separate the operands from the result,
-instead of drawing a line under the last operand.
-
-\includegraphics{figs-prefix/neatsum.jpg}
-
-\section{Pictures}
-Here is the story of a Texan who went on
-vacation to a beach in Mexico. While he was
-freely dallying with the local beauties,
-unbeknowest to him a blackmailer took some
-rather incriminating photos.
-After a week long gallivanting, the Texan
-returns to his ranch in a small town near Austin.
-Arriving at his door shortly after is the blackmailer
-full of bad intentions.
-
-Unaware of any malice, the Texan allows the so
-called photographer to enter and sit in front
-of his desk. Without delay, the blackmailer spread
-out a number of photos on the desk, along with his
-demands: “For the photo in front of the hotel,
-that will cost you \$~25320.00. Well, the one
-on the beach that's got to be \$~56750.00.
-Finally, this definitively I can't let
-go for less than \$~136000.00.”
-
-Once finished with his presentation,
-the blackmailer snaps up the photos,
-and looks to the Texan with a sinister
-grin, awaiting his reply.
-
-Delighted with the selection of pics,
-the Texan in an ellated voice says:
-“I thought I would have no recollection
-of my wonderful time. I want 3 copies
-of the hotel shot, half a dozen of the beach.
-And the last one, I need two copies for myself,
-and please, send one to my ex-wife.
-Make sure you leave me your contact
-details; I might need some more.
-
-\paragraph{Mixed calculations.}
-In order to calculate how much the
-Texan needs to pay his supposed blackmailer,
-his bookkeeper needs to perform the
-following operations:
-$$3\times 25320+6\times 56750 + 2\times 136000+136000$$
-It should be remembered that multiplications
-within an expression take priority over additions
-and subtractions. The bookkeeper must therefore
-calculate the first two products $3\times 25320$
-and $6\times 56750$, before performing the first
-addition. In the Cambridge prefix notation,
-the internal parentheses pass priority over
-to the multiplications.
-
-The Texan's bookkeeper started femtoemacs
-in order to visit the \verb|finance.scm|
-file. The text editor creates a memory
-buffer that mirrors the file contents.
-By convention, the file and the buffer
-have the same name.
-
-Initially, the \verb|finance.scm| buffer
-is empty, but the bookkeeper will fill it
-with expressions and the corresponding
-calculations. Here is how to start the
-text editor:
-\begin{quote}
-\begin{verbatim}
-~/Femto-Emacs$ femto finance.scm
-\end{verbatim}
-\end{quote}
-Listing~\ref{texan:photos} shows what
-an interaction with a femto buffer looks like.
-
-\begin{figure}[!h]
-\begin{fmpage}{0.8\textwidth}
-
-\verb|(+  (* 3 25320)|\\
-\verb|    (* 6 56750)|\\
-\verb|    (* 2 136000)|\\
-\verb|    136000 )|\keys{Esc}\keys{~]~}\\ 
-824460
-\end{fmpage}
-
-\begin{fmpage}{0.8\textwidth}
-\verb| |
-\end{fmpage}
-\caption{The finance.scm buffer}
-\label{texan:photos}
-\end{figure}
-
-After typing an expression obeying the
-Cambridge prefix notation syntax,
-the bookkeeper moves the cursor to the front
-of the most external right parenthesis.
-To perform the calculation,
-he presses and releases the
-\keys{Esc} key, then presses and releases
-the \keys{~]~} key. The femtolisp
-interpreter inserts the result
-into the buffer.
-To save the buffer, the bookkeeper
-keeps the \keys{Ctrl} key down,
-and presses the \keys{~x~} and
-\keys{~s~} keys in sequence.
-To exit the
-editor, he maintains the \keys{~x~}
-pressed and hits the \keys{~x~}
-and \keys{~c~} keys one after the other.
-If there are
-unsaved files, the editor warns
-that modified buffers exist,
-and requires confirmation before
-quitting.
-
-\section{Time value of money}
-Suppose that you wanted to buy a \$ 100,000 red Ferrari,
-and the forecourt salesperson in his eagerness to
-close a deal gives you the following two payment options:  
-\begin{itemize}
-\item Pay \$ 100,000 now {\bf or}
-\item pay the full \$ 100,000 after a three year grace period.
-\end{itemize}
-
-I am sure that you would choose to pay the \$ 100,000 after
-three years of grace has finished, although you have the
-money in a savings account waiting for a business
-opportunity. But why is this? After all, you will need
-to pay the debt one way or the other. However, if you
-keep the money in your power during the grace period,
-you can earn a few months of fuel from the interest.
-
-You may not know for sure how much interest you
-will earn in three years, but since the salesperson
-is not charging you for deferring the payment,
-whatever you gain is yours to keep.
-
-Unfortunately for you, the above scenario would
-more than probably not happen in real life.
-The right to delay payment until some future
-date is a merchandise with a price tag,
-which {\em is called interest by those who
-think it lawful, and usury by those who
-do not} (William Blackstone's Commentaries
-on the Laws of England). Therefore, unless
-the salesperson is your favorite aunt,
-the actual offer is like jumping into a tank
-full of sharks as in the classic James Bond films.
-It requires a little forethought and understanding
-of how interest works, before making a decision.
-Here is a more realistic real estate sales offer:
-
-\begin{itemize}
-\item \$ 100,000 now {\bf or}
-\item \$ 115,000 at the end of three years.
-\end{itemize}
-
-What to do when facing an increase in price
-to cover postponement of payment? The best
-policy is to ask your banker how much interest
-she is willing to pay you over your
-granted grace period.
-
-Since the economy performance is far
-from spectacular, your banker offers you
-an interest rate of 2.5\%, compound annually.
-She explains that compound interest arises
-when interest is paid on both the principal
-and also on any interest from past years.
-
-\section{Future value}\index{Future Value}
-
-\includegraphics{figs-prefix/piggy.jpg}
-
-The value of money changes with time. Therefore,
-the longer you keep control of your money,
-the higher its value becomes, as it can earn
-interest. Time Value of Money, or TVM for short,
-is a concept that conveys the idea that money
-available now is worth more than the same
-amount in the future.
-
-If you have \$ 100,000.00 in a savings account
-now, that amount is called {\em present value},
-since it is what your investment would give you,
-if you were to spend it today.
-
-Future value of an investment is the amount
-you have today plus the interest that your
-investment will bring at the end of a
-specified period.
-
-The relationship between the present value
-and the future value is given by the
-following expression:
-\begin{equation}
-FV= PV\times (1+i)^n
-\label{eq:future-value}
-\end{equation}
-where $FV$ is the future value, $PV$ is the present
-value, $i$ is the interest rate divided by 100,
-and $n$ is the number of periods.
-
-\paragraph{Postponed payment.}
-In the case of postponing the payment of a \$ 100,000.00 car
-for 3 years, at an interest rate of 0.025, the future
-value of the money would be 107,689.06; therefore,
-I stongly recomend against postponing the payment.
-You have learned how to calculate an expression
-by pressing the \keys{Esc}\keys{~]~} command.
-However, there is another way of evaluating an expression.
-
-When you open the femtoemacs editor, there is
-a one line buffer at the bottom of the screen.
-If you keep the \keys{Ctrl} key pressed,
-and strike the  \keys{~o~} key, the editor
-will read and evaluate a Cambridge prefix
-expression from the minibuffer.
-
-\begin{figure}[!h]
-\begin{fmpage}{0.8\textwidth}
-
-\verb|(+  (* 3 25320)|\\
-\verb|    (* 6 56750)|\\
-\verb|    (* 2 136000)|\\
-\verb|    136000 )|\keys{Esc}\keys{~]~}\\ 
-824460
-\end{fmpage}
-
-\begin{fmpage}{0.8\textwidth}
-\verb|> (* 100000.00 (expt (+ 1.0 0.025) 3))|\keys{Enter}\\
-\verb|107689.06|
-\end{fmpage}
-\caption{Command from the minibuffer}
-\label{future-value}
-\end{figure}
-
-\section{Compound interest}
-
-Our Texan decides he needs a break. Thus he walks into
-a New York City bank and asks for the loan officer.
-He tells a story of how through his doctor's recomendation
-he was taking it easy at his property in the south of
-France for two whole years and for such a medical
-emergency he needs a \$ 10,000.00 loan.
-
-The loan officer said that the interest was a compound 8\%
-a year, but the bank would need some collateral for the loan.
-
-“Well, I have a 60 year old car that I like very much.
-Of course, I cannot take it with me to France.
-Would you accept it as collateral?”
-
-Unsure whether or not the old car was worth the
-amount of the loan, the officer summons the bank manager.
-The manager inspects the vehicle that was parked on the
-street in front of the bank. After a close examination,
-he gives a nod of approval: “It’s a Tucker Torpedo.
-Give him the loan.”
-
-The Texan quite willingly signed his heirloom over.
-An employee then drove the old car into the bank’s
-underground garage and parked it. From time to time,
-the employee would go, and turn over the engine, to keep
-the car in good running condition, and gave it an
-occasional waxing just to maintain it in pristine condition.
-Two years later the Texan returned, and asked how
-much he owed the bank. The loan officer started femtoemacs,
-and calculated the total debt as \$ 11,664.00.
-
-\paragraph{Interest Calculation.}
-\index{Interest!Compound}
-Let us follow the calculation of the value accumulated
-in the first year of compound interest at a 8\% rate
-over \$ 10,000.00. Press \keys{Ctrl}\keys{~o~} and
-enter formula~\ref{eq:future-value} in the minibuffer:
-\begin{quote}
-\begin{verbatim}
-> (* (expt (+ 1.0 0.08) 2) 10000)
-11644.00
-\end{verbatim}
-\end{quote}
-Observe that it was necessary to divide the
-interest rate by 100, which produces 0.08.
-
-It is possible to define an operation that
-calculates formula~\ref{eq:future-value}
-given the arguments \verb|fv|, \verb|i|
-and \verb|n|. The definition is given
-in listing~\ref{Texan:parking}.
-Start the editor from a text terminal:
-\begin{quote}
-\begin{verbatim}
-~$ mkdir financing
-~$ cd financing
-~/financing$ femto fvalue.scm
-\end{verbatim}
-\end{quote}
-After typing the definition shown
-in listing~\ref{Texan:parking},
-you must issue the \keys{Ctrl}\keys{~x~}
-\keys{Ctrl}\keys{~s~}
-command to save the buffer.
-In order to do this, keep the
-\keys{Ctrl} key pressed down and
-hit the \keys{~x~} and
-\keys{~s~} keys in sequence.
-
-In order to load the program into
-femtolisp, press \keys{Ctrl}\keys{~o~}
-and type \verb|(load "fvalue.scm")|
-in the minibuffer, as shown in
-listing~\ref{Texan:parking}.
-After the loading operation,
-you can press the
-\keys{Ctrl}\keys{~o~} command again,
-and type
-\begin{quote}
-\verb|(future-value 10000 8 2)|
-\end{quote}
-in the minibuffer.
-
-\begin{figure}[!h]\index{define}
-\begin{fmpage}{0.8\textwidth}
-\begin{verbatim}
-;; File: fvalue.scm
-
-(define  (future-value pv i n)
-(* (expt (+ (/ i 100.0) 1) n) 
-   pv)
-);;end define
-\end{verbatim}
-\end{fmpage}
-
-\begin{fmpage}{0.8\textwidth}
-\verb|(load "fvalue.scm")|\keys{Enter}\\
-\verb|#<function>|\\
-\verb|(future-value 10000 8 2)|\keys{Enter}\\
-11644.00
-\end{fmpage}
-\caption{Future Value Program}
-\label{Texan:parking}
-\end{figure}
-
-In listing~\ref{Texan:parking}, text
-between a semicolon and the end of
-a line is considered a comment.
-Therefore, \verb|;; File: fvalue.scm|
-is a comment. Likewise, \verb|;;end define|
-is a comment. Comments are ignored by
-femtolisp, and have the simple function of
-helping people.
-
-\section{Mortgage}
-A man with horns, legs and tail of a goat,
-thick beard, snub nose and pointed ears entered
-a real estate agency, and expressed his intention
-of closing a deal. People fled in all directions,
-thinking that Satan himself was paying them a visit.
-Deardry seemed to be the only person who remained
-calm. “What a ignorant, narrow minded, prejudiced
-lot! I know you are not the devil. You are the
-Great God Pan! What can I do for you?”
-
-“I would like to buy a house in London.
-I know that the city is made up of 32 Boroughs
-and where I buy will make an enormous difference
-to price, quality of life, and chances of increase
-in capital value of the property.”
-
-“Well, Sir, with our experience you can rest
-assured that you will secure your ideal property.
-Firstly we must decide on what type of property
-fits your needs and where you want to be. You
-may consider somewhere like Fulham, Chelsea,
-Knightsbridge, Kensington or Mayfair.
-I have properties in all these places. ”
-
-“Chelsea! I like the name.”
-
-“Chelsea is arguably one of the best residential
-areas in London. It has benefited from it’s close
-proximity to the west end of the city and is highly
-sought after by overseas buyers looking to be located
-in one of the most popular areas in central London.
-At the moment, I can offer you a fantastic living
-space in a four bedroomed flat situated behind
-King's Road. The price is £10,500,000.”
-
-“I don't have this kind of cash with me right now,
-but can get it in a few months of working in a
-circus. Meanwhile, can you arrange a mortgage for me? ”
-
-“Yes, Yes I can help arrange mortgages in all 32 Boroughs
-of London. Non-residents can have mortgages up to 70\% of
-the purchase price. Do you have £3,150,000 pounds for the
-down payment? In mortgage agreements, down payment is
-the difference between the purchase price of a property
-and the mortgage loan amount.”
-
-“I know what down payment is. And yes, I can dispose
-of £3,150,000 pounds.”
-
-“A mortgage insurance is required for borrowers with
-a down payment of less than 20\% of the home's purchase
-price. That is not your case. Therefore, the balance of
-the purchase price after the down payment is deducted
-is the amount of your mortgage. Let us write a program
-in femtolisp to find out your estimated monthly payment.
-The loan amount is £7,350,000 pounds. The interest rate
-is 10\% a year. The length of the mortgage is 20 years.
-That is the best I can do for you, I am afraid.
-You are going to pay £97131.00 pounds a month for
-ten years. After that, the balance of your debt
-will be zero. But your visit is a surprise!”
-The broker exclaimed. “ I never thought I would
-ever see a true living god wanting to do property
-deals in London.”
-
-With that, Pan replied: “If property prices
-were not so high, and interest rate so steep,
-we would definitely be up for business more often.”
-
-\includegraphics[scale=0.5]{figs-prefix/deuspan.jpg}
-
-\paragraph{Loan Amortization.}
-Amortization refers to the gradual reduction
-of the loan principal through periodic payments.
-
-\includegraphics{figs-prefix/agingshark.jpg}
-
-Suppose you obtained a 20-year mortgage
-for a \$ 100,000.00 principal at the interest
-rate of 6\% a year. Calculate the monthly payments.
-
-\paragraph{Amortization Formula.} Let $p$ be the
-present value, $n$ the number of periods,
-and $r$ be the
-interest rate, i.e., the interest divided by 100.
-In this case, the monthly payment for full
-amortization is given by~\ref{eq:amortization}.
-This formula is implemented in
-listing~\ref{Pan:mortgage}.
-\begin{equation}
-\frac{r\times p\times(1+r)^n}{(1+r)^n - 1}
-\label{eq:amortization}
-\end{equation}
-
-\begin{figure}[!h]\index{define}
-\begin{fmpage}{0.9\textwidth}
-\begin{verbatim}
-;; File: pmt.scm
-
-(define (pmt 
-         p ;; present value
-         i ;; interest 
-         n ;; number of periods
-         ;; optional parameters
-              (r (/ i 100.0)) 
-              (rn (expt (+ 1.0 r) n)) 
-    );;end of parameter list
-(/ (* r p rn)
- (- rn 1))
-);;end of define
-
-\end{verbatim}
-\end{fmpage}
-
-\begin{fmpage}{0.9\textwidth}
-\verb|(load "pmt.scm")|\keys{Enter}\\
-\verb|#<function>|\\
-\verb|(pmt (* 10500000.00 0.7) (/ 10.0 12) (* 20 12))|\keys{Enter}\\
-70929.00
-\end{fmpage}
-\caption{Mortgage for a God}
-\label{Pan:mortgage}
-\end{figure}
-
-You certainly noticed that the
-\verb|pmt| function, defined
-in listing~\ref{Pan:mortgage},
-has two parameters \verb|r| and \verb|rn|,
-which the user does not need
-to express. Femtolisp itself
-assigns \verb|(/ i 100.0)| to \verb|r|
-and \verb|(expt (+ 1.0 r) n)| to \verb|rn|.
-
-\section{Lists}
-Every human and computer language
-has syntax, i.e., rules for combining
-components of sentences.
-In general, a computer language
-syntax is complex, and the programmer
-must study it for years before
-becomming proficient.
-
-Lisp has the simplest syntax
-of any language. All
-Lisp constructions are expressed
-in Cambridge prefix notation:
-$\verb|(operation|\;x_1\;x_2\;x_3\ldots x_n\verb|)|$.
-This means that Lisp commands,
-macros, procedures and functions
-can be written  as a pair of parentheses
-enclosing an operation followed
-by its arguments. Remember, there is no
-exception to this rule.
-
-A linked list is a representation for
-a \verb|xs| sequence  in such a way
-that it is easy and efficient to
-push a new object to the top of \verb|xs|.
-\begin{quote}
-\begin{verbatim}
-> (define aList '(S P Q R))
-(S P Q R)
-> (cons 'Rome aList)
-(Rome S P Q R)
-> aList
-(S P Q R)
-\end{verbatim}
-\end{quote}
-The \verb|'(S P Q R)| list of letters
-is prefixed by a quotation mark because
-in Lisp lists and programs have the
-same syntax: The Cambridge prefix notation.
-The single quotation mark
-tags the list so the computer will
-take it at face-value, and so not to be evaluated.
-
-Through the repeated application of the
-\verb|cons| function, one can
-build lists of any length
-by adding new elements to
-a core.
-\begin{quote}
-\begin{verbatim}
-> (define xs '(S P Q R))
-(S P Q R)
-> (cons 5 (cons 4 (cons 3 (cons 2 (cons 1 xs)) ) ))
-(5 4 3 2 1 S P Q R)
-> xs
-(S P Q R)
-\end{verbatim}
-\end{quote}
-In the above example, you have noted
-that repeated application of nested functions
-cause right parentheses accumulate
-at the tail of the expression.
-It is good practice in programming
-to group these bunches of right parentheses
-in easily distinguishable patterns.
-
-\begin{verbatim}
-> (cons 'S (cons 'P (cons 'Q '(R)) ))  ;4 right parentheses
-(1 2 3)
-> (+ 51 (* 9 (+ 2 (- 3 (+ 1 2 3)) ) )) ;5 right parentheses
-42 
-> (+ 6 (* 9 (+ 2 (- 3 (+ 4 (- 3))) ))) ;6 right parentheses
-42
-\end{verbatim}
-
-Another way to create easily recognizable
-patterns  is to
-reorganize the expression in order
-to interrupt the sequence
-of right parentheses:
-\begin{quote}
-\begin{verbatim}
-> (+ 51 (* (+ 2 (- 3 (+ 1 2 3))) 9))
-42
-\end{verbatim}
-\end{quote}
-
-The head of a list is its first
-element. For instance, the head
-of \verb|'(S P Q R)| is the
-\verb|'S| element. The tail
-is the sublist that comes after
-the head. In the case of
-\verb|'(S P Q R)|, the tail
-is \verb|'(P Q R)|. Lisp has
-two functions, \verb|(car xs)|
-and \verb|(cdr xs)| that
-selects the head and the tail
-respectively.
-\index{List!selector: car}
-\index{List!selector: cdr}
-
-
-As one can see below,
-it is possible to reach any
-element of a list with
-a sequence of \verb|car|
-and \verb|cdr|.
-\begin{verbatim}
-> (define xs '(2 3 4 5 6.0))
-(2 3 4 5 6.0)
-> xs
-(2 3 4 5 6.0)
-> (car xs)
-2
-> (cdr xs)
-(3 4 5 6.0)
-> (car (cdr xs))
-3
-> (cdr (cdr xs))
-(4 5 6.0)
-> (car (cdr (cdr xs)))
-4
-> (car (cdr (cdr (cdr xs)) ))
-5
-> (car (cdr (cdr (cdr (cdr xs)) ) ))
-6.0
-\end{verbatim}
-
-\section{Going through a list}\label{sec:average}
-In listing~\ref{going-through-a-list},
-the \verb|avg| function can be used to
-calculate the average of a list of numbers.
-It reaches all elements of the list
-through successive applications
-of  \verb|(cdr s)|.
-The list elements are accumulated in
-\verb|acc|,
-while the \verb|n| parameter counts
-the number of \verb|(cdr s)| applications.
-When  \verb|s| becomes empty, the \verb|acc|
-accumulator contains the sum of \verb|s|, and \verb|n|
-contains the number of elements. The average
-is given by \verb|(/ acc n)|. 
-
-In order to fully understand the workings
-of the \verb|avg| function, we should have
-waited for the introduction to the \verb|cond-form|
-given on page~\pageref{page:cond-form}.
-The only reason for presenting
-a complex definition like \verb|avg|
-so early in this tutorial is
-to show a grouping pattern of five
-right parentheses. As was discussed
-previously, when the number of close
-parentheses is greater than 3, good
-programmers distribute these into small
-groups, so that an individual who is
-trying to understand the program
-can see that the expression is
-proprely closed at a glance.
-
-\paragraph{For the impatient learner.}
-However, for the sake of the impatient reader,
-let us give a preview on
-how the cond-form works.
-
-\index{Predicates!null?}
-\begin{figure}[!h]
-\begin{fmpage}{0.9\textwidth}
-\begin{verbatim}
-(define (avg s (acc 0) (n 0))
-(cond ( (and (null? s) (= n 0)) 0)
-     ( (null? s) (/ acc n) )
-     (else (avg (cdr s) 
-                (+ (car s) acc) 
-                (+ n 1.0)) ) ))
-\end{verbatim}
-\end{fmpage}
-
-\begin{fmpage}{0.9\textwidth}
-\verb|(load "average.scm")|\keys{Enter}\\
-\verb|#<function>|\\
-\verb|(avg '(3 4 5 6))|\keys{Enter}\\
-4.5
-\end{fmpage}
-\caption{Going through a list}
-\label{going-through-a-list}
-\end{figure}
-
-\index{Conditional execution!cond}
-The cond-form consists of a sequence
-of clauses. In a function definition,
-a clause has two components: A condition
-and an expression. The value of the
-cond-form will be given in the first
-clause that has a true condition.
-A concrete example will make this
-statement clear. In the case of
-listing~\ref{going-through-a-list},
-the clauses are:
-\begin{enumerate}
-\item \verb| ( (and (null? s) (= n 0)) 0)| --
-The condition \verb|(null? s)| will be true
-when \verb|s| is the empty \verb|'()| list.
-If the user types \verb|(avg '())|,
-the \verb|(null? s)| expression is true, and \verb|n| is
-equal to 0. The condition
-\verb|(and (null? s) (= n 0))| is true, and the cond-form
-returns 0.
-\item \verb|( (null? s) (/ acc n) )| -- This clause
-will be activated when the \verb|s| list is
-\verb|'()| empty, but \verb|n| is greater than
-0. If \verb|n| were 0, the first clause
-would prevent the evaluator from
-reaching the second clause. The only
-way to reach the second clause is to go through
-the list by repeatedly evaluating the third clause.
-The value of the second clause is \verb|(/ acc n)|,
-which is the average of the list.
-\item \verb|(else (avg (cdr s) (+ (car s) acc) (+ n 1.0)) )| --
-This clause will be evaluated
-when none of the previous conditions are true.
-If the user executes the \verb|(avg '(3 4 5 6))|
-expression, the evaluator will visit this
-clause with \verb|s= (3 4 5 6)|, \verb|s= (4 5 6)|,
-\verb|s= (5 6)| and \verb|s= (6)|.
-Every time the evaluator falls into the third
-clause, \verb|(cdr s)| is executed, and \verb|s|
-looses an element.
-\end{enumerate}
-
-\paragraph{The third clause.}
-Let us follow the evaluation of \verb|(avg '(3 4 5 6))|
-as it repeatedly  descends through the cond-form conditions
-until it reaches the third clause.
-
-\begin{itemize}
-\item\verb|(avg '(3 4 5 6))|
-goes to the else-clause, that will call:
-\begin{quote}
-\verb|(avg (cdr s) (+ (car s) acc) (+ n 1))|
-\end{quote}
-with
-\verb|s= (3 4 5 6)|, \verb|acc= 0|
-and \verb|n= 0|. Since:
-\begin{quote}
-\verb|(cdr s)= (4 5 6)|,
-\verb|(+ (car s) acc)= 3| and
-\verb|(+ n 1)= 1|,
-\end{quote}
-the else-clause expression reduces to
-\verb|(avg '(4 5 6) 3 1)|.
-\item\verb|(avg '(4 5 6) 3 1)| goes to the
-else-clause again, that calls:
-\begin{quote}
-\verb|(avg (cdr s) (+ (car s) acc) (+ n 1))|
-\end{quote}
-with \verb|s= (4 5 6)|, \verb|acc= 3| and \verb|n= 1|.
-Since:
-\begin{quote}
-\verb|(cdr s)= (5 6)|,
-\verb|(+ (car s) acc)= 7| and
-\verb|(+ n 1)= 2|,
-\end{quote}
-the else-clause expression reduces to
-\verb|(avg '(5 6) 7 2)|.
-\item \verb|(avg '(5 6) 7 2)| visits 
-the else-clause once more:
-\begin{quote}
-\verb|(avg (cdr s) (+ (car s) acc) (+ n 1))|
-\end{quote}
-with \verb|s= (5 6)|, \verb|acc= 7| and \verb|n= 2|.
-Since:
-\begin{quote}
-\verb|(cdr s)= (6)|,
-\verb|(+ (car s) acc)= 12| and
-\verb|(+ n 1)= 3|,
-\end{quote}
-the else-clause expression reduces to
-\verb|(avg '(6) 12 3)|.
-\item\verb|(avg '(6) 12 3)| evaluates the
-expression
-\begin{quote}
-\verb|(avg (cdr s) (+ (car s) n) (+ n 1))|
-\end{quote} 
-for the fourth time, which calls \verb|(avg '() 18 4)|.
-\item \verb|(avg '() 18 4)|  maches
-the \verb|(null? s)| clause, that calculates the
-averaging \verb|(/ acc n)| expression
-with \verb|acc= 18| and \verb|n= 4|.
-\end{itemize}
-
-\chapter{Femtoemacs commands}
-In the following cheat sheet, \verb|Spc| denotes
-the space bar, \verb|C-| is the \keys{Ctrl} prefix, \verb|M-| represents 
-the  \keys{Alt} prefix and  $\kappa$ can be any key. 
-\begin{itemize}
-\item \verb|C-|$\kappa$ -- Press and release \keys{Ctrl}
-and \keys{$\kappa$} simultaneously
-\begin{quote}
- \verb|C-s| then type some text, and press \verb|C-s| again 
-  -- search a text.\\
- \verb|C-r| then type some text, and press \verb|C-r| again 
-  -- reverse search.\\
- \verb|C-k| -- kill a line.\\
- \verb|C-h| -- backspace.\\
- \verb|C-d| -- delete char forward.\\ 
- \verb|C-Spc| then move the cursor -- select a region.\\
- \verb|M-w| -- save selected region into the kill ring. \\
- \verb|C-w| -- kill region.\\
- \verb|C-y| -- insert killed or saved region.\\
- \verb|C-g| -- cancel minibuffer reading.\\
- \verb|C-a| -- go to beginning of line.\\
- \verb|C-e| -- go to end of line.\\
- \verb|C-b| -- move backward one character.\\
- \verb|C-f| -- move forward one character.\\
- \verb|C-n| -- move cursor to the next line.\\
- \verb|C-p| -- move cursor to the previous line.\\
- \verb|C-l| -- refresh screen.\\
-\end{quote}
-\item \verb|C-x C-|$\kappa$ -- Keep \keys{Ctrl}
-down and press \keys{x} and  \keys{$\kappa$}
-\begin{quote}
-\verb|C-x C-f| -- open a file into a new buffer.\\
-\verb|C-x C-s| -- save file.\\
-\verb|C-x C-c| -- exit femto.
-\end{quote}
-
-\end{itemize}
-
-
-\paragraph{Window commands.} One can have more
-than one window on the screen. Below, you will
-find commands to cope with this situation.
-\begin{itemize}
-\item \verb|C-x |$\kappa$ -- Press and release \keys{Ctrl}
-and \keys{x} together, then press \keys{$\kappa$} 
-\begin{quote}
-\verb|C-x n| -- switch buffers.\\
-\verb|C-x 2| -- split window into cursor window and other window.\\
-\verb|C-x o| -- jump to the other window.\\
-\verb|C-x 1| -- close the other window.\\
-\verb|C-x 0| -- close the cursor window.
-\end{quote}
-\item \verb|Esc| $\kappa$ -- Press and release the \keys{Esc} key,
-then press the \keys{$\kappa$} key.
-\begin{quote}
-\verb|Esc >| -- go to the end of buffer.\\
-\verb|Esc <| -- go to the beginning of buffer. 
-\end{quote}
-\item \verb|M|-$\kappa$ -- Keep the \keys{Alt} key
-down and press the \keys{$\kappa$} key.
-\begin{quote}
-\verb|M-b| -- move backward one word.\\
-\verb|M-f| -- move forward one word.\\
-\verb|M-g| -- go to the line given in the minibuffer.\\
-\verb|M-n| -- activate the next buffer.\\
-\verb|M-r| -- query replace.
-\end{quote}
-\end{itemize}
-
-
-In order to get acquainted with editing and scripting,
-let us accompany the Canadian programmer Nia
-Vardalos, while she explores femtoemacs.
-
-When text is needed for carrying out a command,
-it is read from the minibuffer, a one line
-window at the bottom of the screen. For instance, 
-if Nia presses \verb|C-s| for finding a text, 
-the text is read from the minibuffer. After
-typing the text that she wants to localize,
-Nia presses \verb|C-s| again to start the search.
-For abandoning an ongoing command, she may press \verb|C-g|.
-
-To transport a region to another place, Nia presses \verb|C-Spc| to start selection and move the cursor to select the region. Then she presses \verb|C-w| to kill the selection. Finally, she moves the cursor to the insertion place, and presses the \verb|C-y| shortcut.
-
-To copy a region, Nia presses \verb|C-Spc| and moves the cursor to select the region. Then she presses \verb|M-w| to save the selection into the kill ring. Finally, she takes the cursor to the destination where the copy is to be inserted and issues the \verb|C-y| command.
-
-Nia noticed that there are two equivalent ways to
-issue an \verb|M-|$\kappa$ command. She can
-press and release the \keys{Esc} key, then
-strike the  $\kappa$ key. Alternatively, she
-can keep the \keys{Alt} key down and press
-the \keys{$\kappa$} key.
-
-
 \chapter{Arithmetic operations}
 The femto editor is designed for writing programs.
 Therefore, Nia decided
@@ -2718,7 +2846,7 @@ On the \verb|repl.scm| buffer,
 Nia can load the \verb|celsius.scm| program
 and  call any application that she has defined
 herself, or which comes with Lisp.
-The \verb|C-o| command reads an operation
+The \verb|Esc ;| command reads an operation
 from the  minibuffer and executes it.
 The first operation is loading
 the \verb|celsius.scm| file,
@@ -2776,7 +2904,7 @@ Nia press the \verb|C-x o| command.
 The command \verb|C-x C-s| saves the Lisp source 
 file. 
 
-The \verb|C-o| command followed
+The \verb|Esc ;| command followed
 by \verb|(load "celsius.scm")| on the minibuffer
 loads the  source file.
 
@@ -2785,7 +2913,7 @@ by typing \verb|(load "celsius.scm")|
 on the interaction buffer, 
 then press the \verb|Esc ]| command.
 After loading the source file either
-with \verb|C-o| or with the \verb|Esc ]| method,
+with \verb|Esc ;| or with the \verb|Esc ]| method,
 Nia types \verb|(c2f 100)| on the interaction
 buffer. Then she presses \verb|Esc ]| to
 insert the calculation of the Fahrenheit reading
