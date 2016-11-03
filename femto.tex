@@ -39,87 +39,7 @@ circuits.logic.US}
 \maketitle
 \thispagestyle{empty}
 
-\frontmatter
-
-\chapter*{Preface}
-
-Femto is a tiny Emacs clone,
-originally derived from a minimalist
-editor called Atto. Although built
-upon the C Atto codebase, Femto can
-be customized using the femtolisp Scheme dialect.
-
-The fundamental paradigm of Emacs is that it
-rests on a small core, but can be
-extended and customized through
-the Lisp programming language.
-
-Istead of requiring from the programmer a compile,
-build, test and fix cycle ---
-Lisp offers a Read, Eval, Print Loop (REPL).
-\begin{enumerate}
-\item {\bf Read.} The REPL reads
-a symbolic expression 
-such as \verb|(+ 42 13 4)| from
-a text terminal. The symbolic expression -- sexpr --
-always has the form: $(\textrm{operation}\;a_1\;a_2\ldots a_n)$,
-where $a_1$, $a_2$\ldots $a_n$ are the arguments of
-the operation.
-\item {\bf Eval.} The compiler translates the symbolic
-expression to machine language, then executes the
-generated code and calculates the corresponding
-value.
-\item {\bf Print.} The value produced in step 2 is printed.
-\item {\bf Loop.} The REPL returns to step 1.
-\end{enumerate}
-
-Since Lisp is usually compiled, it is
-much faster than interpreted languages.
-However, to facilitate portability,
-femtolisp does not generate
-native code, but compiles symbolic expressions
-to a virtual machine language. As a consequence of
-this choice, femtolisp is not as fast as other
-Lisp dialects, such as sbcl and Racket. Notwithstanding,
-it is about four times faster than Python
-and forty times faster than Tiny Scheme.
-
-The REPL approach enables fast prototyping
-of extensions as each idea can be tested
-individually on the command line inside
-the editor with an immediate result check.
-
-For historical reasons, the reference GNU
-Emacs implementation uses a specialised version of
-lisp known as Emacs Lisp.  However, the Emacs Lisp
-dialect is not standard lisp, being used
-only by the GNU Emacs editor and its
-derivatives.
-
-Femtolisp was chosen
-as the extension language
-for FemtoEmacs for the following reasons:
-\begin{enumerate}
-\item Femtolisp is open source.
-\item Femtolisp is small and written in C.
-\item After loading the \verb|r5rs.scm| library
-provided in the femtoemacs distribution,
-the user can bridge the syntactic gap
-between femtolisp and Scheme.
-In the majority of situations, the \verb|r5rs.scm|
-library is compatible
-with the standard Scheme dialect. This means that
-one can use classical Scheme tutorials to learn
-how to configure and customize femtoemacs.
-The Structure and Interpretation of Computer Programs
-is the most popular of these tutorials.
-Of course, you can use the content of the
-present text to the same effect.
-\item Femtolisp is fast.
-\end{enumerate}    
-
 \mainmatter
-
 
 \chapter{Femtoemacs commands}
 In the next chapter, you will learn how to install
@@ -345,6 +265,96 @@ division \verb|1/2/3|.
 
 \end{itemize}
 
+\paragraph{Command execution.} When you press 
+shortcut keys, femto emacs call a command written in
+C or in Lisp. You can get a complete list of all
+femtoemacs commands by pressing the 
+\keys{Esc}\keys{$l$} shortcut.
+
+There are commands that are not associated to
+ shortcut keys. 
+For instance, the \verb|discard-undo-history|
+scraps the undo tree. Press \keys{Esc}\keys{$x$}
+and type \verb|discard-undo-history| at the
+minibuffer prompt. Then, if you press \verb|C-u|,
+nothing will happen, since the undo tree is empty.
+Below you will find a fairly complete list
+of femtoemacs commands.
+
+\begin{verbatim}
+backspace        backspace
+C-a              beginning-of-line
+C-b              backward-character
+C-d              forward-delete-char
+C-e              end-of-line
+C-f              forward-character
+C-h              backspace
+C-k              kill-line
+C-l              refresh
+C-n              next-line
+C-p              previous-line
+C-r              search-backward
+C-space          set-mark
+C-s              search-forward
+C-u              undo
+C-v              forward-page
+C-w              kill-region
+C-x 1            delete-other-windows
+C-x 2            split-window
+C-x C-b          list-buffers
+C-x C-c          exit
+C-x C-f          find-file
+C-x C-l          user-defined-function
+C-x C-n          next-buffer
+C-x C-s          save-buffer
+C-x =            cursor-position
+C-x C-u          user-defined-function
+C-x C-w          write-file
+C-x ?            describe-key
+C-x i            insert-file
+C-x k            kill-buffer
+C-x n            next-buffer
+C-x o            other-window
+C-x @            shell-command
+C-y              yank
+down             next-line
+esc a            apropos
+esc B            backward-word
+esc b            backward-word
+esc <            beginning-of-buffer
+esc c            copy-region
+esc d            kill-line
+esc down         end-of-buffer
+esc end          end-of-buffer
+esc >            end-of-buffer
+esc esc          show-version
+esc ]            eval-block
+esc ;            exec-lisp-command
+esc F            forward-word
+esc f            forward-word
+esc G            goto-line
+esc g            goto-line
+esc i            yank
+esc k            kill-region
+esc l            list-bindings
+esc m            set-mark
+esc n            next-buffer
+esc o            delete-other-windows
+esc r            query-replace
+esc @            set-mark
+esc up           beginning-of-buffer
+esc v            backward-page
+esc w            copy-region
+esc x            execute-command
+home             beginning-of-line
+INS              toggle-overwrite-mode
+left             backward-character
+PgDn             forward-page
+PgUp             backward-page
+resize           resize-terminal
+right            forward-character
+up               previous-line
+\end{verbatim}
 
 \chapter{Installation}  
 A text editor, like Emacs or femto, has three components:
@@ -6840,4 +6850,84 @@ Available from \verb|http://www.scheme.com/tspl4/|
 \printindex
 
 \end{document}
+
+\frontmatter
+
+\chapter*{Preface}
+
+Femto is a tiny Emacs clone,
+originally derived from a minimalist
+editor called Atto. Although built
+upon the C Atto codebase, Femto can
+be customized using the femtolisp Scheme dialect.
+
+The fundamental paradigm of Emacs is that it
+rests on a small core, but can be
+extended and customized through
+the Lisp programming language.
+
+Istead of requiring from the programmer a compile,
+build, test and fix cycle ---
+Lisp offers a Read, Eval, Print Loop (REPL).
+\begin{enumerate}
+\item {\bf Read.} The REPL reads
+a symbolic expression 
+such as \verb|(+ 42 13 4)| from
+a text terminal. The symbolic expression -- sexpr --
+always has the form: $(\textrm{operation}\;a_1\;a_2\ldots a_n)$,
+where $a_1$, $a_2$\ldots $a_n$ are the arguments of
+the operation.
+\item {\bf Eval.} The compiler translates the symbolic
+expression to machine language, then executes the
+generated code and calculates the corresponding
+value.
+\item {\bf Print.} The value produced in step 2 is printed.
+\item {\bf Loop.} The REPL returns to step 1.
+\end{enumerate}
+
+Since Lisp is usually compiled, it is
+much faster than interpreted languages.
+However, to facilitate portability,
+femtolisp does not generate
+native code, but compiles symbolic expressions
+to a virtual machine language. As a consequence of
+this choice, femtolisp is not as fast as other
+Lisp dialects, such as sbcl and Racket. Notwithstanding,
+it is about four times faster than Python
+and forty times faster than Tiny Scheme.
+
+The REPL approach enables fast prototyping
+of extensions as each idea can be tested
+individually on the command line inside
+the editor with an immediate result check.
+
+For historical reasons, the reference GNU
+Emacs implementation uses a specialised version of
+lisp known as Emacs Lisp.  However, the Emacs Lisp
+dialect is not standard lisp, being used
+only by the GNU Emacs editor and its
+derivatives.
+
+Femtolisp was chosen
+as the extension language
+for FemtoEmacs for the following reasons:
+\begin{enumerate}
+\item Femtolisp is open source.
+\item Femtolisp is small and written in C.
+\item After loading the \verb|r5rs.scm| library
+provided in the femtoemacs distribution,
+the user can bridge the syntactic gap
+between femtolisp and Scheme.
+In the majority of situations, the \verb|r5rs.scm|
+library is compatible
+with the standard Scheme dialect. This means that
+one can use classical Scheme tutorials to learn
+how to configure and customize femtoemacs.
+The Structure and Interpretation of Computer Programs
+is the most popular of these tutorials.
+Of course, you can use the content of the
+present text to the same effect.
+\item Femtolisp is fast.
+\end{enumerate}    
+
 
